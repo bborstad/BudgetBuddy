@@ -70,3 +70,9 @@ gem 'sidekiq', '~> 6.0', '>= 6.0.3'
 gem 'sitemap_generator', '~> 6.1', '>= 6.1.2'
 gem 'whenever', require: false
 gem 'image_processing'
+
+
+
+
+# Adds model attributes/routes to top of model files/routes file
+gem 'annotate', group: :development

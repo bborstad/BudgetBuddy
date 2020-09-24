@@ -18,6 +18,30 @@
       </div>
     <% end %>
 
+
+
+    <div>
+    <%= label_tag "Start Amount" %>
+    <br/>
+    <%= text_field_tag "start_amount", nil %>
+
+    <br/>
+
+    <%= label_tag "Retire By " %>
+    <br/>
+    <%= text_field_tag "retire_by", nil %>
+
+    <br/>
+
+    <%= label_tag "Expected Intrest" %>
+    <br/>
+    <%= text_field_tag "intrest", nil %>
+
+    </div>
+
+
+
+
     <%= form.submit class: 'btn btn-primary' %>
 
     <% if retirement.persisted? %>
