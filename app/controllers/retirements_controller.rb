@@ -72,4 +72,6 @@ class RetirementsController < ApplicationController
     def retirement_params
       params.require(:retirement).permit(:start_amount, :retire_by, :intrest, :annual_saving)
     end
+
+
 end
