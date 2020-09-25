@@ -1,0 +1,51 @@
+
+
+
+<div class="row">
+  <div class="col-sm-6">
+    <h1>Retirements</h1>
+  </div>
+
+  <div class="col-sm-6 text-right">
+  <%= link_to new_retirement_path, class: 'btn btn-primary' do %>
+    Add New Retirement
+  <% end %>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+    
+
+            <th>Start Amount</th>
+            <th>Retire by</th>
+            <th>Intrest</th>
+            <th>Annual Saving</th>
+            <th>Estimated Savings</th>
+            
+          <th></th>
+        
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @retirements.each do |retirement| %>
+        <%= content_tag :tr, id: dom_id(retirement), class: dom_class(retirement) do %>
+          
+
+                      <td><%= retirement.start_amount %></td>
+                      <td><%= retirement.retire_by %></td>
+                      <td><%= retirement.intrest %></td>
+                      <td><%= retirement.annual_saving %></td>
+                      <td> </td>
+          
+          
+            <td><%= link_to 'Show', retirement %></td>
+          
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,24 @@
+# == Schema Information
+#
+# Table name: retirements
+#
+#  id            :bigint           not null, primary key
+#  annual_saving :decimal(, )
+#  intrest       :float
+#  retire_by     :integer
+#  start_amount  :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
+one:
+  start_amount: 1
+  retire_by: 1
+  intrest: 1.5
+  annual_saving: 9.99
+
+two:
+  start_amount: 1
+  retire_by: 1
+  intrest: 1.5
+  annual_saving: 9.99

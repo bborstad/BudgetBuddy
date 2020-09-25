@@ -1,0 +1,24 @@
+<div class="page-header">
+  <%= link_to retirements_path, class: 'btn btn-default' do %>
+    All Retirements
+  <% end %>
+  <%= link_to edit_retirement_path(@retirement), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show retirement</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Start amount:</dt>
+  <dd><%= @retirement.start_amount %></dd>
+
+  <dt>Retire by:</dt>
+  <dd><%= @retirement.retire_by %></dd>
+
+  <dt>Intrest:</dt>
+  <dd><%= @retirement.intrest %></dd>
+
+  <dt>Annual saving:</dt>
+  <dd><%= @retirement.annual_saving %></dd>
+
+</dl>
