@@ -1,0 +1,24 @@
+<div class="page-header">
+  <%= link_to goals_path, class: 'btn btn-default' do %>
+    All Goals
+  <% end %>
+  <%= link_to edit_goal_path(@goal), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show goal</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Title:</dt>
+  <dd><%= @goal.title %></dd>
+
+  <dt>Progress:</dt>
+  <dd><%= @goal.progress %></dd>
+
+  <dt>Goal:</dt>
+  <dd><%= @goal.goal %></dd>
+
+  <dt>Expired:</dt>
+  <dd><%= @goal.expired %></dd>
+
+</dl>

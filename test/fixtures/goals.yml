@@ -1,0 +1,24 @@
+# == Schema Information
+#
+# Table name: goals
+#
+#  id         :bigint           not null, primary key
+#  expired    :boolean
+#  goal       :integer
+#  progress   :integer
+#  title      :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+one:
+  title: MyString
+  progress: 
+  goal: 
+  expired: false
+
+two:
+  title: MyString
+  progress: 
+  goal: 
+  expired: false
