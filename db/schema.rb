@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_26_171246) do
+ActiveRecord::Schema.define(version: 2020_09_26_183330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,9 +68,9 @@ ActiveRecord::Schema.define(version: 2020_09_26_171246) do
   end
 
   create_table "retirements", force: :cascade do |t|
-    t.decimal "start_amount"
-    t.integer "time_until_retirement"
     t.decimal "annual_savings"
+    t.integer "year_of_retirement"
+    t.decimal "inital_savings"
     t.float "intrest_rate"
     t.decimal "retirement_estimate"
     t.datetime "created_at", precision: 6, null: false

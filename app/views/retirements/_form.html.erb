@@ -12,18 +12,18 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label :start_amount %>
-    <%= form.text_field :start_amount, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :time_until_retirement %>
-    <%= form.number_field :time_until_retirement, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
     <%= form.label :annual_savings %>
     <%= form.text_field :annual_savings, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :year_of_retirement %>
+    <%= form.number_field :year_of_retirement, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :inital_savings %>
+    <%= form.text_field :inital_savings, class: 'form-control' %>
   </div>
 
   <div class="form-group">
@@ -31,16 +31,15 @@
     <%= form.text_field :intrest_rate, class: 'form-control' %>
   </div>
 
-
-
-
 <!--
-Block comment to remove the retirement estimate from the form
+        Remove retirement_estimate as an input on the forum 
+
 
   <div class="form-group">
     <%= form.label :retirement_estimate %>
     <%= form.text_field :retirement_estimate, class: 'form-control' %>
   </div>
+
 -->
 
 

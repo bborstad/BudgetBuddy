@@ -2,26 +2,26 @@
 #
 # Table name: retirements
 #
-#  id                    :bigint           not null, primary key
-#  annual_savings        :decimal(, )
-#  intrest_rate          :float
-#  retirement_estimate   :decimal(, )
-#  start_amount          :decimal(, )
-#  time_until_retirement :integer
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
+#  id                  :bigint           not null, primary key
+#  annual_savings      :decimal(, )
+#  inital_savings      :decimal(, )
+#  intrest_rate        :float
+#  retirement_estimate :decimal(, )
+#  year_of_retirement  :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
 #
 
 one:
-  start_amount: 9.99
-  time_until_retirement: 1
   annual_savings: 9.99
+  year_of_retirement: 1
+  inital_savings: 9.99
   intrest_rate: 1.5
   retirement_estimate: 9.99
 
 two:
-  start_amount: 9.99
-  time_until_retirement: 1
   annual_savings: 9.99
+  year_of_retirement: 1
+  inital_savings: 9.99
   intrest_rate: 1.5
   retirement_estimate: 9.99

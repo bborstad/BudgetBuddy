@@ -19,11 +19,11 @@
       <tr>
     
 
-            <th>Start amount</th>
-            <th>Time until retirement</th>
-            <th>Annual savings</th>
-            <th>Intrest rate</th>
-            <th>Retirement estimate</th>
+            <th>Annual Savings</th>
+            <th>Year of Retirement</th>
+            <th>Initial Savings</th>
+            <th>Interest Rate</th>
+            <th>Retirement Estimate</th>
             
           <th></th>
         
@@ -35,11 +35,11 @@
         <%= content_tag :tr, id: dom_id(retirement), class: dom_class(retirement) do %>
           
 
-                      <td><%= retirement.start_amount %></td>
-                      <td><%= retirement.time_until_retirement %></td>
-                      <td><%= retirement.annual_savings %></td>
+                      <td>$<%= retirement.annual_savings %></td>
+                      <td><%= retirement.year_of_retirement %></td>
+                      <td>$<%= retirement.inital_savings %></td>
                       <td><%= retirement.intrest_rate %></td>
-                      <td><%= retirement.retirement_estimate %></td>
+                      <td>$<%= retirement.retirement_estimate %></td>
           
           
             <td><%= link_to 'Show', retirement %></td>

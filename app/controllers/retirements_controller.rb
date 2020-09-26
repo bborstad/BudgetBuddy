@@ -69,6 +69,6 @@ class RetirementsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def retirement_params
-      params.require(:retirement).permit(:start_amount, :time_until_retirement, :annual_savings, :intrest_rate, :retirement_estimate)
+      params.require(:retirement).permit(:annual_savings, :year_of_retirement, :inital_savings, :intrest_rate, :retirement_estimate)
     end
 end
