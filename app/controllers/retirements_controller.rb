@@ -25,7 +25,6 @@ class RetirementsController < ApplicationController
   # POST /retirements.json
   def create
     @retirement = Retirement.new(retirement_params)
-    
 
     respond_to do |format|
       if @retirement.save
@@ -70,8 +69,6 @@ class RetirementsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def retirement_params
-      params.require(:retirement).permit(:start_amount, :retire_by, :intrest, :annual_saving)
+      params.require(:retirement).permit(:start_amount, :time_until_retirement, :annual_savings, :intrest_rate, :retirement_estimate)
     end
-
-
 end

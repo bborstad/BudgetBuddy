@@ -14,10 +14,11 @@ class RetirementsTest < ApplicationSystemTestCase
     visit retirements_url
     click_on "New Retirement"
 
-    fill_in "Annual saving", with: @retirement.annual_saving
-    fill_in "Intrest", with: @retirement.intrest
-    fill_in "Retire by", with: @retirement.retire_by
+    fill_in "Annual savings", with: @retirement.annual_savings
+    fill_in "Intrest rate", with: @retirement.intrest_rate
+    fill_in "Retirement estimate", with: @retirement.retirement_estimate
     fill_in "Start amount", with: @retirement.start_amount
+    fill_in "Time until retirement", with: @retirement.time_until_retirement
     click_on "Create Retirement"
 
     assert_text "Retirement was successfully created"
@@ -28,10 +29,11 @@ class RetirementsTest < ApplicationSystemTestCase
     visit retirements_url
     click_on "Edit", match: :first
 
-    fill_in "Annual saving", with: @retirement.annual_saving
-    fill_in "Intrest", with: @retirement.intrest
-    fill_in "Retire by", with: @retirement.retire_by
+    fill_in "Annual savings", with: @retirement.annual_savings
+    fill_in "Intrest rate", with: @retirement.intrest_rate
+    fill_in "Retirement estimate", with: @retirement.retirement_estimate
     fill_in "Start amount", with: @retirement.start_amount
+    fill_in "Time until retirement", with: @retirement.time_until_retirement
     click_on "Update Retirement"
 
     assert_text "Retirement was successfully updated"

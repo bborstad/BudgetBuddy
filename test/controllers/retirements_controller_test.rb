@@ -17,7 +17,7 @@ class RetirementsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create retirement" do
     assert_difference('Retirement.count') do
-      post retirements_url, params: { retirement: { annual_saving: @retirement.annual_saving, intrest: @retirement.intrest, retire_by: @retirement.retire_by, start_amount: @retirement.start_amount } }
+      post retirements_url, params: { retirement: { annual_savings: @retirement.annual_savings, intrest_rate: @retirement.intrest_rate, retirement_estimate: @retirement.retirement_estimate, start_amount: @retirement.start_amount, time_until_retirement: @retirement.time_until_retirement } }
     end
 
     assert_redirected_to retirement_url(Retirement.last)
@@ -34,7 +34,7 @@ class RetirementsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update retirement" do
-    patch retirement_url(@retirement), params: { retirement: { annual_saving: @retirement.annual_saving, intrest: @retirement.intrest, retire_by: @retirement.retire_by, start_amount: @retirement.start_amount } }
+    patch retirement_url(@retirement), params: { retirement: { annual_savings: @retirement.annual_savings, intrest_rate: @retirement.intrest_rate, retirement_estimate: @retirement.retirement_estimate, start_amount: @retirement.start_amount, time_until_retirement: @retirement.time_until_retirement } }
     assert_redirected_to retirement_url(@retirement)
   end
 

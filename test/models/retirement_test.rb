@@ -2,13 +2,14 @@
 #
 # Table name: retirements
 #
-#  id            :bigint           not null, primary key
-#  annual_saving :decimal(, )
-#  intrest       :float
-#  retire_by     :integer
-#  start_amount  :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id                    :bigint           not null, primary key
+#  annual_savings        :decimal(, )
+#  intrest_rate          :float
+#  retirement_estimate   :decimal(, )
+#  start_amount          :decimal(, )
+#  time_until_retirement :integer
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
 #
 require 'test_helper'
 
