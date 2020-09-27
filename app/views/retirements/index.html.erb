@@ -26,6 +26,7 @@
             <th>Retirement Estimate</th>
             
           <th></th>
+          <th></th>
         
       </tr>
     </thead>
@@ -43,6 +44,12 @@
           
           
             <td><%= link_to 'Show', retirement %></td>
+
+
+
+            
+            <td><%= link_to 'Destroy', retirement, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %></td>
+            
           
         <% end %>
       <% end %>
