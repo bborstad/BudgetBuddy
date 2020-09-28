@@ -31,5 +31,8 @@
   <dt>Interest Paid:</dt>
   <dd><%=  number_to_currency((@calculate_debt.number_of_year*12*@calculate_debt.monthly_payements)-@calculate_debt.principle) %></dd>
 
+  <dt>Total Paid:</dt>
+  <dd><%=  number_to_currency((@calculate_debt.number_of_year*12*@calculate_debt.monthly_payements)) %></dd>
+
 
 </dl>

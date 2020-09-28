@@ -38,6 +38,3 @@ require( "jquery-ui/ui/widgets/autocomplete" );
 // Turbolinks
 var Turbolinks = require("turbolinks")
 Turbolinks.start() 
-
-import 'javascripts/immo_type_autocomplete.js'
-import 'javascripts/floor_hide.js'

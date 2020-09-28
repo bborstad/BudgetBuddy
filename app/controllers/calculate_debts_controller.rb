@@ -19,6 +19,7 @@ class CalculateDebtsController < ApplicationController
 
   # GET /calculate_debts/1/edit
   def edit
+    @calculate_debt = CalculateDebt.find(params[:id])
   end
 
   # POST /calculate_debts

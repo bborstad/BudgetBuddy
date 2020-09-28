@@ -1,3 +1,61 @@
 <h1>Edit Calculate_debt</h1>
 
-<%= render 'form', calculate_debt: @calculate_debt %>
+
+<%= form_with(model: @calculate_debt, local: true) do |form| %>
+    <% if @calculate_debt.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(calculate_debt.errors.count, "error") %> prohibited this calculate_debt from being saved:</h2>
+  
+        <ul>
+        <% calculate_debt.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="form-group">
+      <%= form.label :"What would you like to calculate?" %>
+      <%= form.select :type, ['select','Principle', 'Monthly Payements'], :value =>@calculate_debt.type%>
+     </div>
+  
+    <div class="form-group">
+      <%= form.label :"Principle- (Loan Amount)" %>
+      <%= form.text_field :principle, :value =>@calculate_debt.principle, class: 'form-control' %>
+    </div>
+  
+    <div id="hide_floor">
+      <%= form.label :monthly_payements %>
+      <%= form.text_field :monthly_payements, :value =>@calculate_debt.monthly_payements, class: 'form-control' %>
+    </div>
+  
+    <div class="form-group">
+      <%= form.label :"Interest rate of the loan" %>
+      <%= form.text_field :rate, :value =>@calculate_debt.rate, class: 'form-control', required:true %>
+    </div>
+  
+  
+    <div class="form-group">
+      <%= form.label :"compounds_per_year (Most are compounded every month so 12, if differet please correct)" %>
+      <%= form.number_field :compounds_per_year, :value =>@calculate_debt.compounds_per_year, class: 'form-control',required:true %>
+    </div>
+  
+    <div class="form-group">
+      <%= form.label :Years_to_pay_off %>
+      <%= form.number_field :number_of_year, :value =>@calculate_debt.number_of_year, class: 'form-control',required:true %>
+    </div>
+  
+    <div class="form-group">
+      
+  
+      <%= form.submit class: 'btn btn-primary' %>
+  
+      <% if @calculate_debt.persisted? %>
+        <%= link_to "Cancel", @calculate_debt, class: "btn btn-link" %>
+      <% else %>
+        <%= link_to "Cancel", calculate_debts_path, class: "btn btn-link" %>
+      <% end %>
+    </div>
+  <% end %>
+  
+  
