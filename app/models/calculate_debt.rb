@@ -2,7 +2,7 @@ class CalculateDebt < ApplicationRecord
     before_save :select_action
     def select_action
         trate = self.rate * 0.01
-        if self.monthly_payements == 0 || self.monthly_payements == nil
+        if self.select == 2  #find monthly payments  ['select','Principle', 'Monthly Payements']
                 r_and_k = trate/self.compounds_per_year #r/k
                 r_and_k_plus = 1 + r_and_k #1 + r/k
             
@@ -18,7 +18,7 @@ class CalculateDebt < ApplicationRecord
                 
                 self.monthly_payements = sum
 
-        elsif self.principle == 0 || self.principle == nil
+        elsif self.select == 1 #find principle
             
                 r_and_k = trate/self.compounds_per_year #r/k
                 r_and_k_plus = 1 + r_and_k #1 + r/k

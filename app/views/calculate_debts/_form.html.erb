@@ -14,22 +14,23 @@
 
   <div class="form-group">
     <%= form.label :"What would you like to calculate?" %>
-    <%= form.select :select, ['select','Principle', 'Monthly Payements']%>
+    <%= form.select(:select, options_for_select([ ['Principle',1], ['Monthly Payments',2] ]),:prompt => "Select one") %>
+
    </div>
 
   <div class="form-group">
     <%= form.label :"Principle- (Loan Amount)" %>
-    <%= form.text_field :principle, :value =>0, class: 'form-control' %>
+    <%= form.text_field :principle, class: 'form-control' %>
   </div>
 
-  <div id="hide_floor">
+  <div class="form-group">
     <%= form.label :monthly_payements %>
-    <%= form.text_field :monthly_payements, :value =>0, class: 'form-control' %>
+    <%= form.text_field :monthly_payements, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= form.label :"Interest rate of the loan" %>
-    <%= form.text_field :rate, :value =>0, class: 'form-control', required:true %>
+    <%= form.text_field :rate, class: 'form-control', required:true %>
   </div>
 
   <div class="field-group">
@@ -43,7 +44,7 @@
 
   <div class="form-group">
     <%= form.label :Years_to_pay_off %>
-    <%= form.number_field :number_of_year, :value =>0, class: 'form-control',required:true %>
+    <%= form.number_field :number_of_year, class: 'form-control',required:true %>
   </div>
 
   <div class="form-group">
