@@ -18,3 +18,26 @@ $(document).on("turbolinks:load", () => {
   $('[data-toggle="tooltip"]').tooltip()
   $('[data-toggle="popover"]').popover()
 })
+
+// app/javascript/packs/application.js 
+  // bootstrap
+  import 'bootstrap';
+  import 'css/application.scss';
+  // jquery
+  global.$ = jQuery; 
+
+  // app/javascript/packs/application.js 
+// #[...] 
+// jquery-ui
+import 'jquery-ui/themes/base/all.css';
+require( "jquery-ui/ui/widgets/autocomplete" ); 
+
+
+// app/javascript/packs/application.js 
+// #[...]
+// Turbolinks
+var Turbolinks = require("turbolinks")
+Turbolinks.start() 
+
+import 'javascripts/immo_type_autocomplete.js'
+import 'javascripts/floor_hide.js'

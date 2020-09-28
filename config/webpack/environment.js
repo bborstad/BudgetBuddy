@@ -7,4 +7,16 @@ environment.plugins.append('Provide', new webpack.ProvidePlugin({
   Rails: '@rails/ujs'
 }))
 
+// Add an additional plugin of your choosing : ProvidePlugin 
+environment.plugins.prepend(
+  'Provide',
+   new webpack.ProvidePlugin({
+    $: 'jquery',
+    jQuery: 'jquery',
+    jquery: 'jquery',
+    'window.Tether': 'tether',
+     Popper: ['popper.js', 'default'],
+   }) 
+ )
+
 module.exports = environment

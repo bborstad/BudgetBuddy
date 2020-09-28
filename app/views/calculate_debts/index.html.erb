@@ -35,9 +35,9 @@
         <%= content_tag :tr, id: dom_id(calculate_debt), class: dom_class(calculate_debt) do %>
           
 
-                      <td><%= calculate_debt.principle %></td>
-                      <td><%= calculate_debt.rate %></td>
-                      <td><%= calculate_debt.monthly_payements %></td>
+                      <td><%=  number_to_currency(calculate_debt.principle) %></td>
+                      <td><%= number_to_percentage(calculate_debt.rate) %></td>
+                      <td><%=  number_to_currency(calculate_debt.monthly_payements) %></td>
                       <td><%= calculate_debt.compounds_per_year %></td>
                       <td><%= calculate_debt.number_of_year %></td>
           
