@@ -16,7 +16,11 @@
   
     <div class="form-group">
       <%= form.label :"What would you like to calculate?" %>
-      <%= form.select :type, ['select','Principle', 'Monthly Payements'], :value =>@calculate_debt.type%>
+      <%= form.select :select, ['select','Principle', 'Monthly Payements'], :value =>@calculate_debt.select%>
+     </div>
+
+     <div class="field-group">
+        <%= form.hidden_field :email, :value => current_user.email, class: "form-control"%>
      </div>
   
     <div class="form-group">

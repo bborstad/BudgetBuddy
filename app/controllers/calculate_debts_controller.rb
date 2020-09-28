@@ -70,6 +70,6 @@ class CalculateDebtsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def calculate_debt_params
-      params.require(:calculate_debt).permit(:principle, :rate, :monthly_payements, :compounds_per_year, :number_of_year)
+      params.require(:calculate_debt).permit(:principle, :rate, :monthly_payements, :compounds_per_year, :number_of_year, :email, :select)
     end
 end
