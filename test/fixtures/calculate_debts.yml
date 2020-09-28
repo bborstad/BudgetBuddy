@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  principle: 9.99
+  rate: 9.99
+  monthly_payements: 9.99
+  compounds_per_year: 1
+  number_of_year: 1
+
+two:
+  principle: 9.99
+  rate: 9.99
+  monthly_payements: 9.99
+  compounds_per_year: 1
+  number_of_year: 1

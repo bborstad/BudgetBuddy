@@ -1,0 +1,51 @@
+
+
+
+<div class="row">
+  <div class="col-sm-6">
+    <h1>Calculate_debts</h1>
+  </div>
+
+  <div class="col-sm-6 text-right">
+  <%= link_to new_calculate_debt_path, class: 'btn btn-primary' do %>
+    Add New Calculate debt
+  <% end %>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+    
+
+            <th>Principle</th>
+            <th>Rate</th>
+            <th>Monthly payements</th>
+            <th>Compounds per year</th>
+            <th>Number of year</th>
+            
+          <th></th>
+        
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @calculate_debts.each do |calculate_debt| %>
+        <%= content_tag :tr, id: dom_id(calculate_debt), class: dom_class(calculate_debt) do %>
+          
+
+                      <td><%= calculate_debt.principle %></td>
+                      <td><%= calculate_debt.rate %></td>
+                      <td><%= calculate_debt.monthly_payements %></td>
+                      <td><%= calculate_debt.compounds_per_year %></td>
+                      <td><%= calculate_debt.number_of_year %></td>
+          
+          
+            <td><%= link_to 'Show', calculate_debt %></td>
+          
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

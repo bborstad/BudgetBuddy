@@ -1,0 +1,27 @@
+<div class="page-header">
+  <%= link_to calculate_debts_path, class: 'btn btn-default' do %>
+    All Calculate_debts
+  <% end %>
+  <%= link_to edit_calculate_debt_path(@calculate_debt), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show calculate_debt</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Principle:</dt>
+  <dd><%= @calculate_debt.principle %></dd>
+
+  <dt>Rate:</dt>
+  <dd><%= @calculate_debt.rate %></dd>
+
+  <dt>Monthly payements:</dt>
+  <dd><%= @calculate_debt.monthly_payements %></dd>
+
+  <dt>Compounds per year:</dt>
+  <dd><%= @calculate_debt.compounds_per_year %></dd>
+
+  <dt>Number of year:</dt>
+  <dd><%= @calculate_debt.number_of_year %></dd>
+
+</dl>
