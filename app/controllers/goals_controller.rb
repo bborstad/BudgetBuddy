@@ -1,6 +1,6 @@
 class GoalsController < ApplicationController
   before_action :authenticate_user!
-  #before_action :require_permission, only: [:edit, :update, :destroy]
+  before_action :require_permission, only: [:show, :edit, :update, :destroy]
   before_action :set_goal, only: [:show, :edit, :update, :destroy]
 
   # GET /goals
@@ -73,4 +73,10 @@ class GoalsController < ApplicationController
     def goal_params
       params.require(:goal).permit(:title, :progress, :goal, :expired)
     end
+
+  def require_permission
+    if Goal.find(params[:id]).user != current_user
+      redirect_to goals_url, flash: { error: "You do not have permission to do that."}
+    end
+  end
 end
