@@ -1,0 +1,27 @@
+<div class="page-header">
+  <%= link_to retirements_path, class: 'btn btn-default' do %>
+    All Retirements
+  <% end %>
+  <%= link_to edit_retirement_path(@retirement), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show retirement</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Annual Savings:</dt>
+  <dd><%= number_to_currency(@retirement.annual_savings) %></dd>
+
+  <dt>Year of Retirement:</dt>
+  <dd><%= @retirement.year_of_retirement %></dd>
+
+  <dt>Initial Savings:</dt>
+  <dd><%= number_to_currency(@retirement.inital_savings) %></dd>
+
+  <dt>Interest Rate:</dt>
+  <dd><%= number_to_percentage(@retirement.intrest_rate) %></dd>
+
+  <dt>Retirement Estimate:</dt>
+  <dd><%= number_to_currency(@retirement.retirement_estimate) %></dd>
+
+</dl>

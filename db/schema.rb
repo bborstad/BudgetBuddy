@@ -79,6 +79,16 @@ ActiveRecord::Schema.define(version: 2020_09_29_012221) do
     t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient_type_and_recipient_id"
   end
 
+  create_table "retirements", force: :cascade do |t|
+    t.decimal "annual_savings"
+    t.integer "year_of_retirement"
+    t.decimal "inital_savings"
+    t.float "intrest_rate"
+    t.decimal "retirement_estimate"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "services", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "provider"
