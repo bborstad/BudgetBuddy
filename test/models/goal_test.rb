@@ -3,8 +3,8 @@
 # Table name: goals
 #
 #  id         :bigint           not null, primary key
-#  goal       :integer
-#  progress   :integer
+#  goal       :float
+#  progress   :float
 #  title      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
