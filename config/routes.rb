@@ -2,6 +2,9 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   resources :goals
+
+  resources :retirements
+
   resources :calculate_debts
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'

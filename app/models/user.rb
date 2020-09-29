@@ -37,3 +37,4 @@ class User < ApplicationRecord
     inverse_of: :user
   )
 end
+
