@@ -16,7 +16,7 @@ class CalculateDebt < ApplicationRecord
                 sum = sum/ self.principle
                 sum = 1/sum 
                 
-                self.monthly_payements = sum
+                self.monthly_payements = sum.round(2)
 
         elsif self.select == 1 #find principle
             
@@ -34,7 +34,7 @@ class CalculateDebt < ApplicationRecord
                 sum = self.monthly_payements * minus
 
                 sum = sum /r_and_k
-                self.principle = sum
+                self.principle = sum.round(2)
 
         end
     end
@@ -54,7 +54,7 @@ class CalculateDebt < ApplicationRecord
         sum = sum/ self.principle
         sum = 1/sum 
         
-        self.monthly_payements = sum
+        self.monthly_payements = sum.round(2)
 
     end
     
@@ -74,6 +74,6 @@ class CalculateDebt < ApplicationRecord
        sum = self.monthly_payements * minus
 
        sum = sum /r_and_k
-       self.principle = sum
+       self.principle = sum.round(2)
     end
 end
