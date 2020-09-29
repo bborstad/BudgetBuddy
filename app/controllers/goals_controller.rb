@@ -73,7 +73,7 @@ class GoalsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def goal_params
-      params.require(:goal).permit(:title, :progress, :goal, :expired)
+      params.require(:goal).permit(:title, :progress, :goal)
     end
 
   def require_permission
