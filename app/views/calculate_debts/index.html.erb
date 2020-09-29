@@ -3,12 +3,12 @@
 
 <div class="row">
 <div class="col-sm-6">
-  <h1>Your Calculation History</h1>
+  <h1>Your Debt Quote History</h1>
 </div>
 
 <div class="col-sm-6 text-right">
 <%= link_to new_calculate_debt_path, class: 'btn btn-primary' do %>
-  Add New Calculate debt
+  New Quote
 <% end %>
 </div>
 </div>
@@ -20,10 +20,11 @@
   
 
           <th>Principle</th>
-          <th>Rate</th>
+          <th>Interest Rate</th>
           <th>Monthly payments</th>
           <th>Compounds per year</th>
           <th>Number of year</th>
+          <th>Total Paid </th>
           
         <th></th>
       
@@ -40,6 +41,7 @@
                     <td><%=  number_to_currency(calculate_debt.monthly_payements) %></td>
                     <td><%= calculate_debt.compounds_per_year %></td>
                     <td><%= calculate_debt.number_of_year %></td>
+                    <td><%= number_to_currency((calculate_debt.number_of_year*12*calculate_debt.monthly_payements)) %></td>
         
         
           <td><%= link_to 'Show', calculate_debt %></td>

@@ -14,7 +14,7 @@
 
   <div class="form-group">
     <%= form.label :"What would you like to calculate?" %>
-    <%= form.select(:select, options_for_select([ ['Principle',1], ['Monthly Payments',2] ]),:prompt => "Select one") %>
+    <%= form.select(:select, options_for_select([ ['Principle',1], ['Monthly Payments',2] ]),{ :prompt => "Select one"}, :required => true)%>
 
    </div>
 
