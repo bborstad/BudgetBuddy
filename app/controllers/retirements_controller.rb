@@ -6,7 +6,10 @@ class RetirementsController < ApplicationController
   # GET /retirements.json
   def index
     @retirements = Retirement.all
-  end
+         # @retirements = Retirements.where(email:current_user.email)
+        # need to create a migration that adds user email to retirements then add the above code 
+  
+end
 
   # GET /retirements/1
   # GET /retirements/1.json
@@ -20,6 +23,7 @@ class RetirementsController < ApplicationController
 
   # GET /retirements/1/edit
   def edit
+    @retirement = Retirement.find(params[:id])
   end
 
   # POST /retirements
