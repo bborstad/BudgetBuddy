@@ -21,7 +21,7 @@
 
             <th>Title</th>
             <th>Progress</th>
-            <th>Goal</th>
+           
           <th></th>
         
       </tr>
@@ -33,9 +33,8 @@
           
 
                       <td><%= goal.title %></td>
-                      <td><%= goal.progress %></td>
-                      <td><%= goal.goal %></td>
-          
+                      <td><%= bar_chart Goal.where(user_id:current_user).where(title: goal.title).group(:progress).sum(:goal) %></td>
+                      
           
             <td><%= link_to 'Details', goal %></td>
           
