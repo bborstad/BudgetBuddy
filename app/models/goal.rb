@@ -25,4 +25,8 @@ class Goal < ApplicationRecord
         foreign_key: 'user_id',
         inverse_of: :goals
     )
+    validates :goal, numericality: {greater_than_or_equal_to: 0}
+    validates :progress, numericality: {greater_than_or_equal_to: 0}
+
+
 end

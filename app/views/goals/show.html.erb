@@ -13,8 +13,8 @@
   <dd><%= @goal.title %></dd>
 
   <dt>Progress:</dt>
-  <dd><%= @goal.progress %></dd>
+  <dd><%=  number_to_currency(@goal.progress) %></dd>
 
   <dt>Goal:</dt>
-  <dd><%= @goal.goal %></dd>
+  <dd><%=  number_to_currency(@goal.goal) %></dd>
 </dl>
