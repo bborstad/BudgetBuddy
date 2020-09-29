@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# Users
 u1 = User.create!(
   email: 'alice@gmail.com',
   password: 'password'
@@ -14,4 +15,26 @@ u1 = User.create!(
 u2 = User.create!(
   email: 'bob@gmail.com',
   password: 'password'
+)
+
+# Goals
+g1 = Goal.create!(
+  user: u1,
+  title: 'New Car',
+  progress: 10000,
+  goal: 18000
+)
+
+g2 = Goal.create!(
+  user: u1,
+  title: 'Computer',
+  progress: 300,
+  goal: 3000
+) 
+
+g3 = Goal.create!(
+  user: u2,
+  title: 'Student Loans',
+  progress: 5000,
+  goal: 22000
 )

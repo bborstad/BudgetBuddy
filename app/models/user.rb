@@ -30,4 +30,10 @@ class User < ApplicationRecord
 
   has_many :notifications, as: :recipient
   has_many :services
+  has_many(
+    :goals,
+    class_name: 'Goal',
+    foreign_key: 'user_id',
+    inverse_of: :user
+  )
 end

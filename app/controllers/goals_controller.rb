@@ -1,10 +1,12 @@
 class GoalsController < ApplicationController
+  before_action :authenticate_user!
+  #before_action :require_permission, only: [:edit, :update, :destroy]
   before_action :set_goal, only: [:show, :edit, :update, :destroy]
 
   # GET /goals
   # GET /goals.json
   def index
-    @goals = Goal.all
+    @goals = Goal.where(user_id:current_user)
   end
 
   # GET /goals/1

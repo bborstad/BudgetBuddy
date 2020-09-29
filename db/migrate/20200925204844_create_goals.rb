@@ -4,7 +4,6 @@ class CreateGoals < ActiveRecord::Migration[6.0]
       t.string :title
       t.integer :progress
       t.integer :goal
-      t.boolean :expired
 
       t.timestamps
     end
