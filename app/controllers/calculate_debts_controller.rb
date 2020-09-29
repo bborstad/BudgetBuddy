@@ -5,7 +5,7 @@ class CalculateDebtsController < ApplicationController
   # GET /calculate_debts
   # GET /calculate_debts.json
   def index
-    @calculate_debts = CalculateDebt.all
+    @calculate_debts = CalculateDebt.where(email:current_user.email)
   end
 
   # GET /calculate_debts/1
