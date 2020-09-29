@@ -13,22 +13,22 @@
 
   <div class="form-group">
     <%= form.label :annual_savings %>
-    <%= form.text_field :annual_savings, class: 'form-control' %>
+    <%= form.text_field :annual_savings, class: 'form-control',min:0,required:true %>
   </div>
 
   <div class="form-group">
     <%= form.label :year_of_retirement %>
-    <%= form.number_field :year_of_retirement, class: 'form-control' %>
+    <%= form.number_field :year_of_retirement,min:Date.today.year, class: 'form-control',required:true %>
   </div>
 
   <div class="form-group">
     <%= form.label :inital_savings %>
-    <%= form.text_field :inital_savings, class: 'form-control' %>
+    <%= form.text_field :inital_savings, class: 'form-control',required:true %>
   </div>
 
   <div class="form-group">
-    <%= form.label :"Intrest_Rate - Please enter in the form of a decimal -" %>
-    <%= form.text_field :intrest_rate, class: 'form-control' %>
+    <%= form.label :"Intrest_Rate" %>
+    <%= form.text_field :intrest_rate, class: 'form-control',required:true %>
   </div>
 
 <!--

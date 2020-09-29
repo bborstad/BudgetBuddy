@@ -14,18 +14,25 @@
 class Retirement < ApplicationRecord
 
     before_save :calculate_retirement
+    validates :intrest_rate, numericality: {greater_than_or_equal_to: 0}
+    validates :inital_savings, numericality: {greater_than_or_equal_to: 0}
+    validates :annual_savings, numericality: {greater_than_or_equal_to: 0}
+
+
+
 
 
     def calculate_retirement
+        ratei=self.intrest_rate* 0.01
 
         #get delta time by subtracting the input year - the current year 
         delta_t = self.year_of_retirement - Date.today.year
 
         # calculation the inital amount 
-        cal_with_intital = self.inital_savings * ((1+self.intrest_rate)**delta_t)
+        cal_with_intital = self.inital_savings * ((1+ratei)**delta_t)
 
         #calculation with the annual amount  
-        cal_with_annual = self.annual_savings * (((1+self.intrest_rate)**delta_t)-1)/self.intrest_rate
+        cal_with_annual = self.annual_savings * (((1+ratei)**delta_t)-1)/ratei
 
         #sum those and save to retirement_estimate 
         self.retirement_estimate = (cal_with_annual + cal_with_intital).round(2)

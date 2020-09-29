@@ -3,12 +3,12 @@
 
 <div class="row">
   <div class="col-sm-6">
-    <h1>Retirements</h1>
+    <h1>My Retirements Quotes</h1>
   </div>
 
   <div class="col-sm-6 text-right">
   <%= link_to new_retirement_path, class: 'btn btn-primary' do %>
-    Add New Retirement
+     New Quote
   <% end %>
   </div>
 </div>
@@ -36,11 +36,11 @@
         <%= content_tag :tr, id: dom_id(retirement), class: dom_class(retirement) do %>
           
 
-                      <td>$<%= retirement.annual_savings %></td>
+                      <td><%= number_to_currency(retirement.annual_savings) %></td>
                       <td><%= retirement.year_of_retirement %></td>
-                      <td>$<%= retirement.inital_savings %></td>
-                      <td><%= retirement.intrest_rate %></td>
-                      <td>$<%= retirement.retirement_estimate %></td>
+                      <td><%= number_to_currency(retirement.inital_savings) %></td>
+                      <td><%= number_to_percentage(retirement.intrest_rate) %></td>
+                      <td><%= number_to_currency(retirement.retirement_estimate) %></td>
           
           
             <td><%= link_to 'Show', retirement %></td>
