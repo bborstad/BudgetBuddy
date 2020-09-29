@@ -1,0 +1,2 @@
+class CalculateDebt < ApplicationRecord
+end
