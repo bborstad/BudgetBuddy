@@ -1,22 +1,26 @@
 <div class="page-header">
   <%= link_to calculate_debts_path, class: 'btn btn-default' do %>
-    All Calculate_debts
+    Debt Calculator
   <% end %>
   <%= link_to edit_calculate_debt_path(@calculate_debt), class: 'btn btn-primary' do %>
     Edit
   <% end %>
-  <h1>Show calculate_debt</h1>
+  <br>
+  <hr>
+
+  <h1> Debt Calculator</h1>
 </div>
+<hr>
 
 <dl class="dl-horizontal">
   <dt>Principle:</dt>
-  <dd><%= @calculate_debt.principle %></dd>
+  <dd><%=  number_to_currency(@calculate_debt.principle) %></dd>
 
   <dt>Rate:</dt>
-  <dd><%= @calculate_debt.rate %></dd>
+  <dd><%= number_to_percentage(@calculate_debt.rate) %></dd>
 
   <dt>Monthly payements:</dt>
-  <dd><%= @calculate_debt.monthly_payements %></dd>
+  <dd><%=  number_to_currency(@calculate_debt.monthly_payements) %></dd>
 
   <dt>Compounds per year:</dt>
   <dd><%= @calculate_debt.compounds_per_year %></dd>
@@ -24,10 +28,12 @@
   <dt>Number of year:</dt>
   <dd><%= @calculate_debt.number_of_year %></dd>
 
-  <dt>Email:</dt>
-  <dd><%= @calculate_debt.email %></dd>
+  <dt>Interest Paid:</dt>
+  <dd><%=  number_to_currency((@calculate_debt.number_of_year*12*@calculate_debt.monthly_payements)-@calculate_debt.principle) %></dd>
 
-  <dt>Select:</dt>
-  <dd><%= @calculate_debt.select %></dd>
+  <dt>Total Paid:</dt>
+  <dd><%=  number_to_currency((@calculate_debt.number_of_year*12*@calculate_debt.monthly_payements)) %></dd>
 
+  <dt>Email :</dt>
+  <dd><%=  @calculate_debt.email %></dd>
 </dl>

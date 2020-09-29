@@ -1,4 +1,5 @@
 class CalculateDebtsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_calculate_debt, only: [:show, :edit, :update, :destroy]
 
   # GET /calculate_debts
@@ -19,6 +20,7 @@ class CalculateDebtsController < ApplicationController
 
   # GET /calculate_debts/1/edit
   def edit
+    @calculate_debt = CalculateDebt.find(params[:id])
   end
 
   # POST /calculate_debts

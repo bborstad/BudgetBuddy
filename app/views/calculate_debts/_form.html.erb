@@ -1,3 +1,4 @@
+
 <%= form_with(model: calculate_debt, local: true) do |form| %>
   <% if calculate_debt.errors.any? %>
     <div id="error_explanation">
@@ -12,13 +13,14 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label :principle %>
-    <%= form.text_field :principle, class: 'form-control' %>
-  </div>
+    <%= form.label :"What would you like to calculate?" %>
+    <%= form.select(:select, options_for_select([ ['Principle',1], ['Monthly Payments',2] ]),:prompt => "Select one") %>
+
+   </div>
 
   <div class="form-group">
-    <%= form.label :rate %>
-    <%= form.text_field :rate, class: 'form-control' %>
+    <%= form.label :"Principle- (Loan Amount)" %>
+    <%= form.text_field :principle, class: 'form-control' %>
   </div>
 
   <div class="form-group">
@@ -27,23 +29,22 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :compounds_per_year %>
-    <%= form.number_field :compounds_per_year, class: 'form-control' %>
+    <%= form.label :"Interest rate of the loan" %>
+    <%= form.text_field :rate, class: 'form-control', required:true %>
+  </div>
+
+  <div class="field-group">
+        <%= form.hidden_field :email, :value => current_user.email, class: "form-control"%>
   </div>
 
   <div class="form-group">
-    <%= form.label :number_of_year %>
-    <%= form.number_field :number_of_year, class: 'form-control' %>
+    <%= form.label :"compounds_per_year (Most are compounded every month so 12, if differet please correct)" %>
+    <%= form.number_field :compounds_per_year, :value =>12, class: 'form-control',required:true %>
   </div>
 
   <div class="form-group">
-    <%= form.label :email %>
-    <%= form.text_field :email, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :select %>
-    <%= form.number_field :select, class: 'form-control' %>
+    <%= form.label :Years_to_pay_off %>
+    <%= form.number_field :number_of_year, class: 'form-control',required:true %>
   </div>
 
   <div class="form-group">
