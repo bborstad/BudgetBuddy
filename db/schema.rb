@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 2020_09_29_165821) do
 
   create_table "goals", force: :cascade do |t|
     t.string "title"
-    t.float "progress"
+    t.float "progress", default: 0.0
     t.float "goal"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
