@@ -36,5 +36,13 @@ class User < ApplicationRecord
     foreign_key: 'user_id',
     inverse_of: :user
   )
+
+  has_many(
+    :retirements,
+    class_name: 'Retirement',
+    foreign_key: 'user_id',
+    inverse_of: :user
+  )
+
 end
 
