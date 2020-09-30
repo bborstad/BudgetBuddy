@@ -7,7 +7,7 @@
 
 <nav class="navbar navbar-expand-md navbar-light bg-light">
   <div class="container">
-    <%= link_to Rails.configuration.application_name, root_path, class: "navbar-brand" %>
+    <%= link_to "BudgetBuddy", root_path, class: "navbar-brand" %>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -20,10 +20,10 @@
       <ul class="navbar-nav">
         <% if user_signed_in? %>
         
-        <li class="nav-item"><%= link_to "Home", announcements_path, class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Budget", announcements_path, class: "nav-link #{unread_announcements(current_user)}" %></li>
         <li class="nav-item"><%= link_to "Goals", goals_path, class: "nav-link" %></li>
-        <li class="nav-item"><%= link_to "Retirement", announcements_path, class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "Retirement", retirements_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Social", announcements_path, class: "nav-link" %></li>
 
 
@@ -43,7 +43,7 @@
               <% end %>
               <%= link_to "Profile", edit_user_registration_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
-              <%= link_to "Settings", edit_user_registration_path, class: "dropdown-item" %>
+              <%= link_to "Settings", announcements_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
             </div>
