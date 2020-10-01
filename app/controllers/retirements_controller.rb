@@ -1,5 +1,6 @@
 class RetirementsController < ApplicationController
   before_action :authenticate_user!
+  before_action :require_permission, only: [:show, :edit, :update, :destroy]
   before_action :set_retirement, only: [:show, :edit, :update, :destroy]
 
   # GET /retirements
@@ -70,6 +71,12 @@ end
     # Use callbacks to share common setup or constraints between actions.
     def set_retirement
       @retirement = Retirement.find(params[:id])
+    end
+
+    def require_permission
+      if Retirement.find(params[:id]).user != current_user
+        redirect_to retirements_url, flash: { error: "You do not have permission to do that."}
+      end
     end
 
     # Only allow a list of trusted parameters through.
