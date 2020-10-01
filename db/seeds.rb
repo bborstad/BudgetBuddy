@@ -38,3 +38,4 @@ g3 = Goal.create!(
   progress: 5000,
   goal: 22000
 )
+
