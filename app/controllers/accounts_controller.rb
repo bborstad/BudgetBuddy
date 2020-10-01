@@ -9,7 +9,7 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.json
   def index
-    @accounts = Account.all
+    @accounts = Account.where(user_id:current_user)
   end
 
   # GET /accounts/1
@@ -24,12 +24,13 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1/edit
   def edit
+    @account = Account.find(params[:id])
   end
 
   # POST /accounts
   # POST /accounts.json
   def create
-    @account = Account.new(account_params)
+    @account = current_user.accounts.new(account_params)
 
     respond_to do |format|
       if @account.save
