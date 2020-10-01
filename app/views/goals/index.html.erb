@@ -23,7 +23,7 @@
 
             <td><%= bar_chart Goal.where(user_id:current_user).where(title: goal.title).group(:title).sum(:progress), min: 0, max: goal.goal, prefix: "$", round: 2, zeros: true, height: "75px" %></td>
             <td><%= link_to (image_tag ("info.png") ), goal %></td>
-            <td><%= link_to (image_tag ("plus.png") ) %></td>
+            <td><%= link_to (image_tag ("plus.png") ), goal %></td>
           <% end %>
         <% end %>
       <% end %>
