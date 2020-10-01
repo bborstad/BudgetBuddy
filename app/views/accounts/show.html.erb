@@ -13,6 +13,6 @@
   <dd><%= @account.name %></dd>
 
   <dt>Balance:</dt>
-  <dd><%= @account.balance %></dd>
+  <dd><%= number_to_currency(@account.balance) %></dd>
 
 </dl>

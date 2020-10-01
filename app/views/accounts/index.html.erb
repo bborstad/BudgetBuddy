@@ -33,7 +33,7 @@
             <td><%= link_to account.name, account %></td>
           
 
-                      <td><%= account.balance %></td>
+                      <td><%= number_to_currency(account.balance) %></td>
           
           
         <% end %>
