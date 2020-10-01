@@ -74,6 +74,12 @@ end
       @retirement = Retirement.find(params[:id])
     end
 
+    def require_permission
+      if Retirement.find(params[:id]).user != current_user
+        redirect_to retirements_url, flash: { error: "You do not have permission to do that."}
+      end
+    end
+
     # Only allow a list of trusted parameters through.
     def retirement_params
       params.require(:retirement).permit(:annual_savings, :year_of_retirement, :inital_savings, :intrest_rate, :retirement_estimate)

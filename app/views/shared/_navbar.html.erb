@@ -41,6 +41,8 @@
               <% if current_user.admin? && respond_to?(:admin_root_path) %>
                 <%= link_to "Admin Area", admin_root_path, class: "dropdown-item" %>
               <% end %>
+              <%= link_to "Accounts", accounts_url, class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
               <%= link_to "Profile", edit_user_registration_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <%= link_to "Settings", edit_user_registration_path, class: "dropdown-item" %>
