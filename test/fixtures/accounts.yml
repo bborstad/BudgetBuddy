@@ -1,0 +1,18 @@
+# == Schema Information
+#
+# Table name: accounts
+#
+#  id         :bigint           not null, primary key
+#  balance    :decimal(, )
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+one:
+  name: MyString
+  balance: 9.99
+
+two:
+  name: MyString
+  balance: 9.99
