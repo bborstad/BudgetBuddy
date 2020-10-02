@@ -1,9 +1,6 @@
-<div class="page-header">
+<div class="page-header" >
   <%= link_to goals_path, class: 'btn btn-primary' do %>
     See All Goals
-  <% end %>
-  <%= link_to edit_goal_path(@goal), class: 'btn btn-primary' do %>
-    Edit '<%= @goal.title%>'
   <% end %>
   <h1> Details for Goal '<%= @goal.title %>' </h1>
 </div>
