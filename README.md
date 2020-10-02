@@ -14,7 +14,8 @@
 3. Run <code>bundle install && yarn install</code>
 4. Run <code>rails db:migrate:reset db:seed</code>
 5. Run <code>rails s</code> to launch app
-6. Log in using the Navbar and one of the provided users. 
+6. Open a browser, and go to http://localhost:3000/
+7. Log in using the Navbar and one of the provided users. 
 	- Use Alice as she currently has more data than Bob
 	
 **N.B.** This app is built on Ruby 6.
