@@ -17,8 +17,8 @@
 6. Log in using the Navbar and one of the provided users. 
 	- Use Alice as she currently has more data than Bob
 	
-**N.B.:** This app is built on Ruby 6.
+**N.B.** This app is built on Ruby 6.
 
-**N.B.:** The instructions above are designed to run within Ubuntu on Windows. If you don't have this installed, we can provide a demo on one of our machines.
+**N.B.** The instructions above are designed to run within Ubuntu on Windows. If you don't have this installed, we can provide a demo on one of our machines.
 
 Please let us know if you have any questions.
