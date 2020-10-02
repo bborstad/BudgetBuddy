@@ -33,9 +33,22 @@ g2 = Goal.create!(
 ) 
 
 g3 = Goal.create!(
+  user: u1,
+  title: '6 Month Savings',
+  progress: 12000,
+  goal: 12000
+)
+
+g4 = Goal.create!(
   user: u2,
   title: 'Student Loans',
   progress: 5000,
   goal: 22000
 )
 
+g5 = Goal.create!(
+  user: u2,
+  title: 'Savings',
+  progress: 2000,
+  goal: 10000
+)

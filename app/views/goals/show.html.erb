@@ -1,20 +1,18 @@
-<div class="page-header">
-  <%= link_to goals_path, class: 'btn btn-default' do %>
-    All Goals
+<div class="page-header" >
+  <%= link_to goals_path, class: 'btn btn-primary' do %>
+    See All Goals
   <% end %>
-  <%= link_to edit_goal_path(@goal), class: 'btn btn-primary' do %>
-    Edit
-  <% end %>
-  <h1>Show goal</h1>
+  <h1> Details for Goal '<%= @goal.title %>' </h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt>Title:</dt>
+  <dt>Goal Name:</dt>
   <dd><%= @goal.title %></dd>
 
   <dt>Progress:</dt>
-  <dd><%=  number_to_currency(@goal.progress) %></dd>
+  <dd><%= number_to_currency(@goal.progress)%><%= "/" %><%=  number_to_currency(@goal.goal) %> </dd>
 
-  <dt>Goal:</dt>
-  <dd><%=  number_to_currency(@goal.goal) %></dd>
+  <dd><%= bar_chart Goal.where(user_id:current_user).where(title: @goal.title).group(:title).sum(:progress), min: 0, max: @goal.goal, prefix: "$", round: 2, zeros: true, height: "75px" %></dd>
+
+
 </dl>
