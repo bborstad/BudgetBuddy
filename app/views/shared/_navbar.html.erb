@@ -21,7 +21,7 @@
         <% if user_signed_in? %>
         
         <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link" %></li>
-        <li class="nav-item"><%= link_to "Budget", announcements_path, class: "nav-link #{unread_announcements(current_user)}" %></li>
+        <li class="nav-item"><%= link_to "Budget", budgets_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Goals", goals_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Retirement", retirements_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Social", announcements_path, class: "nav-link" %></li>

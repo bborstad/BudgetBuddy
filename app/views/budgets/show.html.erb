@@ -1,0 +1,15 @@
+<div class="page-header">
+  <%= link_to budgets_path, class: 'btn btn-default' do %>
+    All Budgets
+  <% end %>
+  <%= link_to edit_budget_path(@budget), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show budget</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Month:</dt>
+  <dd><%= @budget.month %></dd>
+
+</dl>
