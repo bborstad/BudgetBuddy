@@ -74,3 +74,5 @@ gem 'annotate', group: :development
 
 #Trying this gem for charts
 gem 'chartkick'
+
+#
