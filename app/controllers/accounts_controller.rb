@@ -7,7 +7,8 @@ class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
 
   # GET /accounts
-  # GET /accounts.json
+  # GET /accounts.json 
+  #
   def index
     @accounts = Account.where(user_id:current_user)
   end
