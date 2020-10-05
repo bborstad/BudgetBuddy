@@ -43,7 +43,7 @@
                     <td><%= calculate_debt.compounds_per_year %></td>
                     <td><%= calculate_debt.number_of_year %></td>
                     <td><%= number_to_currency((calculate_debt.number_of_year*12*calculate_debt.monthly_payements)) %></td>
-        
+
         
           <td><%= link_to 'Show', calculate_debt %></td>
           <td><%= link_to 'Destroy', calculate_debt, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
