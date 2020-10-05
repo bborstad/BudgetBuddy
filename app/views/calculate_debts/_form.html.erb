@@ -13,10 +13,11 @@
   <% end %>
 
 
+
   <div class="form-group">
   <%= form.label :"What would you like to calculate?" %>
-  <select onchange="yesnoCheck(this);">
-    <option value= "Please Select"> Please Select</option>
+  <select name="select" onchange="yesnoCheck(this);" required>
+    <option disabled value="" selected hidden>Please Select</option>
     <option value="Monthly Payments">Monthly Payments</option>
     <option value="Principle">Principle</option>
   </select>

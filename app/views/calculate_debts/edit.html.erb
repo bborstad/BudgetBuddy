@@ -15,21 +15,22 @@
     <% end %>
   
     <div class="form-group">
-      <%= form.label :"What would you like to calculate?" %>
-      <%= form.select :select, ['select','Principle', 'Monthly Payements'], :value =>@calculate_debt.select%>
-     </div>
+    <%= form.label :"What value would you like to re-calculate?" %>
+    <%= form.select(:select, options_for_select([ ['Principle',1], ['Monthly Payments',2] ]),{ :prompt => "Select one"}, :required => true)%>
+
+   </div>
 
      <div class="field-group">
         <%= form.hidden_field :email, :value => current_user.email, class: "form-control"%>
      </div>
   
     <div class="form-group">
-      <%= form.label :"Principle- (Loan Amount)" %>
+      <%= form.label :"Principle (if select field choice was Principle don't touch, if Monthly Payments change)" %>
       <%= form.text_field :principle, :value =>@calculate_debt.principle, class: 'form-control' %>
     </div>
   
     <div class="form-group">
-      <%= form.label :monthly_payments %>
+      <%= form.label :"Monthly Payments (if select field choice was Monthly Payments don't touch, if Principle change)" %>
       <%= form.text_field :monthly_payements, :value =>@calculate_debt.monthly_payements, class: 'form-control' %>
     </div>
   
