@@ -12,21 +12,32 @@
     </div>
   <% end %>
 
+
+
   <div class="form-group">
-    <%= form.label :"What would you like to calculate?" %>
-    <%= form.select(:select, options_for_select([ ['Principle',1], ['Monthly Payments',2] ]),{ :prompt => "Select one"}, :required => true)%>
+  <%= form.label :"What would you like to calculate?" %>
+  <select name="select" onchange="yesnoCheck(this);" required>
+    <option disabled value="" selected hidden>Please Select</option>
+    <option value="Monthly Payments">Monthly Payments</option>
+    <option value="Principle">Principle</option>
+  </select>
+</div>
 
-   </div>
 
+<div id="ifMonthly" style="display: none;">
   <div class="form-group">
     <%= form.label :"Principle- (Loan Amount)" %>
     <%= form.text_field :principle,:value =>0, class: 'form-control' %>
   </div>
+</div>
 
+<div id="ifPrinciple" style="display: none;">
   <div class="form-group">
     <%= form.label :monthly_payments %>
     <%= form.text_field :monthly_payements,:value =>0, class: 'form-control' %>
   </div>
+</div>
+
 
   <div class="form-group">
     <%= form.label :"Interest rate of the loan" %>
@@ -63,3 +74,24 @@
     <% end %>
   </div>
 <% end %>
+
+
+
+<script type="text/javascript">
+  function yesnoCheck(that) {
+      if (that.value == "Principle") {
+          document.getElementById("ifPrinciple").style.display = "block";
+          document.getElementById("ifMonthly").style.display = "none";
+
+      } else if (that.value == "Monthly Payments") {
+          document.getElementById("ifPrinciple").style.display = "none";
+          document.getElementById("ifMonthly").style.display = "block";
+
+      } else{
+        document.getElementById("ifPrinciple").style.display = "none";
+        document.getElementById("ifMonthly").style.display = "none";
+
+
+      }
+  }
+</script>
