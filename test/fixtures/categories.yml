@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  projected: 1.5
+  actual: 1.5
+  grouping: MyString
+
+two:
+  name: MyString
+  projected: 1.5
+  actual: 1.5
+  grouping: MyString
