@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    @categories = Category.where(user_id:current_user)
   end
 
   # GET /categories/1
@@ -24,7 +24,7 @@ class CategoriesController < ApplicationController
   # POST /categories
   # POST /categories.json
   def create
-    @category = Category.new(category_params)
+    @category = current_user.categories.new(category_params)
 
     respond_to do |format|
       if @category.save

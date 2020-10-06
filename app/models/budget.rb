@@ -8,4 +8,5 @@
 #  updated_at :datetime         not null
 #
 class Budget < ApplicationRecord
+    has_many :categories, dependent: :destroy
 end

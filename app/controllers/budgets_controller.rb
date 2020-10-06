@@ -4,7 +4,7 @@ class BudgetsController < ApplicationController
   # GET /budgets
   # GET /budgets.json
   def index
-    @budgets = Budget.all
+    @budgets = Budget.where(user_id:current_user)
   end
 
   # GET /budgets/1
@@ -24,7 +24,7 @@ class BudgetsController < ApplicationController
   # POST /budgets
   # POST /budgets.json
   def create
-    @budget = Budget.new(budget_params)
+    @budget = current_user.budgets.new(budget_params)
 
     respond_to do |format|
       if @budget.save
