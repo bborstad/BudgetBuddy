@@ -52,3 +52,41 @@ g5 = Goal.create!(
   progress: 2000,
   goal: 10000
 )
+
+# Budgets & Categories
+b1 = Budget.create!(
+  user: u1,
+  month: "October"
+)
+
+c1 = Category.create!(
+  budget: b1,
+  name: "Income",
+  projected: 2340.00,
+  actual: 800.00,
+  grouping: "income"
+)
+
+c2 = Category.create!(
+  budget: b1,
+  name: "Gas",
+  projected: 150.00,
+  actual: 82.27,
+  grouping: "transportation"
+)
+
+c3 = Category.create!(
+  budget: b1,
+  name: "Maintenance",
+  projected: 20.00,
+  actual: 0.00,
+  grouping: "transportation"
+)
+
+c4 = Category.create!(
+  budget: b1,
+  name: "Eating Out",
+  projected: 25.00,
+  actual: 17.06,
+  grouping: "food and groceries"
+)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_06_234212) do
+ActiveRecord::Schema.define(version: 2020_10_07_000354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,9 +55,11 @@ ActiveRecord::Schema.define(version: 2020_10_06_234212) do
   end
 
   create_table "budgets", force: :cascade do |t|
-    t.date "month"
+    t.date "date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_budgets_on_user_id"
   end
 
   create_table "calculate_debts", force: :cascade do |t|
@@ -159,6 +161,7 @@ ActiveRecord::Schema.define(version: 2020_10_06_234212) do
 
   add_foreign_key "accounts", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "budgets", "users"
   add_foreign_key "categories", "budgets"
   add_foreign_key "goals", "users"
   add_foreign_key "retirements", "users"

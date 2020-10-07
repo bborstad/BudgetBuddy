@@ -51,6 +51,10 @@ class User < ApplicationRecord
     inverse_of: :user
   )
 
+  has_many(
+    :budgets, dependent: :destroy
+  )
+
 
 end
 
