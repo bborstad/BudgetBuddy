@@ -1,7 +1,9 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resources :posts
+  resources :posts do 
+    resources :likes
+  end
   resources :accounts
   resources :goals
 

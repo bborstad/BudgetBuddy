@@ -26,5 +26,7 @@ class Post < ApplicationRecord
         inverse_of: :posts
     )
 
+    has_many :likes, dependent: :destroy
+
 
 end
