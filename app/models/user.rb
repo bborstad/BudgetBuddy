@@ -51,6 +51,13 @@ class User < ApplicationRecord
     inverse_of: :user
   )
 
+  has_many(
+    :posts,
+    class_name: 'Post',
+    foreign_key: 'user_id',
+    inverse_of: :user
+  )
+
 
 end
 
