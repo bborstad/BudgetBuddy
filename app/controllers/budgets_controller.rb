@@ -1,4 +1,6 @@
 class BudgetsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :require_permission, only: [:show, :edit, :update, :destroy]
   before_action :set_budget, only: [:show, :edit, :update, :destroy]
 
   # GET /budgets
@@ -70,5 +72,11 @@ class BudgetsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def budget_params
       params.require(:budget).permit(:month)
+    end
+
+    def require_permission
+      if Goal.find(params[:id]).user != current_user
+        redirect_to goals_url, flash: { error: "You do not have permission to do that."}
+      end
     end
 end
