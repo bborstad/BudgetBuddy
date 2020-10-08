@@ -52,12 +52,3 @@ g5 = Goal.create!(
   progress: 2000,
   goal: 10000
 )
-c1 = CalculateDebt.create!(
-  user: u1,
-  principle: 0,
-  rate: 50,
-  monthly_payements:5000,
-  compounds_per_year:12,
-  number_of_year: 12
-  
-)

@@ -5,7 +5,7 @@ class CalculateDebtsController < ApplicationController
   # GET /calculate_debts
   # GET /calculate_debts.json
   def index
-    @calculate_debts = CalculateDebt.where(user_id:current_user)
+    @calculate_debts = CalculateDebt.where(email:current_user.email)
   end
 
   # GET /calculate_debts/1
@@ -26,7 +26,8 @@ class CalculateDebtsController < ApplicationController
   # POST /calculate_debts
   # POST /calculate_debts.json
   def create
-    @calculate_debt = current_user.calculate_debts.new(calculate_debt_params)
+    @calculate_debt = CalculateDebt.new(calculate_debt_params)
+
     respond_to do |format|
       if @calculate_debt.save
         format.html { redirect_to @calculate_debt, notice: 'Calculate debt was successfully created.' }
@@ -72,5 +73,4 @@ class CalculateDebtsController < ApplicationController
     def calculate_debt_params
       params.require(:calculate_debt).permit(:principle, :rate, :monthly_payements, :compounds_per_year, :number_of_year, :email, :select)
     end
-    
 end
