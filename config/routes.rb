@@ -3,7 +3,7 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   resources :accounts
   resources :goals
-
+  resources :users, only: [:index, :show]
   resources :retirements
 
   resources :calculate_debts
