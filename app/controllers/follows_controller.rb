@@ -71,7 +71,7 @@ class FollowsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def follow_params
-      params.require(:follow).permit(:requestor, :following)
+      params.permit(:requestor, :following)
     end
     def require_permission
       if Follow.find(params[:id]).user != current_user
