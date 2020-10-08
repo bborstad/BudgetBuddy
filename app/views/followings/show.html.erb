@@ -1,0 +1,21 @@
+<div class="page-header">
+  <%= link_to followings_path, class: 'btn btn-default' do %>
+    All Followings
+  <% end %>
+  <%= link_to edit_following_path(@following), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show following</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Requester user:</dt>
+  <dd><%= @following.requester_user_id %></dd>
+
+  <dt>Following user:</dt>
+  <dd><%= @following.following_user_id %></dd>
+
+  <dt>Tfalse:</dt>
+  <dd><%= @following.tfalse %></dd>
+
+</dl>

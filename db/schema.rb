@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_01_212538) do
+ActiveRecord::Schema.define(version: 2020_10_08_020843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,14 @@ ActiveRecord::Schema.define(version: 2020_10_01_212538) do
     t.integer "number_of_year"
     t.string "email"
     t.integer "select"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "followings", force: :cascade do |t|
+    t.bigint "requester_user_id"
+    t.bigint "following_user_id"
+    t.boolean "tfalse"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
