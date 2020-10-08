@@ -12,12 +12,28 @@
 #  select             :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  user_id            :bigint
+#
+# Indexes
+#
+#  index_calculate_debts_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
 #
 class CalculateDebt < ApplicationRecord
     before_save :select_action
     validates :principle, numericality: {greater_than_or_equal_to: 0}
     validates :monthly_payements, numericality: {greater_than_or_equal_to: 0}
     validates :rate, numericality: {greater_than_or_equal_to: 0}
+
+    belongs_to(
+        :user,
+        class_name: 'User',
+        foreign_key: 'user_id',
+        inverse_of: :calculate_debts
+    )
 
     def select_action
         if self.select.nil?
