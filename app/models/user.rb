@@ -45,6 +45,13 @@ class User < ApplicationRecord
   )
 
   has_many(
+    :follows,
+    class_name: 'Follow',
+    foreign_key: 'user_id',
+    inverse_of: :user
+  )
+
+  has_many(
     :accounts,
     class_name: 'Account',
     foreign_key: 'user_id',

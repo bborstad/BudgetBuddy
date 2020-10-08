@@ -1,10 +1,12 @@
 class FollowsController < ApplicationController
   before_action :set_follow, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :require_permission, only: [:show, :edit, :update, :destroy]
 
   # GET /follows
   # GET /follows.json
   def index
-    @follows = Follow.all
+    @follows = Follow.where(user_id:current_user)
   end
 
   # GET /follows/1
@@ -24,7 +26,7 @@ class FollowsController < ApplicationController
   # POST /follows
   # POST /follows.json
   def create
-    @follow = Follow.new(follow_params)
+    @follow = current_user.follows.new(follow_params)
 
     respond_to do |format|
       if @follow.save
@@ -70,5 +72,10 @@ class FollowsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def follow_params
       params.require(:follow).permit(:requestor, :following)
+    end
+    def require_permission
+      if Follow.find(params[:id]).user != current_user
+        redirect_to goals_url, flash: { error: "You do not have permission to do that."}
+      end
     end
 end
