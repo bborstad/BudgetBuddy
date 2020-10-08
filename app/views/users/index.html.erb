@@ -32,11 +32,7 @@
       <%= content_tag :tr, id: dom_id(user), class: dom_class(user) do %>
         
         
-        <% if user.first_name.present? && user.last_name.presnt? %>
-          <td><%=first_name%> <%=last_name %></td>
-        <% else %>
-          <td> N/A </td>
-        <% end %><td>
+          <td><%=user.first_name%> <%=user.last_name %></td>
                   <td><%= (user.email) %></td>
         
         
