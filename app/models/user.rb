@@ -50,12 +50,6 @@ class User < ApplicationRecord
     foreign_key: 'user_id',
     inverse_of: :user
   )
-  has_many(
-    :followings,
-    class_name: 'Following',
-    foreign_key: 'user_id',
-    inverse_of: :user
-  )
 
 
 end

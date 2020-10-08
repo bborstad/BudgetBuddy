@@ -16,18 +16,6 @@ u2 = User.create!(
   email: 'bob@gmail.com',
   password: 'password'
 )
-u3 = User.create!(
-  email: 'tom@email.com',
-  password: 'password'
-)
-u4 = User.create!(
-  email: 'alice@email.com',
-  password: 'password'
-)
-u5 = User.create!(
-  email: 'bob@email.com',
-  password: 'password'
-)
 
 # Goals
 g1 = Goal.create!(
@@ -63,14 +51,4 @@ g5 = Goal.create!(
   title: 'Savings',
   progress: 2000,
   goal: 10000
-)
-
-#followings
-
-f1 = Following.create!(
-  user: u1,
-  requester_user_id: 1,
-  following_user_id: 2
-
-
 )
