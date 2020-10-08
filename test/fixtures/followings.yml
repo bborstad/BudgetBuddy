@@ -8,14 +8,23 @@
 #  updated_at        :datetime         not null
 #  following_user_id :bigint
 #  requester_user_id :bigint
+#  user_id           :bigint
+#
+# Indexes
+#
+#  index_followings_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
 #
 
 one:
-  requester_user_id: 
-  following_user_id: 
+  requester_user_id: 1  
+  following_user_id: 2
   tfalse: false
 
 two:
-  requester_user_id: 
-  following_user_id: 
+  requester_user_id: 5 
+  following_user_id: 4
   tfalse: false
