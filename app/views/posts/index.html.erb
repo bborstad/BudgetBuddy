@@ -38,7 +38,8 @@
                 <td><p><%= post.likes.count %> <%= (post.likes.count) == 1 ? 'Like' : 'Likes'%></p></td>
           
           
-            <td><%= link_to 'Show', post %></td>
+            <td><%= link_to 'Edit', edit_post_path(post) %></td>
+
           
         <% end %>
       <% end %>
