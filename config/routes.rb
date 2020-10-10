@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :posts do 
     resources :likes
   end
+  
+  resources :socials
+
   resources :accounts
   resources :goals
 
