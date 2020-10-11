@@ -4,7 +4,8 @@ class SocialsController < ApplicationController
 
 
     def index
-        @posts = Post.all
+      # this needs to be changed to show the users followers
+      @posts = Post.all
       end
 
 
