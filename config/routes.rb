@@ -7,11 +7,12 @@ Rails.application.routes.draw do
   
   resources :socials
 
+  resources :follows
   resources :accounts
   resources :goals
-
   resources :retirements
-
+  get '/users', to: 'users#index'
+  get '/user/:id', to: 'users#show', as: 'user'
   resources :calculate_debts
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'
