@@ -96,6 +96,15 @@ ActiveRecord::Schema.define(version: 2020_10_08_161615) do
     t.index ["user_id"], name: "index_goals_on_user_id"
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.bigint "post_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_likes_on_post_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "notifications", force: :cascade do |t|
     t.string "recipient_type", null: false
     t.bigint "recipient_id", null: false
@@ -105,6 +114,15 @@ ActiveRecord::Schema.define(version: 2020_10_08_161615) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient_type_and_recipient_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "attachment"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "retirements", force: :cascade do |t|
@@ -153,6 +171,9 @@ ActiveRecord::Schema.define(version: 2020_10_08_161615) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "follows", "users"
   add_foreign_key "goals", "users"
+  add_foreign_key "likes", "posts"
+  add_foreign_key "likes", "users"
+  add_foreign_key "posts", "users"
   add_foreign_key "retirements", "users"
   add_foreign_key "services", "users"
 end

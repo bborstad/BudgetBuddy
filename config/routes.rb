@@ -1,6 +1,12 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :posts do 
+    resources :likes
+  end
+  
+  resources :socials
+
   resources :follows
   resources :accounts
   resources :goals

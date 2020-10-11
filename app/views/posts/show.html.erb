@@ -1,0 +1,35 @@
+<div class="page-header">
+  <%= link_to posts_path, class: 'btn btn-default' do %>
+    All Posts
+  <% end %>
+  <%= link_to edit_post_path(@post), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show post</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Attachment:</dt>
+  <dd><%= @post.attachment %></dd>
+
+  <dt>Content:</dt>
+  <dd><%= @post.content %></dd>
+</dl>
+
+
+<!-- Display amount of likes -->
+<p><%= @post.likes.count %> <%= (@post.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+
+<!-- like and unlike button code 
+    Removed because like and dislike action now redirects to the social page 
+    and that doesnt make since to click this button and not stay here
+-->
+
+<!--
+<% pre_like = @post.likes.find { |like| like.user_id == current_user.id} %>
+<% if pre_like %>
+  <%= button_to 'Unlike', post_like_path(@post, pre_like), method: :delete %>
+<% else %>
+  <%= button_to 'Like', post_likes_path(@post), method: :post %>
+<% end %>
+-->
