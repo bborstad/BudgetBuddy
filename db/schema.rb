@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_07_000354) do
+ActiveRecord::Schema.define(version: 2020_10_11_164233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(version: 2020_10_07_000354) do
   end
 
   create_table "budgets", force: :cascade do |t|
-    t.date "date", default: -> { "CURRENT_DATE" }
     t.string "month"
     t.string "year"
     t.datetime "created_at", precision: 6, null: false
@@ -80,11 +79,10 @@ ActiveRecord::Schema.define(version: 2020_10_07_000354) do
     t.string "name"
     t.float "projected"
     t.float "actual"
-    t.string "grouping"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "budget_id"
-    t.index ["budget_id"], name: "index_categories_on_budget_id"
+    t.bigint "group_id"
+    t.index ["group_id"], name: "index_categories_on_group_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -106,6 +104,14 @@ ActiveRecord::Schema.define(version: 2020_10_07_000354) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
     t.index ["user_id"], name: "index_goals_on_user_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "budget_id"
+    t.index ["budget_id"], name: "index_groups_on_budget_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -164,8 +170,9 @@ ActiveRecord::Schema.define(version: 2020_10_07_000354) do
   add_foreign_key "accounts", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "budgets", "users"
-  add_foreign_key "categories", "budgets"
+  add_foreign_key "categories", "groups"
   add_foreign_key "goals", "users"
+  add_foreign_key "groups", "budgets"
   add_foreign_key "retirements", "users"
   add_foreign_key "services", "users"
 end

@@ -4,8 +4,6 @@ class CreateCategories < ActiveRecord::Migration[6.0]
       t.string :name
       t.float :projected
       t.float :actual
-      t.string :grouping
-
       t.timestamps
     end
   end

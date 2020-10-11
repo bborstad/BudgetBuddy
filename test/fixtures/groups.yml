@@ -1,25 +1,24 @@
 # == Schema Information
 #
-# Table name: budgets
+# Table name: groups
 #
 #  id         :bigint           not null, primary key
-#  month      :string
-#  year       :string
+#  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  user_id    :bigint
+#  budget_id  :bigint
 #
 # Indexes
 #
-#  index_budgets_on_user_id  (user_id)
+#  index_groups_on_budget_id  (budget_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (user_id => users.id)
+#  fk_rails_...  (budget_id => budgets.id)
 #
 
 one:
-  month: 2020-10-02
+  string: 
 
 two:
-  month: 2020-10-02
+  string: 

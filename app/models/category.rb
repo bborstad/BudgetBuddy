@@ -4,21 +4,20 @@
 #
 #  id         :bigint           not null, primary key
 #  actual     :float
-#  grouping   :string
 #  name       :string
 #  projected  :float
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  budget_id  :bigint
+#  group_id   :bigint
 #
 # Indexes
 #
-#  index_categories_on_budget_id  (budget_id)
+#  index_categories_on_group_id  (group_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (budget_id => budgets.id)
+#  fk_rails_...  (group_id => groups.id)
 #
 class Category < ApplicationRecord
-    belongs_to :budget
+    belongs_to :group
 end

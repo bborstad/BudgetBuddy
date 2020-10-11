@@ -12,20 +12,48 @@
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
-          <th>Category</th>  
-          <th>Actual</th>
-          <th>Projected</th>
+          <th>Income</th>  
+          <th>Planned</th>
+          <th>Received</th>
         
       </tr>
     </thead>
 
     <tbody>
       <% @budget.categories.each do |category| %>
-        <tr>
-          <td><%= category.name %></td>
-          <td><%= category.actual %></td>
-          <td><%= category.projected %></td>
-        </tr>
+        <% if category.income == TRUE %>
+          <tr>
+            <td><%= category.name %></td>
+            <td><%= category.projected %></td>
+            <td><%= category.actual %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+          <th>Expense Categories</th>  
+          <th>Planned</th>
+          <th>Spent</th>
+        
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @budget.categories.each do |category| %>
+        <%if category.income != TRUE %>
+          <tr>
+            <td><%= category.name %></td>
+            <td><%= category.projected %></td>
+            <td><%= category.actual %></td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>

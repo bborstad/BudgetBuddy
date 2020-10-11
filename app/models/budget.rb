@@ -3,7 +3,6 @@
 # Table name: budgets
 #
 #  id         :bigint           not null, primary key
-#  date       :date
 #  month      :string
 #  year       :string
 #  created_at :datetime         not null
@@ -21,5 +20,5 @@
 
 class Budget < ApplicationRecord
     belongs_to :user
-    has_many :categories, dependent: :destroy
+    has_many :groups, dependent: :destroy
 end
