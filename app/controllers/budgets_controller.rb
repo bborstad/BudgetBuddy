@@ -75,7 +75,7 @@ class BudgetsController < ApplicationController
     end
 
     def require_permission
-      if Goal.find(params[:id]).user != current_user
+      if Budget.find(params[:id]).user != current_user
         redirect_to goals_url, flash: { error: "You do not have permission to do that."}
       end
     end

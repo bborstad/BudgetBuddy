@@ -60,47 +60,45 @@ b1 = Budget.create!(
   year: 2020
 )
 
-g1 = Group.create!(
+gr1 = Group.create!(
   budget: b1,
   name: "Income"
 )
 
-g2 = Group.create!(
+gr2 = Group.create!(
   budget: b1,
-  name: "Expense"
+  name: "Automobile and Travel"
+)
+
+gr3 = Group.create!(
+  budget: b1,
+  name: "Food and Groceries"
 )
 
 c1 = Category.create!(
-  group: g1,
-  name: "Income",
+  group: gr1,
+  name: "Paycheck",
   projected: 2340.00,
   actual: 800.00
 )
 
 c2 = Category.create!(
-  group: g2,
+  group: gr2,
   name: "Gas",
   projected: 150.00,
   actual: 82.27
 )
 
 c3 = Category.create!(
-  group: g2,
+  group: gr2,
   name: "Maintenance",
   projected: 20.00,
   actual: 0.00
 )
 
 c4 = Category.create!(
-  group: g2,
+  group: gr3,
   name: "Eating Out",
   projected: 25.00,
   actual: 17.06
-)
-
-c5 = Category.create!(
-  group: g1,
-  name: "Paycheck",
-  projected: 400.00,
-  actual: 200
 )

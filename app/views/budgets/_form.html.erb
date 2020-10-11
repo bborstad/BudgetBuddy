@@ -12,8 +12,12 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label :month %>
-    <%= form.date_select :month, class: 'form-control' %>
+    <%= form.label :month, 'Month' %>
+    <%= form.text_field :month, class: 'form-control' %>
+
+    <%= form.label :year, 'Year' %>
+    <%= form.text_field :year, class: 'form-control' %>
+
   </div>
 
   <div class="form-group">
