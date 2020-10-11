@@ -56,7 +56,8 @@ g5 = Goal.create!(
 # Budgets & Categories
 b1 = Budget.create!(
   user: u1,
-  date: "October"
+  month: "October",
+  year: 2020
 )
 
 c1 = Category.create!(

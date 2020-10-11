@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(version: 2020_10_07_000354) do
 
   create_table "budgets", force: :cascade do |t|
     t.date "date", default: -> { "CURRENT_DATE" }
+    t.string "month"
+    t.string "year"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"

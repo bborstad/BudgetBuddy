@@ -4,6 +4,8 @@
 #
 #  id         :bigint           not null, primary key
 #  date       :date
+#  month      :string
+#  year       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  user_id    :bigint
