@@ -27,10 +27,10 @@ class FollowsController < ApplicationController
   # POST /follows.json
   def create
     @follow = current_user.follows.new(follow_params)
-
+    @user = User.where("id = ?", @follow.following )
     respond_to do |format|
       if @follow.save
-        format.html { redirect_to @follow, notice: 'Follow was successfully created.' }
+        format.html { redirect_back fallback_location: root_path, notice: 'You are now following this user!' }
         format.json { render :show, status: :created, location: @follow }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class FollowsController < ApplicationController
   def update
     respond_to do |format|
       if @follow.update(follow_params)
-        format.html { redirect_to @follow, notice: 'Follow was successfully updated.' }
+        format.html { redirect_back fallback_location: root_path, notice: 'Follow was successfully updated.' }
         format.json { render :show, status: :ok, location: @follow }
       else
         format.html { render :edit }
@@ -58,9 +58,13 @@ class FollowsController < ApplicationController
   def destroy
     @follow.destroy
     respond_to do |format|
-      format.html { redirect_to follows_url, notice: 'Follow was successfully destroyed.' }
+      format.html { redirect_back fallback_location: root_path, notice: 'You have unfollowed this user!' }
       format.json { head :no_content }
     end
+  end
+  
+  def find_follow
+    @follow = Follow.find(params[:id])
   end
 
   private

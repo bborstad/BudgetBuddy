@@ -5,8 +5,11 @@
 <dt>User email:</dt>
 <dd><%= @user.email %></dd>
 
+
+
 <% if Follow.where(:requestor => current_user.id, :following =>@user.id).present? %>    
-    <%= button_to 'Unfollow', follow_url, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+    <% found = Follow.where(:requestor => current_user.id, :following =>@user.id).pluck(:id) %>
+    <%= button_to 'Unfollow', follow_url(found), method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
 <% else %>
     <%= button_to "Follow", {:controller => 'follows', :action => 'create', :requestor => current_user.id, :following => @user.id}, {:method => :post} %>
 <% end %>
