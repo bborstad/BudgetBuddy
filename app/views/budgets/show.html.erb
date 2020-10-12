@@ -8,29 +8,35 @@
   <h1><%= @budget.month %> <%= @budget.year %></h1>
 </div>
 
-<div>
- <%= pie_chart Group.group(:name).count %>
-</div>
-
 <div class="table-responsive">
   <table class="table table-striped table-hover">
 
     <% @budget.groups.each do |group| %>
-      <tr style="font-weight:bold; background-color: #CED3E8;">
+      <tr style="font-weight:bold; background-color: #59A7AE;">
         <td ><%= group.name %></td>
-        <td>Projected</td>
-        <td >Actual</td>
+          <td>Projected</td>
+          <td >Actual</td>
       </tr>
       <tbody>  
         <% group.categories.each do |category| %>  
-          <tr>  
+          <tr style="background-color: #E7E5E5">  
             <td><%= category.name %></td>
             <td><%= category.projected %></td>
             <td><%= category.actual %></td>
           </tr>
         <% end %>
       </tbody>
+      <td><%= link_to budgets_path do %>Add Category<% end %></td>
     <% end %>
-
   </table>
 </div>
+
+<div>
+  <%= link_to new_group_path do %>
+    + ADD GROUP
+  <% end %>
+</div>
+
+  <div>
+    <%= pie_chart Group.group(:name).count %>
+  </div>
