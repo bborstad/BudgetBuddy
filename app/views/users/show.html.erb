@@ -52,15 +52,8 @@
             </div>
             <div class="col-md-6 gedf-main">
 
-                <!--- \\\\\\\Create Post-->
                 
-                <div class="card gedf-card">
-                    
-                    <div class="card-body">
-                       
-                        
-                    </div>
-                </div>
+              
                 <!-- Post /////-->
 
                 <!--- \\\\\\\Post-->
@@ -94,16 +87,19 @@
 
                     </div>
                     <div class="card-body">
-                        <a class="card-link" href="#">
-                            <h5 class="card-title"></h5>
-                        </a>
 
                         <p class="card-text">
                             <%= post.content %>
                         </p>
                     </div>
                     <div class="card-footer" >
-                        <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+                        <a href="#" class="card-link"><i class="fa fa-gittip"></i>
+                            <% if post.likes.count == 0 %>
+                               Like
+                            <% else %>
+                                <%= post.likes.count %>
+                            <% end %>
+                        </a>
                         <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
                         <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
                         <div style="display: flex; justify-content: flex-end">
