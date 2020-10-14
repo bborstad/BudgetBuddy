@@ -52,10 +52,10 @@
               <%= link_to "Accounts", accounts_url, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
 
-              <%= link_to "Profile", edit_user_registration_path, class: "dropdown-item" %>
+              <%= link_to "Profile", user_path(current_user), class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
 
-              <%= link_to "Settings", announcements_path, class: "dropdown-item" %>
+              <%= link_to "Settings", edit_user_registration_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
 
               <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item" %>

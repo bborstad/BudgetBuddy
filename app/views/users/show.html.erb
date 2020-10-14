@@ -12,7 +12,11 @@
         crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-        
+        <style>
+        img {
+          border-radius: 50%;
+        }
+        </style>      
 
 
 
@@ -21,6 +25,13 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
+                        <% if @user.avatar.attached?%>
+                            <div class="avatar" style="height: 149px;">
+                                <%= image_tag(@user.avatar,  style: 'width:50%') %>
+                            </div>
+                        <% else %>
+                            <%= image_tag("No_image.jpg", style: 'width:60%') %>
+                        <%end%>
                         <div class="h5"><%=@user.first_name%> <%=@user.last_name %></div>
                         <% if Follow.where(:requestor => @user.id, :following =>current_user.id).present?%> 
                             <h7><mark>Follows You</mark></h7>
@@ -95,8 +106,8 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="mr-2">
-                                    <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                            <div class="mr-2">
+                            <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
                                 </div>
                                 <div class="ml-2">
                                     <div class="h5 m-0"><%= post.try(:user).try(:first_name) %> <%= post.try(:user).try(:last_name) %></div>
@@ -184,14 +195,7 @@
                 <br>
                 <% end %>
 
-                <div class="card gedf-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Budget will go here</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                            <p class="card-text">Place Holder.</p>
-                            <a href="#" class="card-link">Budget View</a>
-                        </div>
-                    </div>
+                
             </div>
         </div>
     </div>
