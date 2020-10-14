@@ -1,15 +1,220 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
-<dt>User ID:</dt>
-<dd><%= @user.id %></dd>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+        crossorigin="anonymous">
+        
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+           
 
-<dt>User email:</dt>
-<dd><%= @user.email %></dd>
 
 
+    <div class="container-fluid gedf-wrapper">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <% if @user.avatar.attached?%>
+                            <div class="avatar">
+                                <img class="rounded-circle" width="150" <%=image_tag(@user.avatar)%>
+                            </div>
+                        <% else %>
+                            <img class="rounded-circle" width="150" <%=image_tag("No_image.jpg")%>
+                        <%end%>
+                        <div class="h5"><%=@user.first_name%> <%=@user.last_name %></div>
+                        <% if Follow.where(:requestor => @user.id, :following =>current_user.id).present?%> 
+                            <h7><mark>Follows You</mark></h7>
+                        <%end %>
+                        <div class="h7 text-muted"><%= @user.email %></div>
+                        <div class="h7">
 
-<% if Follow.where(:requestor => current_user.id, :following =>@user.id).present? %>    
-    <% found = Follow.where(:requestor => current_user.id, :following =>@user.id).pluck(:id) %>
-    <%= button_to 'Unfollow', follow_url(found), method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
-<% else %>
-    <%= button_to "Follow", {:controller => 'follows', :action => 'create', :requestor => current_user.id, :following => @user.id}, {:method => :post} %>
-<% end %>
+
+                        <br>
+                            <% if @user.id != current_user.id %>
+                                <% if Follow.where(:requestor => current_user.id, :following =>@user.id).present? %>    
+                                    <% found = Follow.where(:requestor => current_user.id, :following =>@user.id).pluck(:id) %>
+                                    <%= button_to 'Unfollow', follow_url(found), method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+                                <% else %>
+                                    <%= button_to "Follow", {:controller => 'follows', :action => 'create', :requestor => current_user.id, :following => @user.id}, {:method => :post} %>
+                                <% end %>
+                            <% end %>
+                        </div>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="h6 text-muted">Followers</div>
+                            <div class="h5"><%= Follow.where(:following => @user.id).count %></div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="h6 text-muted">Following</div>
+                            <div class="h5"><%= Follow.where(:requestor => @user.id).count %></div>
+                    </ul>
+                </div>
+                <br>
+                <div class="card gedf-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Budget will go here</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                            <p class="card-text">Place Holder.</p>
+                            <a href="#" class="card-link">Budget View</a>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-md-6 gedf-main">
+
+                
+              
+                <!-- If No Post /////-->
+                <% if Post.count == 0 %>
+                    <div class="card gedf-card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+
+                        <h3 class="card-text">
+                            This User has no post yet.
+                        </h3>
+                    </div>
+                    <div class="card-footer" >
+                            
+                
+                        
+
+                    </div>
+                    </div>                
+                <% end %>
+
+
+                <!--- \\\\\\\Post-->
+                <% @posts.each do |post| %>
+                <div class="card gedf-card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="mr-2">
+                            <% if @user.avatar.attached?%>
+                                <img class="rounded-circle" width="45" <%=image_tag(@user.avatar)%>
+                                <% else %>
+                            <img class="rounded-circle" width="45" <%=image_tag("No_image.jpg")%>
+                            <% end  %>
+                                </div>
+                                <div class="ml-2">
+                                    <div class="h5 m-0"><%= post.try(:user).try(:first_name) %> <%= post.try(:user).try(:last_name) %></div>
+                                    <div class="h7 text-muted"><%= post.try(:user).try(:email) %></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="dropdown">
+                                    <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-ellipsis-h"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                        <div class="h6 dropdown-header">Configuration</div>
+                                        <a class="dropdown-item" href="#">Save</a>
+                                        <a class="dropdown-item" href="#">Hide</a>
+                                        <a class="dropdown-item" href="#">Report</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+
+                        <p class="card-text">
+                            <%= post.content %>
+                        </p>
+                    </div>
+                    <div class="card-footer" >
+                        <a href="#" class="card-link"><i class="fa fa-gittip"></i>
+                            <% if post.likes.count == 0 %>
+                               Like
+                            <% else %>
+                                <%= post.likes.count %>
+                            <% end %>
+                        </a>
+                        <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                        <div style="display: flex; justify-content: flex-end">
+                            <class="text-muted h7 mb-2"> <i class="fa fa-clock-o "> </i><%= time_ago_in_words(post.created_at) %>
+                        </div>
+                        
+
+                    </div>
+                </div>
+                <!-- Post /////-->
+                <br>
+                <% end %>
+
+               
+                
+
+
+            </div>
+            <div class="col-md-3">
+                <% @goals.each do |goal| %>
+                <div class="card gedf-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Goal: <%= goal.title %></h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                        <%= number_to_currency(goal.progress)%><%= "/" %><%=  number_to_currency(goal.goal) %>                   
+                        </h6>
+                        <% if goal.progress < goal.goal %>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow=<% goal.ppercent %> aria-valuemin="0" aria-valuemax="100" style="width: <%=goal.ppercent %>%">
+                                    <%= number_to_percentage(goal.ppercent, precision: 0) %> </div>
+                            </div>
+                        <% else %>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow=<% goal.ppercent %> aria-valuemin="0" aria-valuemax= "100" style="width: <%=goal.ppercent %>%">
+                                    <%= number_to_percentage(goal.ppercent, precision: 0) %> </div>
+                            </div>
+                        
+                        
+                        <% end %>
+
+
+                        <p class="card-text"></p>
+                        <%= link_to (image_tag ("info.png") ), goal %>
+                        <% if @user.id == current_user.id %>
+                            <%= link_to (image_tag ("plus.png") ), edit_goal_path(id: goal.id) %>
+                        <% end %>
+                    </div>
+                </div>
+                <br>
+                <% end %>
+
+                
+            </div>
+        </div>
+    </div>
+    <hr>
+    <br>
+    <br>
+<hr>
+
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+        crossorigin="anonymous">
+        
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+<div>
+<p>
+</p>
+</div>
