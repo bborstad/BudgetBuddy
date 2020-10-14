@@ -146,9 +146,12 @@
 
                 <!-- Button to like a post -->
                     <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
-                    
+                    <% has_like =  post.likes.count %>
+
                     <% if pre_like %>
                         <%= link_to post.likes.count, post_like_path(post, pre_like), method: :delete, class: "card-link", class: "fa fa-gittip" %>
+                    <% elsif has_like != 0  %>
+                        <%= link_to post.likes.count, post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
                     <% else %>
                         <%= link_to 'Like', post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
                     <% end %>
