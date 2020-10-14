@@ -10,7 +10,8 @@ class LikesController < ApplicationController
         else
           @post.likes.create(user_id: current_user.id)
         end
-        redirect_to socials_path
+        # redirects to current page
+        redirect_to request.referrer
     end
 
     #used to unlike a post 
@@ -20,9 +21,12 @@ class LikesController < ApplicationController
         else
           @like.destroy
         end
+
+
         ### saving this code incase i need it later
-        ####redirect_to post_path(@post)
-        redirect_to socials_path
+            ####redirect_to post_path(@post)
+        # redirects to current page
+        redirect_to request.referrer
       end
 
     private

@@ -69,7 +69,11 @@
             </div>
             <div class="col-md-6 gedf-main">
 
-                
+        <!-- Adds a create a new post button at the top of the page --> 
+            <%= link_to new_post_path, class: 'btn btn-primary btn-lg btn-block' do %>
+                Create A Post
+              <% end %>
+                <br>
               
                 <!-- If No Post /////-->
                 <% if Post.count == 0 %>
@@ -94,6 +98,7 @@
                     </div>
                     </div>                
                 <% end %>
+
 
 
                 <!--- \\\\\\\Post-->
@@ -137,13 +142,34 @@
                         </p>
                     </div>
                     <div class="card-footer" >
-                        <a href="#" class="card-link"><i class="fa fa-gittip"></i>
-                            <% if post.likes.count == 0 %>
-                               Like
-                            <% else %>
-                                <%= post.likes.count %>
-                            <% end %>
-                        </a>
+
+
+                <!-- Button to like a post -->
+                    <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
+                    <% has_like =  post.likes.count %>
+
+                    <% if pre_like %>
+                        <%= link_to post.likes.count, post_like_path(post, pre_like), method: :delete, class: "card-link", class: "fa fa-gittip" %>
+                    <% elsif has_like != 0  %>
+                        <%= link_to post.likes.count, post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
+                    <% else %>
+                        <%= link_to 'Like', post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
+                    <% end %>
+
+
+                <!-- 
+                Removed this becasue I redid the button without the hyperlink anchor
+
+                    <a href="#" class="card-link"><i class="fa fa-gittip"></i>
+                        <% if post.likes.count == 0 %>
+                           Like
+                        <% else %>
+                            <%= post.likes.count %>
+                        <% end %>
+                    </a>
+                -->
+
+
                         <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
                         <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
                         <div style="display: flex; justify-content: flex-end">
