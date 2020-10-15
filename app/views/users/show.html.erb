@@ -108,10 +108,12 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex justify-content-between align-items-center">
                             <div class="mr-2">
-                            <% if post.user.avatar.attached?%>
-                                <img class="rounded-circle" height= "45" width="45" <%=image_tag(post.user.avatar)%>
+<!-- BUD-21-->
+                            <% if @user.avatar.attached?%>
+                                <img class="rounded-circle" height="45" width="45" <%=image_tag(@user.avatar)%>
                                 <% else %>
-                            <img class="rounded-circle" height= "45" width="45" <%=image_tag("No_image.jpg")%>
+                            <img class="rounded-circle" height="45" width="45" <%=image_tag("No_image.jpg")%>
+<!-- end BUD-21-->
                             <% end  %>
                                 </div>
                                 <div class="ml-2">

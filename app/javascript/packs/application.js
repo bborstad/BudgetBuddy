@@ -10,6 +10,7 @@ require("channels")
 require("local-time").start()
 require("chartkick")
 require("chart.js")
+require("sidebarCollapse")
 
 window.Rails = Rails
 
@@ -20,3 +21,11 @@ $(document).on("turbolinks:load", () => {
   $('[data-toggle="tooltip"]').tooltip()
   $('[data-toggle="popover"]').popover()
 })
+
+
+$(function() {
+  // Sidebar toggle behavior
+  $('#sidebarCollapse').on('click', function() {
+    $('#sidebar, #content').toggleClass('active');
+  });
+});
