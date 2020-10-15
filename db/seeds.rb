@@ -60,6 +60,60 @@ b1 = Budget.create!(
   year: 2020
 )
 
+b2 = Budget.create!(
+  user: u1,
+  month: "September",
+  year: 2020
+)
+
+b3 = Budget.create!(
+  user: u1,
+  month: "August",
+  year: 2020
+)
+
+b4 = Budget.create!(
+  user: u1,
+  month: "July",
+  year: 2020
+)
+
+b5 = Budget.create!(
+  user: u1,
+  month: "June",
+  year: 2020
+)
+
+b6 = Budget.create!(
+  user: u1,
+  month: "May",
+  year: 2020
+)
+
+b7 = Budget.create!(
+  user: u1,
+  month: "April",
+  year: 2020
+)
+
+b8 = Budget.create!(
+  user: u1,
+  month: "March",
+  year: 2020
+)
+
+b19 = Budget.create!(
+  user: u1,
+  month: "February",
+  year: 2020
+)
+
+b10 = Budget.create!(
+  user: u1,
+  month: "January",
+  year: 2020
+)
+
 gr1 = Group.create!(
   budget: b1,
   name: "Income"

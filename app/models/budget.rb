@@ -29,6 +29,6 @@ class Budget < ApplicationRecord
     has_many :groups, :dependent => :delete_all
      
 
-      validates :month, presence: true, uniqueness: true
-    validates :year, presence: true, uniqueness: true
+      validates :month, presence: true
+    validates :year, presence: true
 end
