@@ -8,9 +8,18 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :posts do 
+    resources :likes
+  end
+  
+  resources :socials
+
+  resources :follows
   resources :accounts
   resources :goals
   resources :retirements
+  get '/users', to: 'users#index'
+  get '/user/:id', to: 'users#show', as: 'user'
   resources :calculate_debts
   
   get '/privacy', to: 'home#privacy'

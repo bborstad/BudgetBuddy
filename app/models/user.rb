@@ -45,12 +45,25 @@ class User < ApplicationRecord
   )
 
   has_many(
+    :follows,
+    class_name: 'Follow',
+    foreign_key: 'user_id',
+    inverse_of: :user
+  )
+
+  has_many(
     :accounts,
     class_name: 'Account',
     foreign_key: 'user_id',
     inverse_of: :user
   )
 
+  has_many(
+    :posts,
+    class_name: 'Post',
+    foreign_key: 'user_id',
+    inverse_of: :user
+  )
   has_many(
     :budgets,
     class_name: 'Budget',
@@ -59,5 +72,13 @@ class User < ApplicationRecord
   )
 
 
+  
+  has_many(
+    :likes,
+    class_name: 'Like',
+    foreign_key: 'user_id',
+    inverse_of: :user,
+    dependent: :destroy
+  )
 end
 

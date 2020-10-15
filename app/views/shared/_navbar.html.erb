@@ -5,8 +5,8 @@
   </div>
 <% end %>
 
-<nav class="navbar navbar-expand-md navbar-light bg-light">
-  <div class="container">
+<nav class="navbar navbar-expand-md navbar-light bg-light ">
+  <div class="container ">
     <%= link_to "BudgetBuddy", root_path, class: "navbar-brand" %>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,11 +20,11 @@
       <ul class="navbar-nav">
         <% if user_signed_in? %>
         
-        <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Budget", budgets_path, class: "nav-link" %></li>
+
         <li class="nav-item"><%= link_to "Goals", goals_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Retirement", retirements_path, class: "nav-link" %></li>
-        <li class="nav-item"><%= link_to "Social", announcements_path, class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "Calculator ", calculate_debts_path, class: "nav-link" %></li>
 
 
         <li class="nav-item">
@@ -34,20 +34,32 @@
          </li>
 
           <li class="nav-item dropdown">
+            <% if current_user.present? %>
             <%= link_to "#", id: "navbar-dropdown", class: "nav-link dropdown-toggle", data: { target: "nav-account-dropdown", toggle: "dropdown" }, aria: { haspopup: true, expanded: false } do %>
-              <%= image_tag avatar_path(current_user, size: 40), height: 20, width: 20, class: "rounded" %>
+              <% if current_user.avatar.attached?%>
+                <img class="rounded-circle" height= "20" width="20" <%=image_tag(current_user.avatar)%>
+              <%end %>
             <% end %>
+            <% end %>
+
             <div id="nav-account-dropdown" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-dropdown">
+
               <% if current_user.admin? && respond_to?(:admin_root_path) %>
                 <%= link_to "Admin Area", admin_root_path, class: "dropdown-item" %>
               <% end %>
+
+              <%= link_to "My Post", posts_url, class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+
               <%= link_to "Accounts", accounts_url, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
-              <%= link_to "Profile", edit_user_registration_path, class: "dropdown-item" %>
+
+
+              <%= link_to "Settings", edit_user_registration_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
-              <%= link_to "Settings", announcements_path, class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
+
               <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+
             </div>
           </li>
 

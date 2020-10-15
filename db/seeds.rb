@@ -16,6 +16,18 @@ u2 = User.create!(
   email: 'bob@gmail.com',
   password: 'password'
 )
+u3 = User.create!(
+  email: 'alice@email.com',
+  password: 'password'
+)
+u4 = User.create!(
+  email: 'bob@email.com',
+  password: 'password'
+)
+u5 = User.create!(
+  email: 'tom@email.com',
+  password: 'password'
+)
 
 # Goals
 g1 = Goal.create!(
