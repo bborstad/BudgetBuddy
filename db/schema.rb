@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2020_10_13_222432) do
 
   # These are extensions that must be enabled in order to support this database
@@ -54,6 +55,15 @@ ActiveRecord::Schema.define(version: 2020_10_13_222432) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "budgets", force: :cascade do |t|
+    t.string "month"
+    t.string "year"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_budgets_on_user_id"
+  end
+
   create_table "calculate_debts", force: :cascade do |t|
     t.decimal "principle"
     t.decimal "rate"
@@ -66,6 +76,15 @@ ActiveRecord::Schema.define(version: 2020_10_13_222432) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.float "projected"
+    t.float "actual"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "group_id"
+    t.index ["group_id"], name: "index_categories_on_group_id"
+  end
   create_table "follows", force: :cascade do |t|
     t.bigint "requestor"
     t.bigint "following"
@@ -97,6 +116,13 @@ ActiveRecord::Schema.define(version: 2020_10_13_222432) do
     t.index ["user_id"], name: "index_goals_on_user_id"
   end
 
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "budget_id"
+    t.index ["budget_id"], name: "index_groups_on_budget_id"
+  end
   create_table "likes", force: :cascade do |t|
     t.bigint "post_id", null: false
     t.bigint "user_id", null: false
@@ -170,6 +196,10 @@ ActiveRecord::Schema.define(version: 2020_10_13_222432) do
 
   add_foreign_key "accounts", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "budgets", "users"
+  add_foreign_key "categories", "groups"
+  add_foreign_key "goals", "users"
+  add_foreign_key "groups", "budgets"
   add_foreign_key "follows", "users"
   add_foreign_key "goals", "users"
   add_foreign_key "likes", "posts"
