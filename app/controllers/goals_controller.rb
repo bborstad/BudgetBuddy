@@ -1,6 +1,6 @@
 class GoalsController < ApplicationController
   before_action :authenticate_user!
-  before_action :require_permission, only: [:show, :edit, :update, :destroy]
+  before_action :require_permission, only: [ :edit, :update, :destroy]
   before_action :set_goal, only: [:show, :edit, :update, :destroy]
 
   # GET /goals
