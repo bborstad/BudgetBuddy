@@ -15,8 +15,10 @@
       <tr style="font-weight:bold; background-color: #59A7AE;">
         <td >
           <%= group.name %>
-          <%= link_to edit_budget_group_path(@budget, group) do %>(edit)<% end %>
-          <%= link_to budget_groups_path(@budget) do %>(delete)<% end %>
+           | 
+          <%= link_to edit_budget_group_path(@budget, group) do %>Edit<% end %>
+           | 
+          <%= link_to 'Delete', [@budget, group], method: :delete, class: "text-danger", data: { confirm: 'Are you sure? This will delete the group and its categories.' } %>
         </td>
         <td>Projected</td>
         <td >Actual</td>

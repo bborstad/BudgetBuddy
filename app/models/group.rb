@@ -28,7 +28,8 @@ class Group < ApplicationRecord
         :categories,
         class_name: 'Category',
         foreign_key: 'group_id',
-        inverse_of: :groups
+        inverse_of: :groups,
+        :dependent => :delete_all
     )
 
     validates :name, presence: true, uniqueness: true

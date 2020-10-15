@@ -30,7 +30,8 @@ class Budget < ApplicationRecord
         :groups,
         class_name: 'Group',
         foreign_key: 'budget_id',
-        inverse_of: :budget
+        inverse_of: :budget,
+        :dependent => :delete_all
     )
 
       validates :month, presence: true, uniqueness: true
