@@ -19,6 +19,20 @@
 #
 
 class Budget < ApplicationRecord
-    belongs_to :user
-    has_many :groups, dependent: :destroy
+    belongs_to(
+        :user,
+        class_name: 'User',
+        foreign_key: 'user_id',
+        inverse_of: :budgets
+    )
+
+    has_many(
+        :groups,
+        class_name: 'Group',
+        foreign_key: 'budget_id',
+        inverse_of: :budget
+    )
+
+      validates :month, presence: true, uniqueness: true
+    validates :year, presence: true, uniqueness: true
 end

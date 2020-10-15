@@ -51,7 +51,12 @@ class User < ApplicationRecord
     inverse_of: :user
   )
 
-  has_many :budgets, dependent: :destroy
+  has_many(
+    :budgets,
+    class_name: 'Budget',
+    foreign_key: 'user_id',
+    inverse_of: :user
+  )
 
 
 end

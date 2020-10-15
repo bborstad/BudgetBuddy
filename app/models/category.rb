@@ -19,5 +19,10 @@
 #  fk_rails_...  (group_id => groups.id)
 #
 class Category < ApplicationRecord
-    belongs_to :group
+    belongs_to(
+        :group,
+        class_name: 'Group',
+        foreign_key: 'group_id',
+        inverse_of: :categories
+    )
 end

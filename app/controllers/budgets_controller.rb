@@ -26,7 +26,7 @@ class BudgetsController < ApplicationController
   # POST /budgets
   # POST /budgets.json
   def create
-    @budget = current_user.budgets.new(budget_params)
+    @budget = current_user.budgets.build(budget_params)
 
     respond_to do |format|
       if @budget.save
