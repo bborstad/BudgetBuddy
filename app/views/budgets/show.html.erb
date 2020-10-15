@@ -10,14 +10,18 @@
 
 <div class="table-responsive">
   <table class="table table-striped table-hover">
-    #FIXME: need to find correct route for editing each group
+    #FIXME: need to find correct route to edit specific group
     <% @budget.groups.each do |group| %>
       <tr style="font-weight:bold; background-color: #59A7AE;">
-        <td ><%= group.name %> <%= link_to budget_groups_path(@budget) do %>(edit)<% end %></td>
-          <td>Projected</td>
-          <td >Actual</td>
+        <td >
+          <%= group.name %>
+          <%= link_to edit_budget_group_path(@budget, group) do %>(edit)<% end %>
+          <%= link_to budget_groups_path(@budget) do %>(delete)<% end %>
+        </td>
+        <td>Projected</td>
+        <td >Actual</td>
       </tr>
-      #FIXME: paste contents of index2 here
+      #FIXME: paste contents of index2 here once categories are worked back in
       <td><%= link_to budgets_path do %>Add Category<% end %></td>
     <% end %>
   </table>
