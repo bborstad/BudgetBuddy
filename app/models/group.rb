@@ -19,4 +19,5 @@
 class Group < ApplicationRecord
     belongs_to :budget
     has_many :categories, dependent: :destroy
+    accepts_nested_attributes_for :categories
 end

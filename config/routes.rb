@@ -1,9 +1,27 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resources :groups
-  resources :categories
-  resources :budgets
+  # Routing for budget section. Generates:
+  # /budgets
+  # /budgets/1
+  # /budgets/1/groups
+  # /groups/2
+  # /groups/2/categories
+  # /categories/3
+  #resources :budgets do |budgets|
+  #  budgets.groups :categories, :name_prefix => "budget_"
+  #end
+  #resources :groups do |group|
+  #  groups.resources :categories, :name_prefix => "group_"
+  #end
+  #resources :categories
+  
+  resources :budgets do
+    resources :groups do
+      resources :categories
+    end
+  end
+
   resources :accounts
   resources :goals
 

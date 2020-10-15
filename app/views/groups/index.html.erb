@@ -7,9 +7,13 @@
   </div>
 
   <div class="col-sm-6 text-right">
-  <%= link_to new_group_path, class: 'btn btn-primary' do %>
+  <%= link_to new_budget_group_path, class: 'btn btn-primary' do %>
     Add New Group
   <% end %>
+  <%= link_to [@budget], class: 'btn btn-primary' do %>
+    Back to budget
+  <% end %>
+  
   </div>
 </div>
 
@@ -17,12 +21,7 @@
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
-    
-
-            <th>String</th>
-            
-          <th></th>
-        
+            <th>Name</th>
       </tr>
     </thead>
 
@@ -31,10 +30,9 @@
         <%= content_tag :tr, id: dom_id(group), class: dom_class(group) do %>
           
 
-                      <td><%= group.string %></td>
-          
-          
-            <td><%= link_to 'Show', group %></td>
+            <td><%= group.name %></td>
+            <td><%= link_to 'Edit Group', edit_budget_group_path(@budget, group) %></td>
+            <td><%= link_to 'Destroy Group', [@budget, group], method: :delete, data: { confirm: 'Are you sure?' } %></td>
           
         <% end %>
       <% end %>

@@ -32,11 +32,18 @@
 </div>
 
 <div>
-  <%= link_to new_group_path do %>
+  <%= link_to new_budget_group_path(@budget) do %>
     + ADD GROUP
   <% end %>
 </div>
+<div>
+  <%= link_to budget_groups_path(@budget) do %>
+    EDIT GROUPS
+  <% end %>
+</div>
 
-  <div>
-    <%= pie_chart Group.group(:name).count %>
-  </div>
+<br>
+
+<div>
+  <%= pie_chart Group.group(:name).count %>
+</div>

@@ -1,10 +1,11 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :get_budget
 
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    @groups = @budget.groups
   end
 
   # GET /groups/1
@@ -14,7 +15,7 @@ class GroupsController < ApplicationController
 
   # GET /groups/new
   def new
-    @group = Group.new
+    @group = @budget.groups.build
   end
 
   # GET /groups/1/edit
@@ -24,11 +25,11 @@ class GroupsController < ApplicationController
   # POST /groups
   # POST /groups.json
   def create
-    @group = Group.new(group_params)
+    @group = @budget.groups.build(group_params)
 
     respond_to do |format|
       if @group.save
-        format.html { redirect_to @group, notice: 'Group was successfully created.' }
+        format.html { redirect_to budget_groups_path(@budget), notice: 'Group was successfully created.' }
         format.json { render :show, status: :created, location: @group }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class GroupsController < ApplicationController
   def update
     respond_to do |format|
       if @group.update(group_params)
-        format.html { redirect_to @group, notice: 'Group was successfully updated.' }
+        format.html { redirect_to budget_group_path(@budget), notice: 'Group was successfully updated.' }
         format.json { render :show, status: :ok, location: @group }
       else
         format.html { render :edit }
@@ -56,7 +57,7 @@ class GroupsController < ApplicationController
   def destroy
     @group.destroy
     respond_to do |format|
-      format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }
+      format.html { redirect_to budget_groups_path(@budget), notice: 'Group was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -64,11 +65,15 @@ class GroupsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group
-      @group = Group.find(params[:id])
+      @group = @budget.groups.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def group_params
       params.require(:group).permit(:string)
+    end
+
+    def get_budget
+      @budget = Budget.find(params[:budget_id])
     end
 end

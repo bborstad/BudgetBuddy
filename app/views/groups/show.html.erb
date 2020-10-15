@@ -1,8 +1,8 @@
 <div class="page-header">
-  <%= link_to groups_path, class: 'btn btn-default' do %>
+  <%= link_to budget_groups_path(@budget), class: 'btn btn-default' do %>
     All Groups
   <% end %>
-  <%= link_to edit_group_path(@group), class: 'btn btn-primary' do %>
+  <%= link_to edit_budget_group_path(@budget, @group), class: 'btn btn-primary' do %>
     Edit
   <% end %>
   <h1>Show group</h1>

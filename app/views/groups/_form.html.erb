@@ -1,4 +1,4 @@
-<%= form_with(model: group, local: true) do |form| %>
+<%= form_with(model: [@budget, group], local: true) do |form| %>
   <% if group.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(group.errors.count, "error") %> prohibited this group from being saved:</h2>
@@ -12,23 +12,18 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label :string %>
-    <%= form.text_field :string, class: 'form-control' %>
+    <%= form.label :name %>
+    <%= form.text_field :name, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <% if group.persisted? %>
       <div class="float-right">
-        <%= link_to 'Destroy', group, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Destroy', [@budget, group], method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
       </div>
     <% end %>
 
     <%= form.submit class: 'btn btn-primary' %>
 
-    <% if group.persisted? %>
-      <%= link_to "Cancel", group, class: "btn btn-link" %>
-    <% else %>
-      <%= link_to "Cancel", groups_path, class: "btn btn-link" %>
-    <% end %>
   </div>
 <% end %>
