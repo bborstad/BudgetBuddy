@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
-  #before_action :require_permission, only: [:show, :edit, :update, :destroy]
+  before_action :require_permission, only: [:show, :edit, :update, :destroy]
   before_action :set_group, only: [:show, :edit, :update, :destroy]
   before_action :get_budget
 
@@ -81,7 +81,7 @@ class GroupsController < ApplicationController
     end
 
     def require_permission
-      if Goal.find(params[:id]).user != current_user
+      if Budget.find(params[:id]).user != current_user
         redirect_to goals_url, flash: { error: "You do not have permission to do that."}
       end
     end

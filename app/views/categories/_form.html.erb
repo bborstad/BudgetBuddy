@@ -38,7 +38,7 @@
     <% if category.persisted? %>
       <%= link_to "Cancel", category, class: "btn btn-link" %>
     <% else %>
-      <%= link_to "Cancel", categories_path, class: "btn btn-link" %>
+      <%= link_to "Cancel", budget_path(@budget), class: "btn btn-link" %>
     <% end %>
   </div>
 <% end %>

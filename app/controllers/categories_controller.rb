@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
-  #before_action :require_permission, only: [:show, :edit, :update, :destroy]
+  before_action :require_permission, only: [:show, :edit, :update, :destroy]
   before_action :set_category, only: [:show, :edit, :update, :destroy]
   before_action :get_group_and_budget
 
@@ -17,7 +17,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories/new
   def new
-    @category = @groups.categories.build
+    @category = @group.categories.build
   end
 
   # GET /categories/1/edit
@@ -31,7 +31,7 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to @category, notice: 'Category was successfully created.' }
+        format.html { redirect_to budget_path(@budget), notice: 'Category was successfully created.' }
         format.json { render :show, status: :created, location: @category }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class CategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @category.update(category_params)
-        format.html { redirect_to @category, notice: 'Category was successfully updated.' }
+        format.html { redirect_to budget_path(@budget), notice: 'Category was successfully updated.' }
         format.json { render :show, status: :ok, location: @category }
       else
         format.html { render :edit }
@@ -59,7 +59,7 @@ class CategoriesController < ApplicationController
   def destroy
     @category.destroy
     respond_to do |format|
-      format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
+      format.html { redirect_to budget_path(@budget), notice: 'Category was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -77,12 +77,12 @@ class CategoriesController < ApplicationController
     end
 
     def get_group_and_budget
-      @group = Group.find(params[:group_id])
       @budget = Budget.find(params[:budget_id])
+      @group = Group.find(params[:group_id])
     end
 
     def require_permission
-      if Goal.find(params[:id]).user != current_user
+      if Budget.find(params[:id]).user != current_user
         redirect_to goals_url, flash: { error: "You do not have permission to do that."}
       end
     end

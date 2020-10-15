@@ -30,14 +30,14 @@
               |
               <%= link_to budget_path do %>Edit<% end %>
               |
-              Delete
+              <%= link_to 'Delete', [@budget, group, category], method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
             </td>
             <td><%= category.projected %></td>
             <td><%= category.actual %></td>
           </tr>
         <% end %>
       </tbody>
-      <td><%= link_to '+ Add Category', [@budget, @group, @category] %></td>
+      <td><%= link_to new_budget_group_category_path(@budget, group, @category) do%>+ Add Category<% end %></td>
     <% end %>
   </table>
 </div>
