@@ -1,34 +1,40 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 
 # Users
 u1 = User.create!(
-  email: 'alice@gmail.com',
-  password: 'password'
+  email: 'alice@email.com',
+  password: 'password',
+  first_name: 'Alice',
+  last_name: 'Barnett'
 )
 
 u2 = User.create!(
-  email: 'bob@gmail.com',
-  password: 'password'
+  email: 'bob@email.com',
+  password: 'password',
+  first_name: 'Bob',
+  last_name: 'Cunningham'
 )
 u3 = User.create!(
-  email: 'alice@email.com',
-  password: 'password'
+  email: 'noe@email.com',
+  password: 'password',
+  first_name: 'Noe',
+  last_name: 'Larson'
 )
 u4 = User.create!(
-  email: 'bob@email.com',
-  password: 'password'
+  email: 'kennan@email.com',
+  password: 'password',
+  first_name: 'Kennan',
+  last_name: 'Davis'
 )
 u5 = User.create!(
   email: 'tom@email.com',
-  password: 'password'
+  password: 'password',
+  first_name: 'Tom',
+  last_name: 'Reuben'
 )
-
+# Retirements
 # Goals
 g1 = Goal.create!(
   user: u1,
@@ -65,7 +71,7 @@ g5 = Goal.create!(
   goal: 10000
 )
 
-# Budgets & Categories
+# Budgets, Groups, & Categories for Alice
 b1 = Budget.create!(
   user: u1,
   month: "October",
@@ -87,42 +93,6 @@ b3 = Budget.create!(
 b4 = Budget.create!(
   user: u1,
   month: "July",
-  year: 2020
-)
-
-b5 = Budget.create!(
-  user: u1,
-  month: "June",
-  year: 2020
-)
-
-b6 = Budget.create!(
-  user: u1,
-  month: "May",
-  year: 2020
-)
-
-b7 = Budget.create!(
-  user: u1,
-  month: "April",
-  year: 2020
-)
-
-b8 = Budget.create!(
-  user: u1,
-  month: "March",
-  year: 2020
-)
-
-b19 = Budget.create!(
-  user: u1,
-  month: "February",
-  year: 2020
-)
-
-b10 = Budget.create!(
-  user: u1,
-  month: "January",
   year: 2020
 )
 
