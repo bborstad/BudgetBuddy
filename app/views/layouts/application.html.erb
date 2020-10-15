@@ -12,7 +12,7 @@
     <% if current_user.avatar.attached?%>
       <img class="rounded-circle" height= "65" width="65" <%=image_tag(current_user.avatar)%>
     <% else %>
-      <img class="rounded-circle" height= "65" width="65" <%=image_tag("No_image.jpg")%>
+      <img class="rounded-circle" height= "65" width="65" <%=image_tag("No_user.jpg")%>
     <% end %>
       <div class="display: flex; justify-content: flex-end">
         <h4 class="m-0"><%=current_user.first_name%> <%=current_user.last_name %></h4>
