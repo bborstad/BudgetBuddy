@@ -26,13 +26,8 @@ class Budget < ApplicationRecord
         inverse_of: :budgets
     )
 
-    has_many(
-        :groups,
-        class_name: 'Group',
-        foreign_key: 'budget_id',
-        inverse_of: :budget,
-        :dependent => :delete_all
-    )
+    has_many :groups, :dependent => :delete_all
+     
 
       validates :month, presence: true, uniqueness: true
     validates :year, presence: true, uniqueness: true

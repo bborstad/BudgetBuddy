@@ -1,4 +1,6 @@
 class GroupsController < ApplicationController
+  before_action :authenticate_user!
+  #before_action :require_permission, only: [:show, :edit, :update, :destroy]
   before_action :set_group, only: [:show, :edit, :update, :destroy]
   before_action :get_budget
 
@@ -65,7 +67,7 @@ class GroupsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group
-     # @group = @budget.group.find(params[:id])
+     # @group = @budget.groups.find(params[:id])
      @group = Group.find(params[:id])
     end
 
@@ -76,5 +78,11 @@ class GroupsController < ApplicationController
 
     def get_budget
       @budget = Budget.find(params[:budget_id])
+    end
+
+    def require_permission
+      if Goal.find(params[:id]).user != current_user
+        redirect_to goals_url, flash: { error: "You do not have permission to do that."}
+      end
     end
 end

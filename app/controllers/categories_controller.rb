@@ -1,12 +1,13 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
-  before_action :require_permission, only: [:show, :edit, :update, :destroy]
+  #before_action :require_permission, only: [:show, :edit, :update, :destroy]
   before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :get_group_and_budget
 
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.where(user_id:current_user)
+    @categories = @groups.categories
   end
 
   # GET /categories/1
@@ -16,7 +17,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories/new
   def new
-    @category = Category.new
+    @category = @groups.categories.build
   end
 
   # GET /categories/1/edit
@@ -26,7 +27,7 @@ class CategoriesController < ApplicationController
   # POST /categories
   # POST /categories.json
   def create
-    @category = budget_id.categories.new(category_params)
+    @category = @group.categories.build(category_params)
 
     respond_to do |format|
       if @category.save
@@ -66,12 +67,18 @@ class CategoriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category
+      # @category = @group.categories.find(params[:id])
       @category = Category.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def category_params
-      params.require(:category).permit(:name, :projected, :actual, :grouping)
+      params.require(:category).permit(:name, :projected, :actual)
+    end
+
+    def get_group_and_budget
+      @group = Group.find(params[:group_id])
+      @budget = Budget.find(params[:budget_id])
     end
 
     def require_permission
