@@ -5,7 +5,7 @@
   <head>
   <!-- Vertical navbar -->
   <%= render 'shared/head' %> 
-  
+  <% if current_user.present? %>
   <div class="sidenav vertical-nav bg-white" id="sidebar">
   <div class="py-4 px-3 mb-4 bg-light">
     <div class="media d-flex align-items-center">
@@ -23,10 +23,10 @@
 
   <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Main</p>
 
-  <ul class="nav flex-column bg-white mb-0">
+  <ul class="nav flex-column bg-white mb-0 ">
     <li class="nav-item">
-      <a href="#" class="nav-link text-dark font-italic bg-light">
-                <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+      <a href="<%= root_path %>" class="nav-link text-dark font-italic">
+                <i class="fa fa-home mr-3 text-primary fa-fw"></i>
                 Social Home
             </a>
     </li>
@@ -38,14 +38,14 @@
     </li>
     <li class="nav-item">
       <a href="#" class="nav-link text-dark font-italic">
-                <i class="fa fa-cubes mr-3 text-primary fa-fw"></i>
+                <i class="fa fa-inbox mr-3 text-primary fa-fw"></i>
                 Messages
             </a>
     </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link text-dark font-italic">
+    <li class="nav-item ">
+      <a href="<%= user_path(current_user) %>" class="nav-link text-dark font-italic">
                 <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
-                My Profile
+                My Profile 
             </a>
     </li>
   </ul>
@@ -80,6 +80,8 @@
   </ul>
 </div>
 <!-- End vertical navbar -->
+<% end %>
+
        
   </head>
 
