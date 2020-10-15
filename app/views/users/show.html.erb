@@ -26,7 +26,7 @@
                                 <img class="rounded-circle" width="150" height="150" <%=image_tag(@user.avatar)%>
                             </div>
                         <% else %>
-                            <img class="rounded-circle" width="150" height="150" <%=image_tag("No_image.jpg")%>
+                            <img class="rounded-circle" width="150" height="150" <%=image_tag("No_user.jpg")%>
                         <%end%>
                         <div class="h5"><%=@user.first_name%> <%=@user.last_name %></div>
                         <% if Follow.where(:requestor => @user.id, :following =>current_user.id).present?%> 
@@ -109,7 +109,7 @@
                             <% if @user.avatar.attached?%>
                                 <img class="rounded-circle" height="45" width="45" <%=image_tag(@user.avatar)%>
                                 <% else %>
-                            <img class="rounded-circle" height="45" width="45" <%=image_tag("No_image.jpg")%>
+                            <img class="rounded-circle" height="45" width="45" <%=image_tag("No_user.jpg")%>
 <!-- end BUD-21-->
                             <% end  %>
                                 </div>
