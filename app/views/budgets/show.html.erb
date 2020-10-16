@@ -2,22 +2,21 @@
   <%= link_to budgets_path, class: 'btn btn-primary' do %>
     All Budgets
   <% end %>
+
   <br>
   <br>
+
   <h1 style="text-align:left;float:left;"><%= @budget.month %> <%= @budget.year %> </h1>
-  <br>
-  <h5 style="text-align:right;float:left;"> 
-    <%= link_to edit_budget_path(@budget) do %>
-      Edit
-    <% end %>
-  </h5>
+  <h5 style="text-align:right;float:left;"><%= link_to edit_budget_path(@budget) do %>Edit<% end %></h5>
 </div>
+
 <br>
+
 <div class="table-responsive">
-  <table class="table table-striped table-hover">
+  <table class="table table-hover">
     <% @budget.groups.each do |group| %>
       <tr style="font-weight:bold; background-color: #59A7AE;">
-        <td >
+        <td>
           <%= group.name %>
            | 
           <%= link_to edit_budget_group_path(@budget, group) do %>edit<% end %>
@@ -41,12 +40,12 @@
             <td><%= category.actual %></td>
           </tr>
         <% end %>
+        <td colspan="3"><%= link_to new_budget_group_category_path(@budget, group, @category) do%>+ Add Category<% end %></td>
       </tbody>
-      <td><%= link_to new_budget_group_category_path(@budget, group, @category) do%>+ Add Category<% end %></td>
+      
     <% end %>
   </table>
 </div>
-
 <div>
   <%= link_to new_budget_group_path(@budget, @group) do %>
     + ADD GROUP
