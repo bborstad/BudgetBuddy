@@ -11,8 +11,7 @@ require("local-time").start()
 require("chartkick")
 require("chart.js")
 require("sidebarCollapse")
-require("jquery")
-require("best_in_place")
+
 window.Rails = Rails
 
 import 'bootstrap'
@@ -21,11 +20,6 @@ import 'data-confirm-modal'
 $(document).on("turbolinks:load", () => {
   $('[data-toggle="tooltip"]').tooltip()
   $('[data-toggle="popover"]').popover()
-})
-
-$(document).ready(function() {
-  /* Activating Best In Place */
-  jQuery(".best_in_place").best_in_place();
 });
 
 $(function() {
