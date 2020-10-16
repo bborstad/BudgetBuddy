@@ -1,59 +1,67 @@
-<div class="page-header">
-  <%= link_to budgets_path, class: 'btn btn-primary' do %>
-    All Budgets
-  <% end %>
+<div class="row col-12">
+  <div class="card gedf-card; row col-8">
+    <div class="card-header">
+      <h3 style="text-align:center;float:center"><%= @budget.month %> <%= @budget.year %> </h3>
+    </div>
 
-  <br>
-  <br>
+    <br>
 
-  <h1 style="text-align:left;float:left;"><%= @budget.month %> <%= @budget.year %> </h1>
-  <h5 style="text-align:right;float:left;"><%= link_to edit_budget_path(@budget) do %>Edit<% end %></h5>
-</div>
-
-<br>
-
-<div class="table-responsive">
-  <table class="table table-hover">
-    <% @budget.groups.each do |group| %>
-      <tr style="font-weight:bold; background-color: #59A7AE;">
-        <td>
-          <%= group.name %>
-           | 
-          <%= link_to edit_budget_group_path(@budget, group) do %>edit<% end %>
-           | 
-          <%= link_to 'delete', [@budget, group], method: :delete, class: "text-danger", data: { confirm: 'Are you sure? This will delete the group and its categories.' } %>
-        </td>
-        <td>Projected</td>
-        <td >Actual</td>
-      </tr>
-      <tbody>  
-        <% group.categories.each do |category| %>  
-          <tr style="background-color: #E7E5E5">  
-            <td>
-              <%= category.name %>
-              |
-              <%= link_to budget_path do %>edit<% end %>
-              |
-              <%= link_to 'delete', [@budget, group, category], method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
-            </td>
-            <td><%= category.projected %></td>
-            <td><%= category.actual %></td>
-          </tr>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <% @budget.groups.each do |group| %>
+            <tr style="border-bottom: 3px solid red; border-top: 0px">
+              <td>
+                <%= group.name %>
+                | 
+                <%= link_to edit_budget_group_path(@budget, group) do %>edit<% end %>
+                | 
+                <%= link_to 'delete', [@budget, group], method: :delete, class: "text-danger", data: { confirm: 'Are you sure? This will delete the group and its categories.' } %>
+              </td>
+              <td>Projected</td>
+              <td>Actual</td>
+            </tr>
+            
+            <tbody>  
+              <% group.categories.each do |category| %>  
+                <tr style="background-color: #E7E5E5">  
+                  <td>
+                    <%= category.name %>
+                    |
+                    <%= link_to budget_path do %>edit<% end %>
+                    |
+                    <%= link_to 'delete', [@budget, group, category], method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+                  </td>
+                  <td><%= category.projected %></td>
+                  <td><%= category.actual %></td>
+                </tr>
+              <% end %>
+              <td colspan="3"><%= link_to new_budget_group_category_path(@budget, group, @category) do%>+ Add Category<% end %></td>
+            </tbody>
+            
+          <% end %>
+        </table>
+      </div>
+      <div>
+        <%= link_to new_budget_group_path(@budget, @group) do %>
+          + ADD GROUP
         <% end %>
-        <td colspan="3"><%= link_to new_budget_group_category_path(@budget, group, @category) do%>+ Add Category<% end %></td>
-      </tbody>
-      
-    <% end %>
-  </table>
-</div>
-<div>
-  <%= link_to new_budget_group_path(@budget, @group) do %>
-    + ADD GROUP
-  <% end %>
-</div>
+      </div>
+    </div>
+  </div>
 
-<br>
+  <div class="card gedf-card; row col-4">
+    <div class="card-header">
+      <h3 style="text-align:center">Spending Breakdown</h3>
+    </div>
+    <div class="card-body>"
+      <%= pie_chart Group.group(:name).count %>
+    </div>
+  </div>
 
-<div>
-  <%= pie_chart Group.group(:name).count %>
+  <div class="card gedf-card; row col-4">
+    <div class="card-header">
+      <h3>Transactions</h3>
+    </div>
+  </div>
 </div>

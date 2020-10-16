@@ -5,7 +5,7 @@
 #  id         :bigint           not null, primary key
 #  goal       :float
 #  ppercent   :decimal(, )
-#  progress   :float            default(0.0)
+#  progress   :float
 #  title      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
