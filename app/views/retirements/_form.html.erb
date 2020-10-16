@@ -13,22 +13,22 @@
 
   <div class="form-group">
     <%= form.label :"How much will you deposit for your retirement account annually?" %>
-    <%= form.text_field :annual_savings, class: 'form-control',min:0,required:true %>
+    <%= form.text_field :annual_savings, placeholder: "0.00", class: 'form-control',min:0,required:true %>
   </div>
 
   <div class="form-group">
     <%= form.label :"What year do you want to retire by?" %>
-    <%= form.number_field :year_of_retirement,min:Date.today.year, class: 'form-control',required:true %>
+    <%= form.number_field :year_of_retirement, min:Date.today.year, placeholder: "YYYY", class: 'form-control', required:true %>
   </div>
 
   <div class="form-group">
     <%= form.label :"How much did you start with in your account?"%>
-    <%= form.text_field :inital_savings, class: 'form-control',required:true %>
+    <%= form.text_field :inital_savings, placeholder: "0.00", class: 'form-control',required:true %>
   </div>
 
   <div class="form-group">
-    <%= form.label :"Interest_Rate" %>
-    <%= form.text_field :intrest_rate, class: 'form-control',required:true %>
+    <%= form.label :"Interest_Rate (%)" %>
+    <%= form.text_field :intrest_rate, placeholder: "0.00", class: 'form-control',required:true %>
   </div>
 
 <!--

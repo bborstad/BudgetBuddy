@@ -53,7 +53,7 @@
     <div class="form-group">
     <% if @calculate_debt.persisted? %>
       <div class="float-right">
-        <%= link_to 'Destroy', @calculate_debt, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Delete', @calculate_debt, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
       </div>
     <% end %>
       
