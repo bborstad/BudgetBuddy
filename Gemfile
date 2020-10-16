@@ -72,8 +72,6 @@ gem 'whenever', require: false
 gem 'image_processing'
 gem 'annotate', group: :development
 
-#Allows in place editing. See Github documentation.
-gem 'best_in_place', '~> 3.0.1'
 #Trying this gem for charts
 gem 'chartkick'
 
