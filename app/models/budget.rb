@@ -28,7 +28,15 @@ class Budget < ApplicationRecord
 
     has_many :groups, :dependent => :delete_all
      
-
-      validates :month, presence: true
+    validates :month, presence: true
     validates :year, presence: true
+    
+    def previous
+      Budget.where('budgets.id < ?', self.id).order('id').last
+    end
+    
+    def next
+      Budget.where('budgets.id > ?', self.id).order('id').first
+    end
+    
 end

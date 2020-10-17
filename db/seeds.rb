@@ -72,15 +72,9 @@ g5 = Goal.create!(
 )
 
 # Budgets, Groups, & Categories for Alice
-b1 = Budget.create!(
+b4 = Budget.create!(
   user: u1,
-  month: "October",
-  year: 2020
-)
-
-b2 = Budget.create!(
-  user: u1,
-  month: "September",
+  month: "July",
   year: 2020
 )
 
@@ -90,11 +84,18 @@ b3 = Budget.create!(
   year: 2020
 )
 
-b4 = Budget.create!(
+b2 = Budget.create!(
   user: u1,
-  month: "July",
+  month: "September",
   year: 2020
 )
+
+b1 = Budget.create!(
+  user: u1,
+  month: "October",
+  year: 2020
+)
+
 
 gr1 = Group.create!(
   budget: b1,
