@@ -2,10 +2,10 @@
 
 **The following users are avaiable for testing the app:**
 * Alice:
-	- Email: alice@gmail.com
+	- Email: alice@email.com
 	- Password: password
 * Bob:
-	- Email: bob@gmail.com
+	- Email: bob@email.com
 	- Password: password
 
 **Running the app:**
