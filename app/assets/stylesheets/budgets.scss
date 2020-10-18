@@ -1,20 +1,19 @@
 // Place all the styles related to the budgets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-.columna {
-    float: left;
-    width: 66.66%;
-    padding: 5px;
-}
 
-.columnb {
-    float: right;
-    width: 33.33%;
-    padding: 5px;
+.wrap{
+  text-align:center;
 }
-
-.row.after {
-    content: "";
-    clear: both;
-    display: table;
+.left{
+  float: left;
+  vertical-align:middle;
+}
+.right{
+  float: right;
+  vertical-align:middle;
+}
+.center{
+  margin:0 auto;
+  display:inline-block
 }

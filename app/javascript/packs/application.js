@@ -20,8 +20,7 @@ import 'data-confirm-modal'
 $(document).on("turbolinks:load", () => {
   $('[data-toggle="tooltip"]').tooltip()
   $('[data-toggle="popover"]').popover()
-})
-
+});
 
 $(function() {
   // Sidebar toggle behavior

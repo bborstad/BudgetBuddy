@@ -26,22 +26,22 @@
 
 <div id="ifMonthly" style="display: none;">
   <div class="form-group">
-    <%= form.label :"Principle- (Loan Amount)" %>
-    <%= form.text_field :principle,:value =>0, class: 'form-control' %>
+    <%= form.label :"What is the amount of the loan?" %>
+    <%= form.text_field :principle,:value=>0,class: 'form-control' %>
   </div>
 </div>
 
 <div id="ifPrinciple" style="display: none;">
   <div class="form-group">
-    <%= form.label :monthly_payments %>
-    <%= form.text_field :monthly_payements,:value =>0, class: 'form-control' %>
+    <%= form.label :"How much do you pay per month?" %>
+    <%= form.text_field :monthly_payements,:value=>0,class: 'form-control' %>
   </div>
 </div>
 
 
   <div class="form-group">
-    <%= form.label :"Interest rate of the loan" %>
-    <%= form.text_field :rate,:value =>0, class: 'form-control', required:true %>
+    <%= form.label :"What is the interest rate of the loan?" %>
+    <%= form.text_field :rate, placeholder: "0.00", class: 'form-control', required:true %>
   </div>
 
   <div class="field-group">
@@ -49,19 +49,20 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :"compounds_per_year (Most are compounded every month so 12, if differet please correct)" %>
-    <%= form.number_field :compounds_per_year, :value =>12,min:1, class: 'form-control',required:true %>
+    <%= form.label :"How often is the loan compounded?" %>
+    #FIXME: add popup that explains compound on mouse-over (monthly, quarterly, etc)
+    <%= form.number_field :compounds_per_year, placeholder: "12", min:1, class: 'form-control', required:true %>
   </div>
 
   <div class="form-group">
-    <%= form.label :Years_to_pay_off %>
+    <%= form.label :"In how many years would you like to pay this loan off?" %>
     <%= form.number_field :number_of_year, min:0, class: 'form-control',required:true %>
   </div>
 
   <div class="form-group">
     <% if calculate_debt.persisted? %>
       <div class="float-right">
-        <%= link_to 'Destroy', calculate_debt, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Delete', calculate_debt, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
       </div>
     <% end %>
 
@@ -90,6 +91,7 @@
       } else{
         document.getElementById("ifPrinciple").style.display = "none";
         document.getElementById("ifMonthly").style.display = "none";
+
 
 
       }

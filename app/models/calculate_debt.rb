@@ -15,6 +15,7 @@
 #
 class CalculateDebt < ApplicationRecord
     before_save :select_action
+    
     validates :principle, numericality: {greater_than_or_equal_to: 0}
     validates :monthly_payements, numericality: {greater_than_or_equal_to: 0}
     validates :rate, numericality: {greater_than_or_equal_to: 0}

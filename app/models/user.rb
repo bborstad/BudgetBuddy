@@ -64,6 +64,7 @@ class User < ApplicationRecord
     foreign_key: 'user_id',
     inverse_of: :user
   )
+  
   has_many(
     :budgets,
     class_name: 'Budget',
@@ -71,8 +72,6 @@ class User < ApplicationRecord
     inverse_of: :user
   )
 
-
-  
   has_many(
     :likes,
     class_name: 'Like',
