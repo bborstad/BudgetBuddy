@@ -39,9 +39,9 @@ c3 = Category.create!(group: gr2,name: "Maintenance",projected: 20.00,actual: 0.
 c4 = Category.create!(group: gr3,name: "Eating Out",projected: 25.00,actual: 17.06)
 
 # Posts
-p1 = Post.create!(user: u1, content: Faker::Lorem.paragraph(sentence_count: 2))
-p2 = Post.create!(user: u1, content: Faker::Lorem.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 4))
-p3 = Post.create!(user:u1, content: Faker:: Lorem.paragraph(sentence_count: 4, supplemental: false, random_sentences_to_add: 2))
+p1 = Post.create!(user: u1, content: Faker::ChuckNorris.fact)
+p2 = Post.create!(user: u1, content: Faker::ChuckNorris.fact)
+p3 = Post.create!(user:u1, content: Faker::ChuckNorris.fact)
 
 # Retirements
 r1 = Retirement.create!(user: u1, year_of_retirement: 2070, inital_savings: 400.25, intrest_rate: 7.98, annual_savings: 2647.59)
@@ -58,7 +58,8 @@ puts("created Alice")
 #CREATION OF BOB + RANDOM USERS
 users = [User.create!(email: 'bob@email.com', password: 'password', first_name: 'Bob', last_name:'Cunningham')]
 29.times do
-  users.push(User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.unique.email, password: 'password' ))
+  first = Faker::Name.unique.first_name
+  users.push(User.create!(first_name: first, last_name: Faker::Name.last_name, email: Faker::Internet.email(name: first), password: 'password' ))
 end
 
 # Generating data for each user.
@@ -79,9 +80,11 @@ users.each do |u|
   budgets.each do |b|
     groups = []
     # Build out groups for each budget
-    4.times do
-      groups.push(Group.create!(budget: b, name: Faker::Hipster.word))
-    end
+    groups.push(Group.create!(budget: b, name: "Income"))
+    groups.push(Group.create!(budget: b, name: Faker::Coffee.blend_name))
+    groups.push(Group.create!(budget: b, name: Faker::Hipster.word))
+    groups.push(Group.create!(budget: b, name: Faker::House.room))
+    
     # Build out categories for each group
     groups.each do |g|
       2.times do
@@ -100,9 +103,9 @@ users.each do |u|
   end
 
   # Posts
-  Post.create!(user: u, content: Faker::Lorem.paragraph(sentence_count: 2))
-  Post.create!(user: u, content: Faker::Lorem.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 4))
-  Post.create!(user:u, content: Faker:: Lorem.paragraph(sentence_count: 4, supplemental: false, random_sentences_to_add: 2))
+  Post.create!(user: u, content: Faker::ChuckNorris.fact)
+  Post.create!(user: u, content: Faker::ChuckNorris.fact)
+  Post.create!(user:u, content: Faker::ChuckNorris.fact)
   
   # Debts
 
