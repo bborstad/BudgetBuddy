@@ -1,141 +1,114 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
+require 'open-uri'
 
-# Users
-u1 = User.create!(
-  email: 'alice@email.com',
-  password: 'password',
-  first_name: 'Alice',
-  last_name: 'Barnett'
-)
+def image_fetcher
+  open(Faker::Avatar.image)
+  rescue
+  open("https://robohash.org/sitsequiquia.png?size=300x300&set=set1")
+end
 
-u2 = User.create!(
-  email: 'bob@email.com',
-  password: 'password',
-  first_name: 'Bob',
-  last_name: 'Cunningham'
-)
-u3 = User.create!(
-  email: 'noe@email.com',
-  password: 'password',
-  first_name: 'Noe',
-  last_name: 'Larson'
-)
-u4 = User.create!(
-  email: 'kennan@email.com',
-  password: 'password',
-  first_name: 'Kennan',
-  last_name: 'Davis'
-)
-u5 = User.create!(
-  email: 'tom@email.com',
-  password: 'password',
-  first_name: 'Tom',
-  last_name: 'Reuben'
-)
-# Retirements
+# CREATION OF ALICE
+u1 = User.create!(email: 'alice@email.com',password: 'password',first_name: 'Alice',last_name: 'Barnett')
+u1.avatar.attach({
+     io: image_fetcher,
+     filename: "#{1}_faker_image.jpg"
+  })
+# Accounts
+a1 = Account.create!(user: u1, name: 'Bank of America Checking', balance: 780.76)
+
 # Goals
-g1 = Goal.create!(
-  user: u1,
-  title: 'New Car',
-  progress: 10000,
-  goal: 18000
-)
+g1 = Goal.create!(user: u1,title: 'New Car',progress: 10000,goal: 18000)
+g2 = Goal.create!(user: u1,title: 'Computer',progress: 300,goal: 3000) 
+g3 = Goal.create!(user: u1,title: '6 Month Savings',progress: 12000,goal: 12000)
 
-g2 = Goal.create!(
-  user: u1,
-  title: 'Computer',
-  progress: 300,
-  goal: 3000
-) 
+# Budgets, Groups, & Categories
+b4 = Budget.create!(user: u1,month: "July",year: 2020)
+b3 = Budget.create!(user: u1,month: "August",year: 2020)
+b2 = Budget.create!(user: u1,month: "September",year: 2020)
+b1 = Budget.create!(user: u1,month: "October",year: 2020)
 
-g3 = Goal.create!(
-  user: u1,
-  title: '6 Month Savings',
-  progress: 12000,
-  goal: 12000
-)
+gr1 = Group.create!(budget: b1,name: "Income")
+gr2 = Group.create!(budget: b1,name: "Automobile and Travel")
+gr3 = Group.create!(budget: b1,name: "Food and Groceries")
 
-g4 = Goal.create!(
-  user: u2,
-  title: 'Student Loans',
-  progress: 5000,
-  goal: 22000
-)
+c1 = Category.create!(group: gr1,name: "Paycheck",projected: 2340.00,actual: 800.00)
+c2 = Category.create!(group: gr2,name: "Gas",projected: 150.00,actual: 82.27)
+c3 = Category.create!(group: gr2,name: "Maintenance",projected: 20.00,actual: 0.00)
+c4 = Category.create!(group: gr3,name: "Eating Out",projected: 25.00,actual: 17.06)
 
-g5 = Goal.create!(
-  user: u2,
-  title: 'Savings',
-  progress: 2000,
-  goal: 10000
-)
+# Posts
+p1 = Post.create!(user: u1, content: Faker::Lorem.paragraph(sentence_count: 2))
+p2 = Post.create!(user: u1, content: Faker::Lorem.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 4))
+p3 = Post.create!(user:u1, content: Faker:: Lorem.paragraph(sentence_count: 4, supplemental: false, random_sentences_to_add: 2))
 
-# Budgets, Groups, & Categories for Alice
-b4 = Budget.create!(
-  user: u1,
-  month: "July",
-  year: 2020
-)
+# Retirements
+r1 = Retirement.create!(user: u1, year_of_retirement: 2070, inital_savings: 400.25, intrest_rate: 7.98, annual_savings: 2647.59)
+r2 = Retirement.create!(user: u1, year_of_retirement: 2090, inital_savings: 44.25, intrest_rate: 7.98, annual_savings: 245)
 
-b3 = Budget.create!(
-  user: u1,
-  month: "August",
-  year: 2020
-)
-
-b2 = Budget.create!(
-  user: u1,
-  month: "September",
-  year: 2020
-)
-
-b1 = Budget.create!(
-  user: u1,
-  month: "October",
-  year: 2020
-)
+# Debts
+# Likes
+# Follows
+puts("created Alice")
 
 
-gr1 = Group.create!(
-  budget: b1,
-  name: "Income"
-)
 
-gr2 = Group.create!(
-  budget: b1,
-  name: "Automobile and Travel"
-)
 
-gr3 = Group.create!(
-  budget: b1,
-  name: "Food and Groceries"
-)
+#CREATION OF BOB + RANDOM USERS
+users = [User.create!(email: 'bob@email.com', password: 'password', first_name: 'Bob', last_name:'Cunningham')]
+29.times do
+  users.push(User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.unique.email, password: 'password' ))
+end
 
-c1 = Category.create!(
-  group: gr1,
-  name: "Paycheck",
-  projected: 2340.00,
-  actual: 800.00
-)
+# Generating data for each user.
+users.each do |u|
+  # ATTENTION: comment out the avatar creation for a faster seed time.
+  u.avatar.attach({
+     io: image_fetcher,
+     filename: "#{u}_faker_image.jpg"
+  })
+  
+  #Goals
+  4.times do
+    Goal.create!(user: u, title: Faker::Hipster.word, progress: Faker::Number.between(from:0, to:2000), goal: Faker::Number.between(from:2000, to:2500))
+  end
 
-c2 = Category.create!(
-  group: gr2,
-  name: "Gas",
-  projected: 150.00,
-  actual: 82.27
-)
+  #Budgets > Groups > Categories
+  budgets = [Budget.create!(user: u, month: 'July', year: 2020), Budget.create!(user: u, month: 'August', year: 2020), Budget.create!(user: u, month: 'September', year: 2020), Budget.create!(user: u, month: 'October', year: 2020)]
+  budgets.each do |b|
+    groups = []
+    # Build out groups for each budget
+    4.times do
+      groups.push(Group.create!(budget: b, name: Faker::Hipster.word))
+    end
+    # Build out categories for each group
+    groups.each do |g|
+      2.times do
+        Category.create!(group: g, name: Faker::Hipster.word, projected: Faker::Number.between(from:0, to:199), actual: Faker::Number.between(from:199,to:200))
+      end
+    end  
+  end
+  
+  # Retirements
+  Retirement.create!(user: u, year_of_retirement: 2070, inital_savings: 400.25, intrest_rate: 7.98, annual_savings: 2647.59)
+  Retirement.create!(user: u, year_of_retirement: 2090, inital_savings: 4000.25, intrest_rate: 6.98, annual_savings: 6500.00)
 
-c3 = Category.create!(
-  group: gr2,
-  name: "Maintenance",
-  projected: 20.00,
-  actual: 0.00
-)
+  # Accounts
+  2.times do
+    Account.create!(user: u, name: Faker::Bank.name, balance: Faker::Number.between(from:0, to:250000))
+  end
 
-c4 = Category.create!(
-  group: gr3,
-  name: "Eating Out",
-  projected: 25.00,
-  actual: 17.06
-)
+  # Posts
+  Post.create!(user: u, content: Faker::Lorem.paragraph(sentence_count: 2))
+  Post.create!(user: u, content: Faker::Lorem.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 4))
+  Post.create!(user:u, content: Faker:: Lorem.paragraph(sentence_count: 4, supplemental: false, random_sentences_to_add: 2))
+  
+  # Debts
+
+  # Likes
+  # Follows
+  puts("created a new User")
+end
+
+puts("Completed seeding the database")

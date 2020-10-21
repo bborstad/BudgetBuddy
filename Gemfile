@@ -71,6 +71,7 @@ gem 'sitemap_generator', '~> 6.1', '>= 6.1.2'
 gem 'whenever', require: false
 gem 'image_processing'
 gem 'annotate', group: :development
+gem 'faker'
 
 #Trying this gem for charts
 gem 'chartkick'
