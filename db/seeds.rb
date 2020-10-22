@@ -13,7 +13,7 @@ end
 u1 = User.create!(email: 'alice@email.com',password: 'password',first_name: 'Alice',last_name: 'Barnett')
 u1.avatar.attach({
      io: image_fetcher,
-     filename: "#{1}_faker_image.jpg"
+     filename: "#{u1}_faker_image.jpg"
   })
 # Accounts
 a1 = Account.create!(user: u1, name: 'Bank of America Checking', balance: 780.76)
