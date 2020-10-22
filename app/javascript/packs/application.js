@@ -11,6 +11,8 @@ require("local-time").start()
 require("chartkick")
 require("chart.js")
 require("sidebarCollapse")
+require("trix")
+require("@rails/actiontext")
 
 window.Rails = Rails
 
@@ -28,3 +30,4 @@ $(function() {
     $('#sidebar, #content').toggleClass('active');
   });
 });
+import "controllers"
