@@ -7,21 +7,21 @@
 * Bob:
 	- Email: bob@email.com
 	- Password: password
+* Any user can be accessed by retrieving their email from the Users page. The password will be <code>password</code>
 
 **Running the app:**
 1. Clone repository
 2. You will need postgresql. Make sure it is running (<code>sudo service posgresql start</code> and <code>sudo service postgresql status</code>)
 3. Run <code>bundle install && yarn install</code>
-4. Run <code>rails db:migrate:reset</cod>
-5. Run <code>db:seed</code>
+4. Run <code>rails db:migrate:reset</code>
+5. Then run <code>db:seed</code>
 6. Run <code>rails s</code> to launch app
 7. Open a browser, and go to http://localhost:3000/
 8. Log in using the Navbar and one of the provided users. 
-	- Use Alice as she currently has more data than Bob
+	- Use Alice as she has more data than Bob
 	
-**N.B.** This app is built on Ruby 6.
 
-**N.B.** The instructions above are designed to run within Ubuntu on Windows. If you don't have this installed, we can provide a demo on one of our machines.
+The instructions above are designed to run within Ubuntu on Windows. If you don't have this installed, we can provide a demo on one of our machines.
 
 Please let us know if you have any questions.
 ** ** 
