@@ -1,6 +1,7 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
+puts('Starting seeding')
 require 'open-uri'
 
 def image_fetcher
@@ -9,12 +10,17 @@ def image_fetcher
   open("https://robohash.org/sitsequiquia.png?size=300x300&set=set1")
 end
 
+puts('End of function declarations')
+
 # CREATION OF ALICE
+puts('Creating Alice')
 u1 = User.create!(email: 'alice@email.com',password: 'password',first_name: 'Alice',last_name: 'Barnett')
+puts('Attaching avatar to Alice')
 u1.avatar.attach({
      io: image_fetcher,
      filename: "#{u1}_faker_image.jpg"
   })
+puts('Creating Alice\'s data')
 # Accounts
 a1 = Account.create!(user: u1, name: 'Bank of America Checking', balance: 780.76)
 
@@ -57,7 +63,7 @@ puts("created Alice")
 
 #CREATION OF BOB + RANDOM USERS
 users = [User.create!(email: 'bob@email.com', password: 'password', first_name: 'Bob', last_name:'Cunningham')]
-29.times do
+30.times do
   first = Faker::Name.unique.first_name
   users.push(User.create!(first_name: first, last_name: Faker::Name.last_name, email: Faker::Internet.email(name: first), password: 'password' ))
 end
