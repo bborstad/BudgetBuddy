@@ -14,7 +14,7 @@
 2. You will need postgresql. Make sure it is running (<code>sudo service posgresql start</code> and <code>sudo service postgresql status</code>)
 3. Run <code>bundle install && yarn install</code>
 4. Run <code>rails db:migrate:reset</code>
-5. Then run <code>db:seed</code>
+5. Then run <code>rails db:seed</code>
 6. Run <code>rails s</code> to launch app
 7. Open a browser, and go to http://localhost:3000/
 8. Log in using the Navbar and one of the provided users. 
