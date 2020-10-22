@@ -7,7 +7,7 @@
 * Bob:
 	- Email: bob@email.com
 	- Password: password
-* Any user can be accessed by retrieving their email from the Users page. The password will be <code>password</code>
+* Any user can be accessed by retrieving their email from the Users page and login in as that user. The password will be <code>password</code>
 
 **Running the app:**
 1. Clone repository
