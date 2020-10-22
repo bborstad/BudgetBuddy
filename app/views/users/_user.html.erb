@@ -1,4 +1,5 @@
-<span class "mention">
+<%= link_to user, class: "mention" do %>
     <%= image_tag gravatar_image_url(user.email, size:40),height: 20, width: 20, class: "rounded" %>
-    <%= user.email %>
-</span>
+    <%= user.name %>
+
+<% end %>

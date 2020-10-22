@@ -80,5 +80,9 @@ class User < ApplicationRecord
     inverse_of: :user,
     dependent: :destroy
   )
+
+  def to_trix_content_attachment_partial_path
+    to_partial_path
+  end
 end
 
