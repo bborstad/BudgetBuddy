@@ -28,3 +28,7 @@ $(function() {
     $('#sidebar, #content').toggleClass('active');
   });
 });
+import "controllers"
+
+require("trix")
+require("@rails/actiontext")
