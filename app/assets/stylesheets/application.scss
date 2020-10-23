@@ -64,3 +64,18 @@ body > .alert {
     }
   }
 }
+trix-toolbar .button_groups {
+  button.code {
+    display: none;
+  }
+  button.increase {
+    display: none;
+  }
+  button.decrease {
+    display: none;
+  }
+}
+.trix-button-group--file-tools { display: none !important; }
+.trix-button-group.trix-button-group--text-tools { display: none !important; }
+.trix-button-group.trix-button-group--block-tools { display: none !important; }
+.trix-button-group.trix-button-group--history-tools { display: none !important; }
