@@ -3,6 +3,7 @@
 # Table name: groups
 #
 #  id         :bigint           not null, primary key
+#  average    :float            default(0.0)
 #  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
