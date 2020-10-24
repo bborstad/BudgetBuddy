@@ -7,6 +7,6 @@ class PostMailer < ApplicationMailer
   #
   def user_mention(post, user)
     @post, @user = post, user
-    mail to: user.email, subject: "You have benn mentioned in a post"
+    mail to: user.email, subject: "You have been mentioned in a post"
   end
 end
