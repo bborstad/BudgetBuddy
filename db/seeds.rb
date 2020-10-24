@@ -87,8 +87,8 @@ users.each do |u|
     groups = []
     # Build out groups for each budget
     groups.push(Group.create!(budget: b, name: "Income"))
-    groups.push(Group.create!(budget: b, name: Faker::Coffee.blend_name))
-    groups.push(Group.create!(budget: b, name: Faker::Hipster.word))
+    groups.push(Group.create!(budget: b, name: "Automobile and Travel"))
+    groups.push(Group.create!(budget: b, name: "Food and Groceries"))
     groups.push(Group.create!(budget: b, name: Faker::House.room))
     
     # Build out categories for each group
