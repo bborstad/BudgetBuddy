@@ -29,4 +29,18 @@ class Post < ApplicationRecord
     has_many :likes, dependent: :destroy
     has_rich_text :content
 
+    after_create :send_notifications
+    
+    def send_notifications
+        users = user_mentions - [user]
+        users.each do |user|
+            PostMailer.user_mention(user).deliver_now
+        end
+    end
+
+    def user_mentions
+        @users ||= content.body.attachments.select { |a| a.attachable.class == User }.map(&:attachable).uniq
+    end
+
+
 end

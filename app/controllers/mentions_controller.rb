@@ -6,4 +6,5 @@ class MentionsController < ApplicationController
             format.json
         end
     end
+
 end
