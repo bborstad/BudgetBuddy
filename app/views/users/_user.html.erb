@@ -1,0 +1,14 @@
+<%= link_to user, class: "mention" do %>
+
+
+    <% if user.avatar.attached?%>
+        <img class="rounded-circle" height= "20" width="20" <%=image_tag(user.avatar, size:40)%>
+    <% else %>
+        <img class="rounded-circle" height= "20" width="20" <%=image_tag("No_user.jpg", size:40)%>
+    <% end  %>
+    
+    <%= user.name %>
+    
+    
+
+<% end %>

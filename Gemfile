@@ -76,4 +76,8 @@ gem 'faker'
 #Trying this gem for charts
 gem 'chartkick'
 
+# Gemfile
+gem 'gravatar_image_tag'
+
+
 #

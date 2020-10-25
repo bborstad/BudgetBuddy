@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   end
   
   resources :socials
-
+  resources :mentions, only: [:index]
+  resources :mentioned_posts, only: [:index]
   resources :follows
   resources :accounts
   resources :goals

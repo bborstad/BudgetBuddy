@@ -73,4 +73,10 @@ class CalculateDebtsController < ApplicationController
     def calculate_debt_params
       params.require(:calculate_debt).permit(:principle, :rate, :monthly_payements, :compounds_per_year, :number_of_year, :email, :select)
     end
+
+    def require_permission
+      if CalculateDebt.find(params[:id]).user != current_user
+        redirect_to calculate_debts_url, flash: { error: "You do not have permission to do that."}
+      end
+    end
 end
