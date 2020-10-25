@@ -26,8 +26,6 @@
           <th>Number of year</th>
           <th>Total Paid </th>
           
-        <th>select</th>
-        <th></th>
       
     </tr>
   </thead>
@@ -43,7 +41,6 @@
                     <td><%= calculate_debt.compounds_per_year %></td>
                     <td><%= calculate_debt.number_of_year %></td>
                     <td><%= number_to_currency((calculate_debt.number_of_year*12*calculate_debt.monthly_payements)) %></td>
-                     <td><%= calculate_debt.select %></td>
 
         
           <td><%= link_to 'Show', calculate_debt %></td>

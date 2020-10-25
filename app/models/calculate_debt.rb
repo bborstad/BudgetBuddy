@@ -12,9 +12,20 @@
 #  select             :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  user_id            :bigint
+#
+# Indexes
+#
+#  index_calculate_debts_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
 #
 class CalculateDebt < ApplicationRecord
     before_save :select_action
+
+
     
     validates :principle, numericality: {greater_than_or_equal_to: 0}
     validates :monthly_payements, numericality: {greater_than_or_equal_to: 0}
@@ -23,7 +34,7 @@ class CalculateDebt < ApplicationRecord
     def select_action
        
         trate = self.rate * 0.01
-        
+
         if self.select == 2  #find monthly payments  ['select','Principle', 'Monthly Payements']
                 r_and_k = trate/self.compounds_per_year #r/k
                 r_and_k_plus = 1 + r_and_k #1 + r/k
