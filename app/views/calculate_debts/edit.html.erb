@@ -15,27 +15,36 @@
     <% end %>
   
     <div class="form-group">
-    <%= form.label :"What value would you like to re-calculate?" %>
-    <%= form.select(:select, options_for_select([ ['Principle',1], ['Monthly Payments',2] ]),{ :prompt => "Select one"}, :required => true)%>
-
+      <%= form.label :"What value would you like to re-calculate?" %>
+      <select name="calculate_debt[select]" id= "calculate_debt_select" onchange="yesnoCheck(this);" required>
+          <option disabled value="" selected hidden>Please Select</option>
+          <option value=2>Monthly Payments</option>
+          <option value=1 >Principle</option>
+      </select>  
    </div>
+    
+
 
      <div class="field-group">
         <%= form.hidden_field :email, :value => current_user.email, class: "form-control"%>
      </div>
   
-    <div class="form-group">
-      <%= form.label :"Principle (if select field choice was Principle don't touch, if Monthly Payments change)" %>
-      <%= form.text_field :principle, :value =>@calculate_debt.principle, class: 'form-control' %>
+    <div id="ifMonthly" style="display: none;">
+      <div class="form-group">
+        <%= form.label :"What is the amount of the loan?" %>
+        <%= form.text_field :principle,:value=>@calculate_debt.principle,class: 'form-control' %>
+      </div>
+    </div>
+
+    <div id="ifPrinciple" style="display: none;">
+      <div class="form-group">
+        <%= form.label :"How much do you pay per month?" %>
+        <%= form.text_field :monthly_payements,:value=>@calculate_debt.monthly_payements,class: 'form-control' %>
+      </div>
     </div>
   
     <div class="form-group">
-      <%= form.label :"Monthly Payments (if select field choice was Monthly Payments don't touch, if Principle change)" %>
-      <%= form.text_field :monthly_payements, :value =>@calculate_debt.monthly_payements, class: 'form-control' %>
-    </div>
-  
-    <div class="form-group">
-      <%= form.label :"Interest rate of the loan" %>
+      <%= form.label :"What is the interest rate of the loan?" %>
       <%= form.text_field :rate, :value =>@calculate_debt.rate, class: 'form-control', min:0, required:true %>
     </div>
   
@@ -46,7 +55,7 @@
     </div>
   
     <div class="form-group">
-      <%= form.label :Years_to_pay_off %>
+      <%= form.label :"In how many years would you like to pay this loan off?" %>
       <%= form.number_field :number_of_year, :value =>@calculate_debt.number_of_year, class: 'form-control', min:0,required:true %>
     </div>
   
@@ -68,4 +77,22 @@
     </div>
   <% end %>
   
-  
+  <script type="text/javascript">
+  function yesnoCheck(that) {
+      if (that.value == 1) {
+          document.getElementById("ifPrinciple").style.display = "block";
+          document.getElementById("ifMonthly").style.display = "none";
+
+      } else if (that.value == 2) {
+          document.getElementById("ifPrinciple").style.display = "none";
+          document.getElementById("ifMonthly").style.display = "block";
+
+      } else{
+        document.getElementById("ifPrinciple").style.display = "none";
+        document.getElementById("ifMonthly").style.display = "none";
+
+
+
+      }
+  }
+</script>
