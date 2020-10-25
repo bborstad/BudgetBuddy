@@ -2,12 +2,13 @@
 #
 # Table name: groups
 #
-#  id         :bigint           not null, primary key
-#  average    :float            default(0.0)
-#  name       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  budget_id  :bigint
+#  id             :bigint           not null, primary key
+#  average        :float            default(0.0)
+#  categories_sum :float            default(0.0)
+#  name           :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  budget_id      :bigint
 #
 # Indexes
 #
@@ -29,7 +30,7 @@ class Group < ApplicationRecord
         puts("STARTING TASK")
 
         ActiveRecord::Base.connection.execute("
-        UPDATE public.groups SET average = t.total_projected  
+        UPDATE public.groups SET categories_sum = t.total_projected  
         FROM  (	SELECT group_id, SUM(projected) as total_projected  
                 FROM public.categories  
                 GROUP BY group_id  ) AS t  
@@ -39,7 +40,7 @@ class Group < ApplicationRecord
 
         ActiveRecord::Base.connection.execute("
         UPDATE public.groups SET average = t.group_average
-        FROM (	SELECT groups.name, AVG(average) AS group_average
+        FROM (	SELECT groups.name, AVG(categories_sum) AS group_average
                                 FROM public.groups
                                 GROUP BY groups.name	) AS t
         WHERE groups.name = t.name; ")

@@ -2,12 +2,13 @@
 #
 # Table name: groups
 #
-#  id         :bigint           not null, primary key
-#  average    :float            default(0.0)
-#  name       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  budget_id  :bigint
+#  id             :bigint           not null, primary key
+#  average        :float            default(0.0)
+#  categories_sum :float            default(0.0)
+#  name           :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  budget_id      :bigint
 #
 # Indexes
 #
