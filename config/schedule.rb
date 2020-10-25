@@ -18,10 +18,9 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-
-ENV['RAILS_ENV'] = "development"
-
+set :environment, "development"
 set :output, 'log/whenever.log'
+
 every 1.minute  do
     rake "groups:update"
 end
