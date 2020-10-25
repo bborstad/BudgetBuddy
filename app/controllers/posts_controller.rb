@@ -16,6 +16,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
+    @goal = Goal.where(user_id:current_user)
     @post = Post.new
   end
 
