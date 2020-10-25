@@ -20,4 +20,6 @@
 #
 class Category < ApplicationRecord
     belongs_to :group
+
+    validates :actual, numericality: { less_than_or_equal_to: :projected }
 end

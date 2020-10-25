@@ -67,6 +67,7 @@
               <% end %>
               <td colspan="3"><%= link_to new_budget_group_category_path(@budget, group, @category) do%>+ Add
                 Category<% end %></td>
+              <td> <%= group.average %>
             </tbody>
           </table>
           <% end %>

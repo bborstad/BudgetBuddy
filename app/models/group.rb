@@ -23,4 +23,28 @@ class Group < ApplicationRecord
     has_many :categories, :dependent => :delete_all
 
     validates :name, presence: true
+
+
+    def self.update_average
+        puts("STARTING TASK")
+
+        ActiveRecord::Base.connection.execute("
+        UPDATE public.groups SET average = t.total_projected  
+        FROM  (	SELECT group_id, SUM(projected) as total_projected  
+                FROM public.categories  
+                GROUP BY group_id  ) AS t  
+        WHERE groups.id = t.group_id; ")
+
+        puts("FINISHED FIRST STEP")
+
+        ActiveRecord::Base.connection.execute("
+        UPDATE public.groups SET average = t.group_average
+        FROM (	SELECT groups.name, AVG(average) AS group_average
+                                FROM public.groups
+                                GROUP BY groups.name	) AS t
+        WHERE groups.name = t.name; ")
+
+        puts("FINISHED SECOND STEP")
+    end
+
 end

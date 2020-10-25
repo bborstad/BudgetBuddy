@@ -89,12 +89,12 @@ users.each do |u|
     groups.push(Group.create!(budget: b, name: "Income"))
     groups.push(Group.create!(budget: b, name: "Automobile and Travel"))
     groups.push(Group.create!(budget: b, name: "Food and Groceries"))
-    groups.push(Group.create!(budget: b, name: Faker::House.room))
+    groups.push(Group.create!(budget: b, name: "Insurance"))
     
     # Build out categories for each group
     groups.each do |g|
       2.times do
-        Category.create!(group: g, name: Faker::Hipster.word, projected: Faker::Number.between(from:0, to:199), actual: Faker::Number.between(from:199,to:200))
+        Category.create!(group: g, name: Faker::Hipster.word, actual: Faker::Number.between(from:0, to:199), projected: Faker::Number.between(from:199,to:200))
       end
     end  
   end
