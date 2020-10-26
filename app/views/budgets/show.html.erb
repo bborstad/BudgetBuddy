@@ -51,7 +51,7 @@
               </td>
               <td>Projected</td>
               <td>Actual</td>
-              <td>
+              <td style="color:#026877">
                 <% if ((group.categories_sum * 100 )/(group.average)) > 100 %>
                   <%= number_with_precision(((group.categories_sum * 100 )/(group.average)), :precision => 0) %>% above average
                 <% elsif ((group.categories_sum * 100 )/(group.average)) < 100 %>
