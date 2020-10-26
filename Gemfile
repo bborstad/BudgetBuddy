@@ -80,4 +80,8 @@ gem 'chartkick'
 gem 'gravatar_image_tag'
 
 
-#
+# Emojis
+gem 'gemoji'
+gem 'rails_emoji_picker'
+gem 'redis'
+

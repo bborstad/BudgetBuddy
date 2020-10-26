@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_25_230309) do
+ActiveRecord::Schema.define(version: 2020_10_26_181122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,16 @@ ActiveRecord::Schema.define(version: 2020_10_25_230309) do
     t.index ["group_id"], name: "index_categories_on_group_id"
   end
 
+  create_table "conversations", force: :cascade do |t|
+    t.integer "author_id"
+    t.integer "receiver_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id", "receiver_id"], name: "index_conversations_on_author_id_and_receiver_id", unique: true
+    t.index ["author_id"], name: "index_conversations_on_author_id"
+    t.index ["receiver_id"], name: "index_conversations_on_receiver_id"
+  end
+
   create_table "follows", force: :cascade do |t|
     t.bigint "requestor"
     t.bigint "following"
@@ -161,6 +171,16 @@ ActiveRecord::Schema.define(version: 2020_10_25_230309) do
     t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient_type_and_recipient_id"
   end
 
+  create_table "personal_messages", force: :cascade do |t|
+    t.text "body"
+    t.bigint "conversation_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["conversation_id"], name: "index_personal_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_personal_messages_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "attachment"
     t.text "content"
@@ -223,6 +243,8 @@ ActiveRecord::Schema.define(version: 2020_10_25_230309) do
   add_foreign_key "groups", "budgets"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "personal_messages", "conversations"
+  add_foreign_key "personal_messages", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "retirements", "users"
   add_foreign_key "services", "users"

@@ -31,6 +31,7 @@
                   <% elsif Follow.where(:requestor => user.id, :following =>current_user.id).present? %>
                   <h7><mark>Follows You</mark></h7>
                 <%end %>
+                  <%= user.name %> | <%= link_to 'send a message', new_personal_message_path(receiver_id: user) %>
                 </ul>
                <h3> <%= link_to 'View Profile', user %> </h3>
               </div>

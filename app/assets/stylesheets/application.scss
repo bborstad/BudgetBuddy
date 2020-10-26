@@ -79,3 +79,9 @@ trix-toolbar .button_groups {
 .trix-button-group.trix-button-group--text-tools { display: none !important; }
 .trix-button-group.trix-button-group--block-tools { display: none !important; }
 .trix-button-group.trix-button-group--history-tools { display: none !important; }
+
+#conversation-body {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 2em;
+}
