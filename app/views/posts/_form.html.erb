@@ -27,7 +27,7 @@
       <select name="post[attachid]" id= "post_attachid">
         <option disabled value="" selected hidden>Please Select</option>
         <% Goal.where(user_id:current_user).each do |goal| %>
-            <option value="<%= goal.id %>"><%= goal.title %></option>
+            <option value=<%= goal.id %> > Goal: <%= goal.title %></option>
         <% end %>
       </select>
   </div>

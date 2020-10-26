@@ -23,6 +23,7 @@
             <th>Content</th>
             <th></th>
             <th>Attach ID </th>
+            <th> attachtype </th>
 
             
           <th></th>
@@ -39,6 +40,7 @@
                       <td><%= post.content %></td>
                 <td><p><%= post.likes.count %> <%= (post.likes.count) == 1 ? 'Like' : 'Likes'%></p></td>
                       <td><%= post.attachid %></td>
+                      <td><%= post.attachtype %></td>
           
             <td><%= link_to 'Edit', edit_post_path(post) %></td>
 

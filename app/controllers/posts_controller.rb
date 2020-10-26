@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.where(user_id:current_user)
+    @posts = Post.where(user_id:current_user).order(created_at: :desc)
   end
 
   # GET /posts/1
@@ -74,11 +74,11 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:attachment, :content)
+      params.require(:post).permit(:attachment, :content, :attachid, :attachtype)
     end
 
     def mentioned_post_params
-      params.require(:mentioned_post).permit(:user_id, :post_id)
+      params.require(:mentioned_post).permit(:user_id, :post_id,)
     end
 
     def require_permission
