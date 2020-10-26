@@ -83,8 +83,6 @@ ActiveRecord::Schema.define(version: 2020_10_25_230309) do
     t.integer "select"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_calculate_debts_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -169,8 +167,8 @@ ActiveRecord::Schema.define(version: 2020_10_25_230309) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
-    t.integer "attachtype"
-    t.integer "attachid"
+    t.integer "attachtype", default: 0
+    t.integer "attachid", default: 0
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -219,7 +217,6 @@ ActiveRecord::Schema.define(version: 2020_10_25_230309) do
   add_foreign_key "accounts", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "budgets", "users"
-  add_foreign_key "calculate_debts", "users"
   add_foreign_key "categories", "groups"
   add_foreign_key "follows", "users"
   add_foreign_key "goals", "users"

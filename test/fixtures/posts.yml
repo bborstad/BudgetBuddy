@@ -3,9 +3,9 @@
 # Table name: posts
 #
 #  id         :bigint           not null, primary key
-#  attachid   :integer
+#  attachid   :integer          default(0)
 #  attachment :string
-#  attachtype :integer
+#  attachtype :integer          default(0)
 #  content    :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
