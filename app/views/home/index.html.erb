@@ -130,81 +130,166 @@
 
                 <!--- \\\\\\\Post-->
                 <% @posts.each do |post| %>
-                <div class="card gedf-card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex justify-content-between align-items-center">
-                            <div class="mr-2">
-                            <% if post.user.avatar.attached?%>
-                                <img class="rounded-circle" height= "45" width="45" <%=image_tag(post.user.avatar)%>
-                            <% else %>
-                                <img class="rounded-circle" height= "45" width="45" <%=image_tag("No_user.jpg")%>
-                            <% end  %>
-                                </div>
-                                <div class="ml-2">
-                                    <div class="h5 m-0"><%= post.try(:user).try(:first_name) %> <%= post.try(:user).try(:last_name) %></div>
-                                    <div class="h7 text-muted"><%= post.try(:user).try(:email) %></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="dropdown">
-                                    <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-ellipsis-h"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                        <div class="h6 dropdown-header">Configuration</div>
-                                        <a class="dropdown-item" href="#">Save</a>
-                                        <a class="dropdown-item" href="#">Hide</a>
-                                        <a class="dropdown-item" href="#">Report</a>
+                    <% if post.attachtype == 0 %>
+
+                        <div class="card gedf-card">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-2">
+                                    <% if post.user.avatar.attached?%>
+                                        <img class="rounded-circle" height= "45" width="45" <%=image_tag(post.user.avatar)%>
+                                    <% else %>
+                                        <img class="rounded-circle" height= "45" width="45" <%=image_tag("No_user.jpg")%>
+                                    <% end  %>
+                                        </div>
+                                        <div class="ml-2">
+                                            <div class="h5 m-0"><%= post.try(:user).try(:first_name) %> <%= post.try(:user).try(:last_name) %></div>
+                                            <div class="h7 text-muted"><%= post.try(:user).try(:email) %></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="dropdown">
+                                            <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-ellipsis-h"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                                <div class="h6 dropdown-header">Configuration</div>
+                                                <a class="dropdown-item" href="#">Save</a>
+                                                <a class="dropdown-item" href="#">Hide</a>
+                                                <a class="dropdown-item" href="#">Report</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
+                            </div>
+                            <div class="card-body">
+
+                                <p class="card-text">
+                                    <dd><%= post.content %></dd>
+                                </p>
+                            </div>
+                            <div class="card-footer" >
+                            <!-- Button to like a post -->
+                            <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
+                            <% has_like =  post.likes.count %>
+
+                            <% if pre_like %>
+                                <%= link_to post.likes.count, post_like_path(post, pre_like), method: :delete, class: "card-link", class: "fa fa-gittip" %>
+                            <% elsif has_like != 0  %>
+                                <%= link_to post.likes.count, post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
+                            <% else %>
+                                <%= link_to 'Like', post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
+                            <% end %>
+
+
+                        <!-- 
+                        Removed this becasue I redid the button without the hyperlink anchor
+
+                            <a href="#" class="card-link"><i class="fa fa-gittip"></i>
+                                <% if post.likes.count == 0 %>
+                                Like
+                                <% else %>
+                                    <%= post.likes.count %>
+                                <% end %>
+                            </a>
+                        -->
+
+                                <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                                <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                                <div style="display: flex; justify-content: flex-end">
+                                    <class="text-muted h7 mb-2"> <i class="fa fa-clock-o "> </i><%= time_ago_in_words(post.created_at) %>
+                                </div>
+                                
+
                             </div>
                         </div>
+                        <!-- Post /////-->
+                        <br>
+                    <% elsif post.attachtype == 1 %>
+                        <div class="card gedf-card">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-2">
+                                    <% if post.user.avatar.attached?%>
+                                        <img class="rounded-circle" height= "45" width="45" <%=image_tag(post.user.avatar)%>
+                                    <% else %>
+                                        <img class="rounded-circle" height= "45" width="45" <%=image_tag("No_user.jpg")%>
+                                    <% end  %>
+                                        </div>
+                                        <div class="ml-2">
+                                            <div class="h5 m-0"><%= post.try(:user).try(:first_name) %> <%= post.try(:user).try(:last_name) %></div>
+                                            <div class="h7 text-muted"><%= post.try(:user).try(:email) %></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="dropdown">
+                                            <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-ellipsis-h"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                                <div class="h6 dropdown-header">Configuration</div>
+                                                <a class="dropdown-item" href="#">Save</a>
+                                                <a class="dropdown-item" href="#">Hide</a>
+                                                <a class="dropdown-item" href="#">Report</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                    </div>
-                    <div class="card-body">
+                            </div>
+                            <div class="card-body">
 
-                        <p class="card-text">
-                            <dd><%= post.content %></dd>
-                        </p>
-                    </div>
-                    <div class="card-footer" >
-                    <!-- Button to like a post -->
-                    <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
-                    <% has_like =  post.likes.count %>
-
-                    <% if pre_like %>
-                        <%= link_to post.likes.count, post_like_path(post, pre_like), method: :delete, class: "card-link", class: "fa fa-gittip" %>
-                    <% elsif has_like != 0  %>
-                        <%= link_to post.likes.count, post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
-                    <% else %>
-                        <%= link_to 'Like', post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
-                    <% end %>
+                                <p class="card-text">
+                                    <dd><%= post.content %></dd>
+                                </p>
+                                    <dd><%= Goal.where(id:post.attachid).pluck(:title) %></dd>
 
 
-                <!-- 
-                Removed this becasue I redid the button without the hyperlink anchor
+                                
+                            </div>
+                            <div class="card-footer" >
+                            <!-- Button to like a post -->
+                            <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
+                            <% has_like =  post.likes.count %>
 
-                    <a href="#" class="card-link"><i class="fa fa-gittip"></i>
-                        <% if post.likes.count == 0 %>
-                           Like
-                        <% else %>
-                            <%= post.likes.count %>
-                        <% end %>
-                    </a>
-                -->
+                            <% if pre_like %>
+                                <%= link_to post.likes.count, post_like_path(post, pre_like), method: :delete, class: "card-link", class: "fa fa-gittip" %>
+                            <% elsif has_like != 0  %>
+                                <%= link_to post.likes.count, post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
+                            <% else %>
+                                <%= link_to 'Like', post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
+                            <% end %>
 
-                        <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-                        <div style="display: flex; justify-content: flex-end">
-                            <class="text-muted h7 mb-2"> <i class="fa fa-clock-o "> </i><%= time_ago_in_words(post.created_at) %>
+
+                        <!-- 
+                        Removed this becasue I redid the button without the hyperlink anchor
+
+                            <a href="#" class="card-link"><i class="fa fa-gittip"></i>
+                                <% if post.likes.count == 0 %>
+                                Like
+                                <% else %>
+                                    <%= post.likes.count %>
+                                <% end %>
+                            </a>
+                        -->
+
+                                <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                                <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                                <div style="display: flex; justify-content: flex-end">
+                                    <class="text-muted h7 mb-2"> <i class="fa fa-clock-o "> </i><%= time_ago_in_words(post.created_at) %>
+                                </div>
+                                
+
+                            </div>
                         </div>
+                        <!-- Post /////-->
+                        <br>
                         
 
-                    </div>
-                </div>
-                <!-- Post /////-->
-                <br>
+                    <% end %>
                 <% end %>
 
                
