@@ -143,10 +143,13 @@
                                         <img class="rounded-circle" height= "45" width="45" <%=image_tag("No_user.jpg")%>
                                     <% end  %>
                                         </div>
-                                        <div class="ml-2">
-                                            <div class="h5 m-0"><%= post.try(:user).try(:first_name) %> <%= post.try(:user).try(:last_name) %></div>
-                                            <div class="h7 text-muted"><%= post.try(:user).try(:email) %></div>
-                                        </div>
+                                        <%=link_to  user_path(post.user), :action => 'go' do %>
+                                            <div class="ml-2">
+                                                <div class="h5 m-0"><%= post.try(:user).try(:first_name) %> <%= post.try(:user).try(:last_name) %></div>
+                                                <div class="h7 text-muted"><%= post.try(:user).try(:email) %></div>
+                                            </div>
+                                        <% end  %>
+
                                     </div>
                                     <div>
                                         <div class="dropdown">
@@ -219,10 +222,13 @@
                                         <img class="rounded-circle" height= "45" width="45" <%=image_tag("No_user.jpg")%>
                                     <% end  %>
                                         </div>
-                                        <div class="ml-2">
-                                            <div class="h5 m-0"><%= post.try(:user).try(:first_name) %> <%= post.try(:user).try(:last_name) %></div>
-                                            <div class="h7 text-muted"><%= post.try(:user).try(:email) %></div>
-                                        </div>
+                                        <%=link_to  user_path(post.user), :action => 'go' do %>
+                                            <div class="ml-2">
+                                                <div class="h5 m-0"><%= post.try(:user).try(:first_name) %> <%= post.try(:user).try(:last_name) %></div>
+                                                <div class="h7 text-muted"><%= post.try(:user).try(:email) %></div>
+                                            </div>
+                                        <% end %>
+
                                     </div>
                                     <div>
                                         <div class="dropdown">
@@ -263,9 +269,9 @@
                                     </div>
                                 <% end %>
                                 <br>
-                                 <%= link_to (image_tag ("info.png") ), goal_path(id: post.attachid) %>
-                                <% if @user.id == current_user.id %>
-                                    <%= link_to (image_tag ("plus.png") ), edit_goal_path(id: post.attachid) %>
+                                 <%= link_to (image_tag ("info.png"), size:40 ), goal_path(id: post.attachid) %>
+                                <% if @post.user_id == current_user.id %>
+                                    <%= link_to (image_tag ("plus.png"), size:40 ), edit_goal_path(id: post.attachid) %>
                                 <% end %>
 
 
