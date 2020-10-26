@@ -14,6 +14,7 @@ require("sidebarCollapse")
 require("trix")
 require("@rails/actiontext")
 //= require conversations
+require("conversations")
 
 
 window.Rails = Rails

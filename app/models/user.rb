@@ -95,5 +95,5 @@ class User < ApplicationRecord
 end
 
 def name
-  email.split('@')[0]
+  self.name
 end
