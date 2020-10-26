@@ -15,6 +15,8 @@ require("trix")
 require("@rails/actiontext")
 //= require conversations
 require("conversations")
+//= require cable
+
 
 
 window.Rails = Rails
