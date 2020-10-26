@@ -87,8 +87,8 @@ users.each do |u|
     groups = []
     # Build out groups for each budget
     groups.push(Group.create!(budget: b, name: "Income"))
-    groups.push(Group.create!(budget: b, name: "Automobile and Travel"))
-    groups.push(Group.create!(budget: b, name: "Food and Groceries"))
+    groups.push(Group.create!(budget: b, name: "Auto & Transportation"))
+    groups.push(Group.create!(budget: b, name: "Food & Dining"))
     groups.push(Group.create!(budget: b, name: "Insurance"))
     
     # Build out categories for each group

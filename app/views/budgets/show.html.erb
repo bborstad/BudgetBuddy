@@ -57,7 +57,7 @@
                 <% elsif ((group.categories_sum * 100 )/(group.average)) < 100 %>
                   <%= number_with_precision(((group.categories_sum * 100 )/(group.average)), :precision => 0) %>% below average
                 <% else %>
-                  You are average
+                  At average
                 <% end %>
                 
               </td>
