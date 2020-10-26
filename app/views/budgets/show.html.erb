@@ -52,10 +52,12 @@
               <td>Projected</td>
               <td>Actual</td>
               <td style="color:#026877">
-                <% if ((group.categories_sum * 100 )/(group.average)) > 100 %>
-                  <%= number_with_precision(((group.categories_sum * 100 )/(group.average)), :precision => 0) %>% above average
-                <% elsif ((group.categories_sum * 100 )/(group.average)) < 100 %>
-                  <%= number_with_precision(((group.categories_sum * 100 )/(group.average)), :precision => 0) %>% below average
+                <% if ((group.categories_sum * 100 )/(group.average) - 100) > 1 %>
+                  <%= number_with_precision(((group.categories_sum * 100 )/(group.average) - 100), :precision => 0) %>% above average
+
+                <% elsif (100 - (group.categories_sum * 100 )/(group.average)) < -1 %>
+                  <%= number_with_precision((100 - (group.categories_sum * 100 )/(group.average)), :precision => 0) %>% below average
+                  
                 <% else %>
                   At average
                 <% end %>
