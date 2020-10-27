@@ -23,4 +23,7 @@ module ApplicationHelper
       "#{base_url}/00000000000000000000000000000000#{base_url_params}"
     end
   end
+  def online_status(user)
+    content_tag :span, user.name, class: "user-#{user.id} online_status #{'online' if user.online?}"
+  end
 end

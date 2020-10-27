@@ -97,3 +97,6 @@ end
 def name
   self.name
 end
+def online?
+  !Redis.new.get("user_#{self.id}_online").nil?
+end
