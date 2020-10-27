@@ -19,8 +19,10 @@ Rails.application.routes.draw do
   resources :accounts
   resources :goals
   resources :retirements
+  
   resources :personal_messages, only: [:new, :create]
   resources :conversations, only: [:index, :show]
+  mount ActionCable.server => '/cable'
 
   get '/users', to: 'users#index'
   get '/user/:id', to: 'users#show', as: 'user'

@@ -15,6 +15,11 @@ require("trix")
 require("@rails/actiontext")
 //= require conversations
 require("conversations")
+//= require cable
+//= require jquery
+//= require jquery_ujs
+//= require cable
+//= require turbolinks
 
 
 window.Rails = Rails

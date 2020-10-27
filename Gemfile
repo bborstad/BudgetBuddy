@@ -72,6 +72,7 @@ gem 'whenever', require: false
 gem 'image_processing'
 gem 'annotate', group: :development
 gem 'faker'
+gem 'redis-rails'
 
 #Trying this gem for charts
 gem 'chartkick'
