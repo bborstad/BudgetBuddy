@@ -92,8 +92,14 @@ class User < ApplicationRecord
   def to_trix_content_attachment_partial_path
     to_partial_path
   end
-end
 
-def name
-  self.name
+
+  def name
+    email.split('@')[0]
+  end
+
+  def online?
+    !Redis.new.get("user_#{self.id}_online").nil?
+  end
+
 end
