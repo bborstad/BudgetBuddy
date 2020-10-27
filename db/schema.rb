@@ -146,8 +146,6 @@ ActiveRecord::Schema.define(version: 2020_10_27_043911) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
-    t.float "average", default: 0.0
-    t.float "categories_sum", default: 0.0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "budget_id"
