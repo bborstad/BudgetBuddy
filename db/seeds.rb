@@ -70,7 +70,6 @@ end
 
 # Generating data for each user.
 users.each do |u|
-  # ATTENTION: comment out the avatar creation for a faster seed time.
   u.avatar.attach({
      io: image_fetcher,
      filename: "#{u}_faker_image.jpg"
@@ -87,14 +86,14 @@ users.each do |u|
     groups = []
     # Build out groups for each budget
     groups.push(Group.create!(budget: b, name: "Income"))
-    groups.push(Group.create!(budget: b, name: Faker::Coffee.blend_name))
-    groups.push(Group.create!(budget: b, name: Faker::Hipster.word))
-    groups.push(Group.create!(budget: b, name: Faker::House.room))
+    groups.push(Group.create!(budget: b, name: "Auto & Transportation"))
+    groups.push(Group.create!(budget: b, name: "Food & Dining"))
+    groups.push(Group.create!(budget: b, name: "Insurance"))
     
     # Build out categories for each group
     groups.each do |g|
       2.times do
-        Category.create!(group: g, name: Faker::Hipster.word, projected: Faker::Number.between(from:0, to:199), actual: Faker::Number.between(from:199,to:200))
+        Category.create!(group: g, name: Faker::Hipster.word, actual: Faker::Number.between(from:0, to:199), projected: Faker::Number.between(from:199,to:2000))
       end
     end  
   end

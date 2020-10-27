@@ -17,7 +17,7 @@
 
 <div class="container-fluid gedf-wrapper">
   <div class="row">
-    <div class="card gedf-card; col-md-8">
+    <div class="card gedf-card; col-md-12">
       <div class="navigation; wrap">
         <div class="left"><%= link_to @budget.previous, class: 'btn btn-info btn-block' do %>Previous<% end %></div>
         <div class="center">
@@ -36,8 +36,10 @@
           <table class="table table-hover; width: 100%">
             <colgroup>
               <col span="1" style="width: 50%;">
-              <col span="1" style="width: 25%;">
-              <col span="1" style="width: 25%;">
+              <col span="1" style="width: 15%;">
+              <col span="1" style="width: 15%;">
+              <col span="1" style="width: 20%;">
+              
             </colgroup>
             <tr style="border-bottom: 3px solid #17A2B8; border-top: 0px; font-weight:bold; color: rgb(71, 73, 73);">
               <td>
@@ -49,6 +51,18 @@
               </td>
               <td>Projected</td>
               <td>Actual</td>
+              <td style="color:#026877">
+                <% if ((group.categories_sum * 100 )/(group.average) - 100) > 1 %>
+                  <%= number_with_precision(((group.categories_sum * 100 )/(group.average) - 100), :precision => 0) %>% above average
+
+                <% elsif (100 - (group.categories_sum * 100 )/(group.average)) < -1 %>
+                  <%= number_with_precision((100 - (group.categories_sum * 100 )/(group.average)), :precision => 0) %>% below average
+                  
+                <% else %>
+                  At average
+                <% end %>
+                
+              </td>
             </tr>
 
             <tbody>
@@ -67,6 +81,7 @@
               <% end %>
               <td colspan="3"><%= link_to new_budget_group_category_path(@budget, group, @category) do%>+ Add
                 Category<% end %></td>
+              
             </tbody>
           </table>
           <% end %>
@@ -80,7 +95,7 @@
       </div>
     </div>
 
-    <div class="card gedf-card; col-md-3">
+    <div class="card gedf-card; col-md-6">
       <div class="card-header">
         <h3 style="text-align:center">Spending</h3>
       </div>
