@@ -16,10 +16,10 @@
 
   <div class="form-group">
   <%= form.label :"What would you like to calculate?" %>
-  <select name="select" onchange="yesnoCheck(this);" required>
+  <select name="calculate_debt[select]" id= "calculate_debt_select" onchange="yesnoCheck(this);" required>
     <option disabled value="" selected hidden>Please Select</option>
-    <option value="Monthly Payments">Monthly Payments</option>
-    <option value="Principle">Principle</option>
+    <option value=2>Monthly Payments</option>
+    <option value=1 >Principle</option>
   </select>
 </div>
 
@@ -41,7 +41,7 @@
 
   <div class="form-group">
     <%= form.label :"What is the interest rate of the loan?" %>
-    <%= form.text_field :rate, placeholder: "0.00", class: 'form-control', required:true %>
+    <%= form.text_field :rate, placeholder: "0.00%", class: 'form-control', required:true %>
   </div>
 
   <div class="field-group">
@@ -80,11 +80,11 @@
 
 <script type="text/javascript">
   function yesnoCheck(that) {
-      if (that.value == "Principle") {
+      if (that.value == 1) {
           document.getElementById("ifPrinciple").style.display = "block";
           document.getElementById("ifMonthly").style.display = "none";
 
-      } else if (that.value == "Monthly Payments") {
+      } else if (that.value == 2) {
           document.getElementById("ifPrinciple").style.display = "none";
           document.getElementById("ifMonthly").style.display = "block";
 

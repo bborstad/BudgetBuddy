@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.where(user_id:current_user)
+    @posts = Post.where(user_id:current_user).order(created_at: :desc)
   end
 
   # GET /posts/1
@@ -16,6 +16,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
+    @goal = Goal.where(user_id:current_user)
     @post = Post.new
   end
 
@@ -27,9 +28,11 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = current_user.posts.new(post_params)
+    @mentioned_post = MentionedPost.new(params[:mentioned_post])
+    @mentioned_post.save
 
     respond_to do |format|
-      if @post.save
+      if @post.save 
         format.html { redirect_back fallback_location: root_path, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
@@ -71,7 +74,11 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:attachment, :content)
+      params.require(:post).permit(:attachment, :content, :attachid, :attachtype)
+    end
+
+    def mentioned_post_params
+      params.require(:mentioned_post).permit(:user_id, :post_id,)
     end
 
     def require_permission

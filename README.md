@@ -7,6 +7,7 @@
 * Bob:
 	- Email: bob@email.com
 	- Password: password
+* Any user can be accessed by retrieving their email from the Users page and login in as that user. The password will be <code>password</code>
 
 **Running the app:**
 1. Clone repository
@@ -20,10 +21,12 @@
 6. Run <code>rails s</code> to launch app
 7. Open a browser, and go to http://localhost:3000/
 8. Log in to Alice's account using the top navbar.
-	
-**N.B.** This app is built on Ruby 6.
 
-**N.B.** The instructions above are designed to run within Ubuntu on Windows. If you don't have this installed, we can provide a demo on one of our machines.
+	
+
+The instructions above are designed to run within Ubuntu on Windows. If you don't have this installed, we can provide a demo on one of our machines.
 
 Please let us know if you have any questions.
 ** ** 
+
+**Edit**

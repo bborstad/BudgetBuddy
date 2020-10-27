@@ -21,6 +21,7 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
+  include ActionText::Attachable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :masqueradable, :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :omniauthable
@@ -79,5 +80,12 @@ class User < ApplicationRecord
     inverse_of: :user,
     dependent: :destroy
   )
+
+
+
+
+  def to_trix_content_attachment_partial_path
+    to_partial_path
+  end
 end
 
