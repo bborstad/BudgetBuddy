@@ -200,8 +200,13 @@
                         -->
 
                         
+                        <%= link_to "Show Page", post_path(post)%>
 
-                                <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                                <a href= ' # ' class="card-link"><i class="fa fa-comment"></i> Comment</a>
+
+
+
+
                                 <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
                                 <div style="display: flex; justify-content: flex-end">
                                     <class="text-muted h7 mb-2"> <i class="fa fa-clock-o "> </i><%= time_ago_in_words(post.created_at) %>
