@@ -1,7 +1,10 @@
 <% @comments.each do |comment| %>
 
+    <p><%= comment.user.name %></p>
     <p> <%= comment.content %> </p>
-
+    <%= link_to "Delete", [comment.post,comment], method: :delete %>
+    <%= link_to "Edit", edit_post_comment_path(comment.post, comment)%>
+    
 
 <% end %>
 
