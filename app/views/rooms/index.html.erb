@@ -5,37 +5,39 @@
   <div class="row">
     <div class="col-3 rooms-sidebar">
       <div class="card no-outline">
-        <div class="card-body">
-          <small>Logged in as</small><br>
-          <b><%= current_user.name %><br></b>
-        </div>
+        
       </div>
+          <b>Direct Messages<br></b>
+
       <hr>
       <%= render 'form', room: Room.new %>
       <hr>
-      <% @rooms.order(updated_at: :desc).each do |room| %>
-        <%= link_to room, class: 'room-link' do %>
-          <% active_class = (@room == room) ? 'active' : '' %>
-          <div class="card no-outline mb-2 room-card <%= active_class %>">
-            <div class="card-body">
-              <span class='name'>
-                <% if room.user1 == current_user.id %>
-                  <%= User.find_by(id: room.user2).first_name%>
-                <% elsif room.user2 == current_user.id%>
-                  <%= User.find_by(id: room.user1).first_name%>
-                <% else %>
-                  No User
-                <% end%>
-              
-              
-              </span><br>
-              <span class='member-count'>
-                <small><%= room.users.uniq.count %> Members</small>
-              </span>
+      <div class= "rooms-render" >
+        <% @rooms.where(user1:current_user.id).or(@rooms.where(user2:current_user.id)).order(updated_at: :desc).each do |room| %>
+          <%= link_to room, class: 'room-link' do %>
+            <% active_class = (@room == room) ? 'active' : '' %>
+            <div class="card no-outline mb-2 room-card <%= active_class %>">
+              <div class="card-body">
+                <span class='name'>
+                  <% if room.user1 == current_user.id %>
+                    <%= User.find_by(id: room.user2).first_name%>
+                  <% elsif room.user2 == current_user.id%>
+                    <%= User.find_by(id: room.user1).first_name%>
+                  <% else %>
+                    No User
+                  <% end%>
+                
+                
+                </span><br>
+                <span class='member-count'>
+                  <small><%= room.users.uniq.count %> Active</small>
+                </span>
+              </div>
             </div>
-          </div>
+          <% end %>
         <% end %>
-      <% end %>
+            </div>
+
     </div>
     <div class="col-9">
       <% if @room.present? %>

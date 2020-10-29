@@ -11,7 +11,7 @@ body {
   }
   
   .chat-room {
-    height: 100vh;
+    height: 80vh;
   
     #messages {
       height: 100%;
@@ -106,4 +106,13 @@ body {
   
   .rooms-sidebar {
     border-right: 1px solid #eeeeee;
+    max-height: 800px;
+    .rooms-render{
+      max-height: 550px;
+      overflow-y: auto;
+  
+    }
   }
+  
+
+

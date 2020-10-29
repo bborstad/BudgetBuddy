@@ -58,7 +58,7 @@
   <% if current_page?(rooms_path) || params[:controller] == 'rooms' && params[:action] == 'show' %>
   <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Direct Messages</p>
       <ul class="nav flex-column bg-white mb-0 ">
-      <% @rooms.limit(6).order(updated_at: :desc).each do |room| %>
+      <% @rooms.where(user1:current_user.id).or(@rooms.where(user2:current_user.id)).limit(6).order(updated_at: :desc).each do |room| %>
           <li class="nav-item">
             <a href="<%= room_path(room.id) %>" class="nav-link text-dark font-italic">
               <i class=" fas fa-reply mr-3 text-primary fa-fw"></i>
