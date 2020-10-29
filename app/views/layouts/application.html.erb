@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Main</p>
+  <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Direct Messages</p>
 
   <ul class="nav flex-column bg-white mb-0 ">
     <li class="nav-item">
@@ -37,7 +37,7 @@
             </a>
     </li>
     <li class="nav-item">
-      <a href="#" class="nav-link text-dark font-italic">
+      <a href="<%= rooms_path %>" class="nav-link text-dark font-italic">
                 <i class="fa fa-inbox mr-3 text-primary fa-fw"></i>
                 Messages
             </a>
@@ -55,6 +55,18 @@
             </a>
     </li>
   </ul>
+  <% if current_page?(rooms_path) || params[:controller] == 'rooms' && params[:action] == 'show' %>
+  <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Direct Messages</p>
+      <ul class="nav flex-column bg-white mb-0 ">
+          <li class="nav-item">
+            <a href="<%= root_path %>" class="nav-link text-dark font-italic">
+                      <i class="fa fa-home mr-3 text-primary fa-fw"></i>
+                      Social Home
+                  </a>
+          </li>
+     
+        </ul>
+        <% end %>
 
   
 </div>

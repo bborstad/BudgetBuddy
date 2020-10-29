@@ -8,6 +8,7 @@
 @import "bootstrap";
 @import "jumpstart/sticky-footer";
 @import "jumpstart/announcements";
+@import "trixs";
 
 // Fixes bootstrap nav-brand container overlap
 @include media-breakpoint-down(xs) {
@@ -36,46 +37,3 @@ body > .alert {
   padding: 0;
 }
 
-// Tribute styles
-.tribute-container {
-  border-radius: 4px;
-  border: 1px solid rgba(0,0,0,0.1);
-  box-shadow: 0 0 4px rgba(0,0,0,0.1), 0 5px 20px rgba(0,0,0,0.05);
-
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  li {
-    background: #fff;
-    padding: 0.2em 1em;
-    min-width: 15em;
-    max-width: 100%;
-  }
-
-  .highlight {
-    background: #1b6ac9;
-    color: #fff;
-
-    span {
-      font-weight: bold;
-    }
-  }
-}
-trix-toolbar .button_groups {
-  button.code {
-    display: none;
-  }
-  button.increase {
-    display: none;
-  }
-  button.decrease {
-    display: none;
-  }
-}
-.trix-button-group--file-tools { display: none !important; }
-.trix-button-group.trix-button-group--text-tools { display: none !important; }
-.trix-button-group.trix-button-group--block-tools { display: none !important; }
-.trix-button-group.trix-button-group--history-tools { display: none !important; }
