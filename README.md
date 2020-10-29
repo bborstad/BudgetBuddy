@@ -12,6 +12,10 @@
 **Running the app:**
 1. Clone repository
 2. You will need postgresql. Make sure it is running (<code>sudo service posgresql start</code> and <code>sudo service postgresql status</code>)
+	- Also if you don't have redis-server Here ae the steps
+		- sudo apt install redis-server
+		- sudo service redis-server start (start the server)
+		- service --status-all (check and see if its up and running)
 3. Run <code>bundle install && yarn install</code>
 4. Run <code>rails db:migrate:reset db:seed</code>
 5. Run <code>crontab -l</code> and see if a task called groups:update is in the crontab. This task is responsible for updating the budget comparisons.
