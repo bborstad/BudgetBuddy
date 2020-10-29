@@ -13,7 +13,7 @@
 
   <div class="form-group mb-3">
     <%= form.label "Select New User to Message" %>
-    <select name="room[user2]" id= "room_user2" required>
+    <select class="custom-select"  name="room[user2]" id= "room_user2" required >
       <option disabled value="" selected hidden>Please Select</option>
       <% User.where.not(id:current_user.id).each do |user| %>
           <option value=<%= user.id %> >  <%= user.name %></option>
