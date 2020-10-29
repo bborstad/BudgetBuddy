@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
     before_action :comment_owner, only: [:destroy, :edit, :update]
 
     def create 
+       
         @comment = @post.comments.create(params[:comment].permit(:content))
         @comment.user_id = current_user.id
         @comment.save

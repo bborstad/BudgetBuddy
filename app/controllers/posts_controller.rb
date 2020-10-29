@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.where(user_id:current_user).order(created_at: :desc)
+
   end
 
   # GET /posts/1
@@ -89,4 +90,6 @@ class PostsController < ApplicationController
         redirect_to posts_url, flash: { error: "You do not have permission to do that."}
       end
     end
+
+    
 end

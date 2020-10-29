@@ -174,33 +174,33 @@
                                 </p>
                             </div>
                             <div class="card-footer" >
-                            <!-- Button to like a post -->
-                            <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
-                            <% has_like =  post.likes.count %>
+                                <!-- Button to like a post -->
+                                <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
+                                <% has_like =  post.likes.count %>
 
-                            <% if pre_like %>
-                                <%= link_to post.likes.count, post_like_path(post, pre_like), method: :delete, class: "card-link", class: "fa fa-gittip" %>
-                            <% elsif has_like != 0  %>
-                                <%= link_to post.likes.count, post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
-                            <% else %>
-                                <%= link_to 'Like', post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
-                            <% end %>
-
-
-                        <!-- 
-                        Removed this becasue I redid the button without the hyperlink anchor
-
-                            <a href="#" class="card-link"><i class="fa fa-gittip"></i>
-                                <% if post.likes.count == 0 %>
-                                Like
+                                <% if pre_like %>
+                                    <%= link_to post.likes.count, post_like_path(post, pre_like), method: :delete, class: "card-link", class: "fa fa-gittip" %>
+                                <% elsif has_like != 0  %>
+                                    <%= link_to post.likes.count, post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
                                 <% else %>
-                                    <%= post.likes.count %>
+                                    <%= link_to 'Like', post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
                                 <% end %>
-                            </a>
-                        -->
 
-                        
-                        <%= link_to "Show Page", post_path(post)%>
+
+                                        <!-- 
+                                        Removed this becasue I redid the button without the hyperlink anchor
+
+                                            <a href="#" class="card-link"><i class="fa fa-gittip"></i>
+                                                <% if post.likes.count == 0 %>
+                                                Like
+                                                <% else %>
+                                                    <%= post.likes.count %>
+                                                <% end %>
+                                            </a>
+                                        -->
+
+                                <!--  Tempoary link to show page in order to create comments  -->
+                                <%= link_to "Show Page", post_path(post)%>
 
                                 <a href= ' # ' class="card-link"><i class="fa fa-comment"></i> Comment</a>
 
@@ -212,9 +212,29 @@
                                     <class="text-muted h7 mb-2"> <i class="fa fa-clock-o "> </i><%= time_ago_in_words(post.created_at) %>
                                 </div>
                                 
-
+                                
                             </div>
+
+                        <!-- Comments //// -->
+                            <div class="card-body">
+                                    <p>This post has <%= post.comments.count%> comments</p>
+                                    <% post.comments.each do |comment| %>
+
+                                        <p><b><%= comment.user.name %></b> -  <%= comment.content %> </p>
+                                    
+                                    
+                                        <% if current_user == comment.user %>
+                                            <%= link_to "Delete", [comment.post,comment], method: :delete %>
+                                            <%= link_to "Edit", edit_post_comment_path(comment.post, comment)%>
+                                        <% end %>
+                                    
+                                    <% end %>
+                            </div>
+                        <!-- End Comments /// -->    
+
                         </div>
+
+
                         <!-- Post /////-->
                         <br>
                     <% elsif post.attachtype == 1 %>
@@ -309,7 +329,9 @@
                                 <% end %>
                             </a>
                         -->
-
+                                <!--  Tempoary link to show page in order to create comments  -->
+                                <%= link_to "Show Page", post_path(post)%>
+                                
                                 <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
                                 <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
                                 <div style="display: flex; justify-content: flex-end">
@@ -318,6 +340,23 @@
                                 
 
                             </div>
+                        <!-- Comments //// -->
+                            <div class="card-body">
+                                    <p>This post has <%= post.comments.count%> comments</p>
+                                    <% post.comments.each do |comment| %>
+
+                                        <p><b><%= comment.user.name %></b> -  <%= comment.content %> </p>
+                                    
+                                    
+                                        <% if current_user == comment.user %>
+                                            <%= link_to "Delete", [comment.post,comment], method: :delete %>
+                                            <%= link_to "Edit", edit_post_comment_path(comment.post, comment)%>
+                                        <% end %>
+                                    
+                                    <% end %>
+                            </div>
+                        <!-- End Comments /// -->   
+                        
                         </div>
                         <!-- Post /////-->
                         <br>

@@ -81,7 +81,7 @@ class User < ApplicationRecord
     dependent: :destroy
   )
 
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   def to_trix_content_attachment_partial_path
     to_partial_path
