@@ -17,7 +17,7 @@
 
 <div class="container-fluid gedf-wrapper">
   <div class="row">
-    <div class="card gedf-card; col-md-12">
+    <div class="card gedf-card; col-md-9">
       <div class="navigation; wrap">
         <div class="left"><%= link_to @budget.previous, class: 'btn btn-info btn-block' do %>Previous<% end %></div>
         <div class="center">
@@ -39,32 +39,32 @@
               <col span="1" style="width: 15%;">
               <col span="1" style="width: 15%;">
               <col span="1" style="width: 20%;">
-              
             </colgroup>
-            <tr style="border-bottom: 3px solid #17A2B8; border-top: 0px; font-weight:bold; color: rgb(71, 73, 73);">
-              <td>
-                <%= group.name %>
-                |
-                <%= link_to edit_budget_group_path(@budget, group) do %>edit<% end %>
-                |
-                <%= link_to 'delete', [@budget, group], method: :delete, class: "text-danger", data: { confirm: 'Are you sure? This will delete the group and its categories.' } %>
-              </td>
-              <td>Projected</td>
-              <td>Actual</td>
-              <td style="color:#026877">
-                <% if ((group.categories_sum * 100 )/(group.average) - 100) > 1 %>
-                  <%= number_with_precision(((group.categories_sum * 100 )/(group.average) - 100), :precision => 0) %>% above average
-
-                <% elsif (100 - (group.categories_sum * 100 )/(group.average)) < -1 %>
-                  <%= number_with_precision((100 - (group.categories_sum * 100 )/(group.average)), :precision => 0) %>% below average
+            <thead>
+              <tr style="border-bottom: 3px solid #17A2B8; border-top: 0px; font-weight:bold; color: rgb(71, 73, 73);">
+                <td>
+                  <%= group.name %>
+                  |
+                  <%= link_to edit_budget_group_path(@budget, group) do %>edit<% end %>
+                  |
+                  <%= link_to 'delete', [@budget, group], method: :delete, class: "text-danger", data: { confirm: 'Are you sure? This will delete the group and its categories.' } %>
+                </td>
+                <td>Projected</td>
+                <td>Actual</td>
+                <td style="color:#026877">
+                  <% if ((group.categories_sum * 100 )/(group.average) - 100) > 1 %>
                   
-                <% else %>
-                  At average
-                <% end %>
-                
-              </td>
-            </tr>
-
+                  <%= number_with_precision(((group.categories_sum * 100 )/(group.average) - 100), :precision => 0) %>% ↑ average
+                  <% elsif (100 - (group.categories_sum * 100 )/(group.average)) < -1 %>
+                  
+                  <%= number_with_precision((100 - (group.categories_sum * 100 )/(group.average)), :precision => 0) %>% ↓ average
+                  <% else %>
+                    At average
+                  <% end %>
+                  
+                </td>
+              </tr>
+            </thead>
             <tbody>
               <% group.categories.each do |category| %>
               <tr style="border-bottom: 3px solid darkgrey;">
@@ -75,13 +75,11 @@
                   |
                   <%= link_to 'delete', [@budget, group, category], method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
                 </td>
-                <td><%= category.projected %></td>
-                <td><%= category.actual %></td>
+                <td><%= number_to_currency(category.projected) %></td>
+                <td><%= number_to_currency(category.actual) %></td>
               </tr>
               <% end %>
-              <td colspan="3"><%= link_to new_budget_group_category_path(@budget, group, @category) do%>+ Add
-                Category<% end %></td>
-              
+              <td colspan="3"><%= link_to new_budget_group_category_path(@budget, group, @category) do%>+ Add Category<% end %></td>
             </tbody>
           </table>
           <% end %>
@@ -95,12 +93,12 @@
       </div>
     </div>
 
-    <div class="card gedf-card; col-md-6">
+    <div class="card gedf-card; col-md-3">
       <div class="card-header">
-        <h3 style="text-align:center">Spending</h3>
+        <h4 style="text-align:center">Spending</h4>
       </div>
       <div class="card-body>">
-        <%= pie_chart Group.group(:name).count %>
+        <%= pie_chart Group.where(budget_id:@budget.id).group(:name).sum(:categories_sum), legend:false, prefix: "$", round: 2, zeros: true, messages: {empty: "Add some data for this month!"} %>
       </div>
       <div>
         <table class="table table-hover; width: 100%">
@@ -113,15 +111,13 @@
           <% @budget.groups.each do |group| %>
           <tr style="border-bottom: 3px solid darkgrey">
             <td><%= group.name %></td>
-            <% group.categories.each do |category| %>
-
-            <% end %>
-            <td>(25%)</td>
-            <td>$200.46</td>
+            <td> <%= number_with_precision((group.categories_sum/(Group.where(budget_id:@budget.id).sum(:categories_sum)))*100, :precision => 2) %>% </td>
+            <td><%= number_to_currency(group.categories_sum) %></td>
           </tr>
           <% end %>
         </table>
       </div>
     </div>
+
   </div>
 </div>
