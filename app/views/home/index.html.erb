@@ -32,220 +32,132 @@
             </div>
         </div>
         <div class="col-md-6 gedf-main">
-
-            <!--- \\\\\\\Post-->
-
-
+            <!--- \\\\\\ Create Post //////-->
             <%= form_for(@post, remote: true) do |form| %>
-            <div class="card gedf-card">
-                <div class="card-header">
-                    <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
-                                aria-controls="posts" aria-selected="true">Make
-                                a Post</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images"
-                                aria-selected="false" href="#images">Attach</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="card-body">
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
-                            <div class="form-group">
-                                <label class="sr-only" for="message">post</label>
-                                <%= form.rich_text_area :content,:size=>"50", placeholder: "What are you thinking? ", class: 'form-control post_content',data: {controller: "mentions", target: "mentions.field"} %>
-                            </div>
-
-                        </div>
-                        <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
-                            <div class="form-group">
-                                <%= form.label :"What would you like to attach" %>
-                                <select name="post[attachtype]" id="post_attachtype" onchange="yesnoCheck(this);">
-                                    <option disabled value="" selected hidden>Please Select</option>
-                                    <option value=0>None</option>
-                                    <option value=1>Goal</option>
-                                    <option value=2>Budget</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group" id="goal_attachid" style="display: none;">
-                                <%= form.label :"Select Goal to Attach" %>
-                                <select name="post[attachid]" id="goal_attachid">
-                                    <option disabled value="" selected hidden>Please Select</option>
-                                    <% Goal.where(user_id:current_user).each do |goal| %>
-                                    <option value=<%= goal.id %>> Goal: <%= goal.title %></option>
-                                    <% end %>
-                                </select>
-                            </div>
-
-                            <div class="form-group" id="budget_attachid" style="display: none;">
-                                <%= form.label :"Select Budget to Attach" %>
-                                <select name="post[attachid]" id="budget_attachid">
-                                    <option disabled value="" selected hidden>Please Select</option>
-                                    <% Budget.where(user_id:current_user).each do |budget| %>
-                                    <option value=<%= budget.id %>> Budget: <%= budget.month %> <%= budget.year %>
-                                    </option>
-                                    <% end %>
-                                </select>
-                            </div>
-
-                            <div class="py-4"></div>
-                        </div>
-
+                <div class="card gedf-card">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
+                                    aria-controls="posts" aria-selected="true">Make
+                                    a Post</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images"
+                                    aria-selected="false" href="#images">Attach</a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="btn-toolbar justify-content-between">
-                        <div class="btn-group">
-                            <%= form.submit "Share", class: 'btn btn-primary' %>
-                        </div>
-                        <% end %>
+                    <div class="card-body">
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                                <div class="form-group">
+                                    <label class="sr-only" for="message">post</label>
+                                    <%= form.rich_text_area :content,:size=>"50", placeholder: "What are you thinking? ", class: 'form-control post_content',data: {controller: "mentions", target: "mentions.field"} %>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
+                                <div class="form-group">
+                                    <%= form.label :"What would you like to attach" %>
+                                    <select name="post[attachtype]" id="post_attachtype" onchange="yesnoCheck(this);">
+                                        <option disabled value="" selected hidden>Please Select</option>
+                                        <option value=0>None</option>
+                                        <option value=1>Goal</option>
+                                        <option value=2>Budget</option>
+                                    </select>
+                                </div>
 
-                        <div class="btn-group">
-                            <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-globe"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-                                <a class="dropdown-item" href="#"><i class="fa fa-globe"></i> Public</a>
-                                <a class="dropdown-item" href="#"><i class="fa fa-users"></i> Friends</a>
-                                <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Just me</a>
+                                <div class="form-group" id="goal_attachid" style="display: none;">
+                                    <%= form.label :"Select Goal to Attach" %>
+                                    <select name="post[attachid]" id="goal_attachid">
+                                        <option disabled value="" selected hidden>Please Select</option>
+                                        <% Goal.where(user_id:current_user).each do |goal| %>
+                                        <option value=<%= goal.id %>> Goal: <%= goal.title %></option>
+                                        <% end %>
+                                    </select>
+                                </div>
+
+                                <div class="form-group" id="budget_attachid" style="display: none;">
+                                    <%= form.label :"Select Budget to Attach" %>
+                                    <select name="post[attachid]" id="budget_attachid">
+                                        <option disabled value="" selected hidden>Please Select</option>
+                                        <% Budget.where(user_id:current_user).each do |budget| %>
+                                        <option value=<%= budget.id %>> Budget: <%= budget.month %> <%= budget.year %>
+                                        </option>
+                                        <% end %>
+                                    </select>
+                                </div>
+
+                                <div class="py-4"></div>
+                            </div>
+                        </div>
+                        <div class="btn-toolbar justify-content-between">
+                            <div class="btn-group">
+                                <%= form.submit "Share", class: 'btn btn-primary' %>
+                            </div>
+                            <% end %>
+
+                            <div class="btn-group">
+                                <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-globe"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                                    <a class="dropdown-item" href="#"><i class="fa fa-globe"></i> Public</a>
+                                    <a class="dropdown-item" href="#"><i class="fa fa-users"></i> Friends</a>
+                                    <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Just me</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-            </div>
+
             <br>
 
-
-            <!-- If No Post /////-->
+            <!-- \\\\\\ If No Post //////-->
             <% if Post.count == 0 %>
-            <div class="card gedf-card">
-                <div class="card-header">
-                    <div class="d-flex justify-content-between align-items-center">
-
-                    </div>
-
-                </div>
-                <div class="card-body">
-
-                    <h3 class="card-text">
-                        This User has no post yet.
-                    </h3>
-                </div>
-                <div class="card-footer">
-
-
-
-
-                </div>
-            </div>
-            <% end %>
-
-
-            <!--- \\\\\\\Post-->
-            <% @posts.each do |post| %>
-            <% if post.attachtype == 0 || post.attachtype.nil? %>
-
-            <div class="card gedf-card">
-                <div class="card-header">
-                    <div class="d-flex justify-content-between align-items-center">
+                <div class="card gedf-card">
+                    <div class="card-header">
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="mr-2">
-                                <% if post.user.avatar.attached?%>
-                                <img class="rounded-circle" height="45" width="45" <%=image_tag(post.user.avatar)%>
-                                    <% else %> <img class="rounded-circle" height="45" width="45"
-                                    <%=image_tag("No_user.jpg")%> <% end  %> </div>
-                                <%=link_to  user_path(post.user), :action => 'go' do %>
-                                <div class="ml-2">
-                                    <div class="h5 m-0"><%= post.try(:user).try(:first_name) %>
-                                        <%= post.try(:user).try(:last_name) %></div>
-                                    <div class="h7 text-muted"><%= post.try(:user).try(:email) %></div>
-                                </div>
-                                <% end  %>
 
-                            </div>
-                            <div>
-                                <div class="dropdown">
-                                    <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-ellipsis-h"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                        <div class="h6 dropdown-header">Configuration</div>
-                                        <a class="dropdown-item" href="#">Save</a>
-                                        <a class="dropdown-item" href="#">Hide</a>
-                                        <a class="dropdown-item" href="#">Report</a>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                     </div>
                     <div class="card-body">
 
-                        <p class="card-text">
-                            <dd><%= post.content %></dd>
-                        </p>
+                        <h3 class="card-text">
+                            This User has no post yet.
+                        </h3>
                     </div>
-                    <div class="card-footer">
-                        <!-- Button to like a post -->
-                        <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
-                        <% has_like =  post.likes.count %>
-
-                        <% if pre_like %>
-                        <%= link_to post.likes.count, post_like_path(post, pre_like), method: :delete, class: "card-link", class: "fa fa-gittip" %>
-                        <% elsif has_like != 0  %>
-                        <%= link_to post.likes.count, post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
-                        <% else %>
-                        <%= link_to 'Like', post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
-                        <% end %>
-
-
-                        <!-- 
-                        Removed this becasue I redid the button without the hyperlink anchor
-
-                            <a href="#" class="card-link"><i class="fa fa-gittip"></i>
-                                <% if post.likes.count == 0 %>
-                                Like
-                                <% else %>
-                                    <%= post.likes.count %>
-                                <% end %>
-                            </a>
-                        -->
-
-                        <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-                        <div style="display: flex; justify-content: flex-end">
-                            <class="text-muted h7 mb-2"> <i class="fa fa-clock-o ">
-                                </i><%= time_ago_in_words(post.created_at) %>
-                        </div>
-
-
-                    </div>
+                    <div class="card-footer"></div>
                 </div>
-                <!-- Post /////-->
-                <br>
-                <% elsif post.attachtype == 1 && post.attachid.present? %>
-                <div class="card gedf-card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="mr-2">
-                                    <% if post.user.avatar.attached?%>
-                                    <img class="rounded-circle" height="45" width="45" <%=image_tag(post.user.avatar)%>
-                                        <% else %> <img class="rounded-circle" height="45" width="45"
-                                        <%=image_tag("No_user.jpg")%> <% end  %> </div>
-                                    <%=link_to  user_path(post.user), :action => 'go' do %>
-                                    <div class="ml-2">
-                                        <div class="h5 m-0"><%= post.try(:user).try(:first_name) %>
-                                            <%= post.try(:user).try(:last_name) %></div>
-                                        <div class="h7 text-muted"><%= post.try(:user).try(:email) %></div>
-                                    </div>
-                                    <% end %>
+            <% end %>
 
+            <% @posts.each do |post| %>
+                <!--- \\\\\\\ Post with no attachments ////// -->
+                <% if post.attachtype == 0 || post.attachtype.nil? %>
+                    <div class="card gedf-card">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-2">
+                                        <% if post.user.avatar.attached?%>
+                                            <img class="rounded-circle" height="45" width="45" <%=image_tag(post.user.avatar)%>
+                                        <% else %>
+                                            <img class="rounded-circle" height="45" width="45" <%=image_tag("No_user.jpg")%>
+                                        <% end  %>
+                                    </div>
+                                    <%=link_to  user_path(post.user), :action => 'go' do %>
+                                        <div class="ml-2">
+                                            <div class="h5 m-0">
+                                                <%= post.try(:user).try(:first_name) %>
+                                                <%= post.try(:user).try(:last_name) %>
+                                            </div>
+                                            <div class="h7 text-muted">
+                                                <%= post.try(:user).try(:email) %>
+                                            </div>
+                                        </div>
+                                    <% end  %>
                                 </div>
                                 <div>
                                     <div class="dropdown">
@@ -262,48 +174,119 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <div class="card-body">
+                                <p class="card-text">
+                                    <dd><%= post.content %></dd>
+                                </p>
+                        </div>
+                        <div class="card-footer">
+                                <!-- Button to like a post -->
+                                <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
+                                <% has_like =  post.likes.count %>
 
+                                <% if pre_like %>
+                                <%= link_to post.likes.count, post_like_path(post, pre_like), method: :delete, class: "card-link", class: "fa fa-gittip" %>
+                                <% elsif has_like != 0  %>
+                                <%= link_to post.likes.count, post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
+                                <% else %>
+                                <%= link_to 'Like', post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
+                                <% end %>
+
+
+                                <!-- 
+                                Removed this becasue I redid the button without the hyperlink anchor
+
+                                    <a href="#" class="card-link"><i class="fa fa-gittip"></i>
+                                        <% if post.likes.count == 0 %>
+                                        Like
+                                        <% else %>
+                                            <%= post.likes.count %>
+                                        <% end %>
+                                    </a>
+                                -->
+
+                                <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                                <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                                <div style="display: flex; justify-content: flex-end">
+                                    <class="text-muted h7 mb-2"> <i class="fa fa-clock-o ">
+                                        </i><%= time_ago_in_words(post.created_at) %>
+                                </div>
+                        </div>
+                    </div>
+                        
+                    <br>
+                <!--- \\\\\\\ Post with Goal attached ////// -->
+                <% elsif post.attachtype == 1 && post.attachid.present? %>
+                    <div class="card gedf-card">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-2">
+                                        <% if post.user.avatar.attached?%>
+                                            <img class="rounded-circle" height="45" width="45" <%=image_tag(post.user.avatar)%>
+                                        <% else %>
+                                            <img class="rounded-circle" height="45" width="45" <%=image_tag("No_user.jpg")%>
+                                        <% end  %> 
+                                    </div>
+                                    <%=link_to  user_path(post.user), :action => 'go' do %>
+                                        <div class="ml-2">
+                                            <div class="h5 m-0">
+                                                <%= post.try(:user).try(:first_name) %>
+                                                <%= post.try(:user).try(:last_name) %>
+                                            </div>
+                                            <div class="h7 text-muted">
+                                                <%= post.try(:user).try(:email) %>
+                                            </div>
+                                        </div>
+                                    <% end %>
+                                </div>
+                                <div>
+                                    <div class="dropdown">
+                                        <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-ellipsis-h"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                            <div class="h6 dropdown-header">Configuration</div>
+                                            <a class="dropdown-item" href="#">Save</a>
+                                            <a class="dropdown-item" href="#">Hide</a>
+                                            <a class="dropdown-item" href="#">Report</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
                             <p class="card-text">
                                 <dd><%= post.content %></dd>
                             </p>
                             <hr>
-
+                                
                             <h5 class="card-title">Goal: <%= Goal.select(:title).find(post.attachid).title %></h5>
                             <h6 class="card-subtitle mb-2 text-muted">
                                 <%= number_to_currency(Goal.select(:progress).find(post.attachid).progress)%><%= "/" %><%=  number_to_currency(Goal.select(:goal).find(post.attachid).goal) %>
                             </h6>
                             <% if  Goal.select(:progress).find(post.attachid).progress < Goal.select(:goal).find(post.attachid).goal %>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped" role="progressbar"
-                                    aria-valuenow=<% Goal.select(:ppercent).find(post.attachid).ppercent %>
-                                    aria-valuemin="0" aria-valuemax="100"
-                                    style="width: <%=Goal.select(:ppercent).find(post.attachid).ppercent %>%">
-                                    <%= number_to_percentage(Goal.select(:ppercent).find(post.attachid).ppercent, precision: 0) %>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-animated" role="progressbar" aria-valuenow=<% Goal.select(:ppercent).find(post.attachid).ppercent %>aria-valuemin="0" aria-valuemax="100" style="width: <%=Goal.select(:ppercent).find(post.attachid).ppercent %>%">
+                                        <%= number_to_percentage(Goal.select(:ppercent).find(post.attachid).ppercent, precision: 0) %>
+                                    </div>
                                 </div>
-                            </div>
                             <% else %>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped  bg-success"
-                                    role="progressbar"
-                                    aria-valuenow=<% Goal.select(:ppercent).find(post.attachid).ppercent %>
-                                    aria-valuemin="0" aria-valuemax="100"
-                                    style="width: <%=Goal.select(:ppercent).find(post.attachid).ppercent %>%">
-                                    <%= number_to_percentage(Goal.select(:ppercent).find(post.attachid).ppercent, precision: 0) %>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-animated  bg-success" role="progressbar" aria-valuenow=<% Goal.select(:ppercent).find(post.attachid).ppercent %> aria-valuemin="0" aria-valuemax="100" style="width: <%=Goal.select(:ppercent).find(post.attachid).ppercent %>%">
+                                        <%= number_to_percentage(Goal.select(:ppercent).find(post.attachid).ppercent, precision: 0) %>
+                                    </div>
                                 </div>
-                            </div>
                             <% end %>
                             <br>
                             <%= link_to (image_tag ("info.png"), size:40 ), goal_path(id: post.attachid) %>
                             <% if @post.user_id == current_user.id %>
-                            <%= link_to (image_tag ("plus.png"), size:40 ), edit_goal_path(id: post.attachid) %>
+                                <%= link_to (image_tag ("plus.png"), size:40 ), edit_goal_path(id: post.attachid) %>
                             <% end %>
-
-
-
                         </div>
+
                         <div class="card-footer">
                             <!-- Button to like a post -->
                             <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
@@ -317,18 +300,17 @@
                             <%= link_to 'Like', post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
                             <% end %>
 
-
                             <!-- 
-                        Removed this becasue I redid the button without the hyperlink anchor
+                                Removed this becasue I redid the button without the hyperlink anchor
 
-                            <a href="#" class="card-link"><i class="fa fa-gittip"></i>
-                                <% if post.likes.count == 0 %>
-                                Like
-                                <% else %>
-                                    <%= post.likes.count %>
-                                <% end %>
-                            </a>
-                        -->
+                                <a href="#" class="card-link"><i class="fa fa-gittip"></i>
+                                    <% if post.likes.count == 0 %>
+                                    Like
+                                    <% else %>
+                                        <%= post.likes.count %>
+                                    <% end %>
+                                </a>
+                            -->
 
                             <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
                             <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
@@ -336,25 +318,23 @@
                                 <class="text-muted h7 mb-2"> <i class="fa fa-clock-o ">
                                     </i><%= time_ago_in_words(post.created_at) %>
                             </div>
-
-
                         </div>
                     </div>
-                    <!-- Post /////-->
-                    <br>
 
-                    <!-- Post /////-->
                     <br>
-                    <% elsif post.attachtype == 2 && post.attachid.present? %>
+                <!--- \\\\\\\ Post with Budget attached //////-->
+                <% elsif post.attachtype == 2 && post.attachid.present? %>
                     <div class="card gedf-card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="mr-2">
                                         <% if post.user.avatar.attached?%>
-                                        <img class="rounded-circle" height="45" width="45"
-                                            <%=image_tag(post.user.avatar)%> <% else %> <img class="rounded-circle"
-                                            height="45" width="45" <%=image_tag("No_user.jpg")%> <% end  %> </div>
+                                            <img class="rounded-circle" height="45" width="45" <%=image_tag(post.user.avatar)%> 
+                                        <% else %> 
+                                            <img class="rounded-circle" height="45" width="45" <%=image_tag("No_user.jpg")%> 
+                                        <% end %> 
+                                    </div>
                                         <%=link_to  user_path(post.user), :action => 'go' do %>
                                         <div class="ml-2">
                                             <div class="h5 m-0"><%= post.try(:user).try(:first_name) %>
@@ -362,9 +342,9 @@
                                             <div class="h7 text-muted"><%= post.try(:user).try(:email) %></div>
                                         </div>
                                         <% end %>
-
-                                    </div>
-                                    <div>
+                                </div>
+                            </div>
+                            <div>
                                         <div class="dropdown">
                                             <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -377,11 +357,9 @@
                                                 <a class="dropdown-item" href="#">Report</a>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-
                             </div>
-                            <div class="card-body">
+                        </div>
+                        <div class="card-body">
 
                                 <p class="card-text">
                                     <dd><%= post.content %></dd>
@@ -410,17 +388,16 @@
                                                     <% group.categories.each do |category| %>
                                                     <tr style="border-bottom: 3px solid darkgrey;">
                                                         <td><%= category.name %></td>
-                                                        <td><%= category.projected %></td>
-                                                        <td><%= category.actual %></td>
+                                                        <td><%= number_to_currecny(category.projected) %></td>
+                                                        <td><%= number_to_currecny(category.actual) %></td>
                                                     </tr>
                                                     <% end %>
                                                 </tbody>
                                             </table>
                                             <% end %>
                                         </div>
-                                    
-                            
-                            </h6>
+
+                                </h6>
 
 
 
@@ -461,25 +438,14 @@
 
                         </div>
                     </div>
-                    <!-- Post /////-->
+
                     <br>
+                <% end %>
+            <% end %>
+        </div>
 
-
-                    <% end %>
-                    <% end %>
-
-
-
-
-
-                </div>
-
-
-
-
-            </div>
-            <div class="col-md-3">
-                <% @goals.each do |goal| %>
+        <div class="col-md-3">
+            <% @goals.each do |goal| %>
                 <div class="card gedf-card">
                     <div class="card-body">
                         <h5 class="card-title">Goal: <%= goal.title %></h5>
@@ -487,42 +453,40 @@
                             <%= number_to_currency(goal.progress)%><%= "/" %><%=  number_to_currency(goal.goal) %>
                         </h6>
                         <% if goal.progress < goal.goal %>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped" role="progressbar"
-                                aria-valuenow=<% goal.ppercent %> aria-valuemin="0" aria-valuemax="100"
-                                style="width: <%=goal.ppercent %>%">
-                                <%= number_to_percentage(goal.ppercent, precision: 0) %> </div>
-                        </div>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-animated" role="progressbar"
+                                    aria-valuenow=<% goal.ppercent %> aria-valuemin="0" aria-valuemax="100"
+                                    style="width: <%=goal.ppercent %>%">
+                                    <%= number_to_percentage(goal.ppercent, precision: 0) %>
+                                </div>
+                            </div>
                         <% else %>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped bg-success"
-                                role="progressbar" aria-valuenow=<% goal.ppercent %> aria-valuemin="0"
-                                aria-valuemax="100" style="width: <%=goal.ppercent %>%">
-                                <%= number_to_percentage(goal.ppercent, precision: 0) %> </div>
-                        </div>
-
-
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-animated bg-success"
+                                    role="progressbar" aria-valuenow=<% goal.ppercent %> aria-valuemin="0"
+                                    aria-valuemax="100" style="width: <%=goal.ppercent %>%">
+                                    <%= number_to_percentage(goal.ppercent, precision: 0) %>
+                                </div>
+                            </div>
                         <% end %>
-
 
                         <p class="card-text"></p>
                         <%= link_to (image_tag ("info.png") ), goal %>
                         <% if @user.id == current_user.id %>
-                        <%= link_to (image_tag ("plus.png") ), edit_goal_path(id: goal.id) %>
+                            <%= link_to (image_tag ("plus.png") ), edit_goal_path(id: goal.id) %>
                         <% end %>
                     </div>
                 </div>
                 <br>
-                <% end %>
-
-
-            </div>
+            <% end %>
         </div>
     </div>
-    <hr>
-    <br>
-    <br>
-    <hr>
+</div>
+    
+<hr>
+<br>
+<br>
+<hr>
 
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
