@@ -6,6 +6,7 @@
 #  attachid   :integer          default(0)
 #  attachment :string
 #  attachtype :integer          default(0)
+#  budgetid   :integer          default(0)
 #  content    :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
