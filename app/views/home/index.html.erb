@@ -63,7 +63,7 @@
                         <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
                             <div class="form-group">
                                 <%= form.label :"What would you like to attach" %>
-                                <select name="post[attachtype]" id="post_attachtype" onchange="yesnoCheck(this);">
+                                <select class="custom-select" name="post[attachtype]" id="post_attachtype" onchange="yesnoCheck(this);">
                                     <option disabled value="" selected hidden>Please Select</option>
                                     <option value=0>None</option>
                                     <option value=1>Goal</option>
@@ -71,9 +71,9 @@
                                 </select>
                             </div>
 
-                            <div class="form-group" id="goal_attachid" style="display: none;">
+                            <div class="form-group" id="attachg" style="display: none;">
                                 <%= form.label :"Select Goal to Attach" %>
-                                <select name="post[attachid]" id="goal_attachid">
+                                <select class="custom-select" name="post[goalid]" id="goal_goalid">
                                     <option disabled value="" selected hidden>Please Select</option>
                                     <% Goal.where(user_id:current_user).each do |goal| %>
                                     <option value=<%= goal.id %>> Goal: <%= goal.title %></option>
@@ -81,9 +81,9 @@
                                 </select>
                             </div>
 
-                            <div class="form-group" id="budget_attachid" style="display: none;">
+                            <div class="form-group" id="attachb" style="display: none;">
                                 <%= form.label :"Select Budget to Attach" %>
-                                <select name="post[attachid]" id="budget_attachid">
+                                <select class="custom-select" name="post[budgetid]" id="budget_budgetid">
                                     <option disabled value="" selected hidden>Please Select</option>
                                     <% Budget.where(user_id:current_user).each do |budget| %>
                                     <option value=<%= budget.id %>> Budget: <%= budget.month %> <%= budget.year %>
@@ -228,7 +228,7 @@
                 </div>
                 <!-- Post /////-->
                 <br>
-                <% elsif post.attachtype == 1 && (post.attachid.present? && post.attachid != 0) %>
+                <% elsif post.attachtype == 1 && (post.goalid.present? && post.goalid != 0) %>
                 <div class="card gedf-card">
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-items-center">
@@ -271,34 +271,34 @@
                             </p>
                             <hr>
 
-                            <h5 class="card-title">Goal: <%= Goal.select(:title).find(post.attachid).title %></h5>
+                            <h5 class="card-title">Goal: <%= Goal.select(:title).find(post.goalid).title %></h5>
                             <h6 class="card-subtitle mb-2 text-muted">
-                                <%= number_to_currency(Goal.select(:progress).find(post.attachid).progress)%><%= "/" %><%=  number_to_currency(Goal.select(:goal).find(post.attachid).goal) %>
+                                <%= number_to_currency(Goal.select(:progress).find(post.goalid).progress)%><%= "/" %><%=  number_to_currency(Goal.select(:goal).find(post.goalid).goal) %>
                             </h6>
-                            <% if  Goal.select(:progress).find(post.attachid).progress < Goal.select(:goal).find(post.attachid).goal %>
+                            <% if  Goal.select(:progress).find(post.goalid).progress < Goal.select(:goal).find(post.goalid).goal %>
                             <div class="progress">
                                 <div class="progress-bar progress-bar-striped" role="progressbar"
-                                    aria-valuenow=<% Goal.select(:ppercent).find(post.attachid).ppercent %>
+                                    aria-valuenow=<% Goal.select(:ppercent).find(post.goalid).ppercent %>
                                     aria-valuemin="0" aria-valuemax="100"
-                                    style="width: <%=Goal.select(:ppercent).find(post.attachid).ppercent %>%">
-                                    <%= number_to_percentage(Goal.select(:ppercent).find(post.attachid).ppercent, precision: 0) %>
+                                    style="width: <%=Goal.select(:ppercent).find(post.goalid).ppercent %>%">
+                                    <%= number_to_percentage(Goal.select(:ppercent).find(post.goalid).ppercent, precision: 0) %>
                                 </div>
                             </div>
                             <% else %>
                             <div class="progress">
                                 <div class="progress-bar progress-bar-striped  bg-success"
                                     role="progressbar"
-                                    aria-valuenow=<% Goal.select(:ppercent).find(post.attachid).ppercent %>
+                                    aria-valuenow=<% Goal.select(:ppercent).find(post.goalid).ppercent %>
                                     aria-valuemin="0" aria-valuemax="100"
-                                    style="width: <%=Goal.select(:ppercent).find(post.attachid).ppercent %>%">
-                                    <%= number_to_percentage(Goal.select(:ppercent).find(post.attachid).ppercent, precision: 0) %>
+                                    style="width: <%=Goal.select(:ppercent).find(post.goalid).ppercent %>%">
+                                    <%= number_to_percentage(Goal.select(:ppercent).find(post.goalid).ppercent, precision: 0) %>
                                 </div>
                             </div>
                             <% end %>
                             <br>
-                            <%= link_to (image_tag ("info.png"), size:40 ), goal_path(id: post.attachid) %>
+                            <%= link_to (image_tag ("info.png"), size:40 ), goal_path(id: post.goalid) %>
                             <% if @post.user_id == current_user.id %>
-                            <%= link_to (image_tag ("plus.png"), size:40 ), edit_goal_path(id: post.attachid) %>
+                            <%= link_to (image_tag ("plus.png"), size:40 ), edit_goal_path(id: post.goalid) %>
                             <% end %>
 
 
@@ -345,22 +345,25 @@
 
                     <!-- Post /////-->
                     <br>
-                    <% elsif post.attachtype == 2 && (post.attachid.present? && post.attachid != 0) %>
+                    <% elsif post.attachtype == 2 && (post.budgetid.present? && post.budgetid != 0) %>
                     <div class="card gedf-card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="mr-2">
                                         <% if post.user.avatar.attached?%>
-                                        <img class="rounded-circle" height="45" width="45"
-                                            <%=image_tag(post.user.avatar)%> <% else %> <img class="rounded-circle"
-                                            height="45" width="45" <%=image_tag("No_user.jpg")%> <% end  %> </div>
-                                        <%=link_to  user_path(post.user), :action => 'go' do %>
-                                        <div class="ml-2">
-                                            <div class="h5 m-0"><%= post.try(:user).try(:first_name) %>
-                                                <%= post.try(:user).try(:last_name) %></div>
-                                            <div class="h7 text-muted"><%= post.try(:user).try(:email) %></div>
-                                        </div>
+                                            <img class="rounded-circle" height="45" width="45"
+                                                <%=image_tag(post.user.avatar)%> 
+                                            <% else %> <img class="rounded-circle"
+                                                height="45" width="45" <%=image_tag("No_user.jpg")%> 
+                                            <% end  %> 
+                                            </div>
+                                            <%=link_to  user_path(post.user), :action => 'go' do %>
+                                            <div class="ml-2">
+                                                <div class="h5 m-0"><%= post.try(:user).try(:first_name) %>
+                                                    <%= post.try(:user).try(:last_name) %></div>
+                                                <div class="h7 text-muted"><%= post.try(:user).try(:email) %></div>
+                                            </div>
                                         <% end %>
 
                                     </div>
@@ -388,10 +391,10 @@
                                 </p>
                                 <hr>
 
-                                <h5 class="card-title">Budget: <%= Budget.select(:month).find(post.attachid).month %> <%= Budget.select(:year).find(post.attachid).year %></h5>
+                                <h5 class="card-title">Budget: <%= Budget.select(:month).find(post.budgetid).month %> <%= Budget.select(:year).find(post.budgetid).year %></h5>
                                 <h6 class="card-subtitle mb-2 text-muted">
                                         <div class="table-responsive">
-                                            <% Budget.find(post.attachid).groups.each do |group| %>
+                                            <% Budget.find(post.budgetid).groups.each do |group| %>
                                             <table class="table table-hover; width: 100%">
                                                 <colgroup>
                                                     <col span="1" style="width: 50%;">
@@ -431,26 +434,12 @@
                             <% has_like =  post.likes.count %>
 
                             <% if pre_like %>
-                            <%= link_to post.likes.count, post_like_path(post, pre_like), method: :delete, class: "card-link", class: "fa fa-gittip" %>
+                                <%= link_to post.likes.count, post_like_path(post, pre_like), method: :delete, class: "card-link", class: "fa fa-gittip" %>
                             <% elsif has_like != 0  %>
-                            <%= link_to post.likes.count, post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
+                                <%= link_to post.likes.count, post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
                             <% else %>
-                            <%= link_to 'Like', post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
+                                <%= link_to 'Like', post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
                             <% end %>
-
-
-                            <!-- 
-        Removed this becasue I redid the button without the hyperlink anchor
-
-            <a href="#" class="card-link"><i class="fa fa-gittip"></i>
-                <% if post.likes.count == 0 %>
-                Like
-                <% else %>
-                    <%= post.likes.count %>
-                <% end %>
-            </a>
-        -->
-
                             <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
                             <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
                             <div style="display: flex; justify-content: flex-end">
@@ -463,6 +452,7 @@
                     </div>
                     <!-- Post /////-->
                     <br>
+                    
 
 
                     <% end %>
@@ -545,17 +535,21 @@
 
     <script type="text/javascript">
         function yesnoCheck(that) {
-            if (that.value == 1) {
-                document.getElementById("goal_attachid").style.display = "block";
-
-            } else if (that.value == 0) {
-                document.getElementById("post_attachid").style.display = "none";
-
-            } else if (that.value == 2) {
-                document.getElementById("budget_attachid").style.display = "block";
-
-            } else {
-                document.getElementById("post_attachid").style.display = "none";
+             if (that.value == 0) {
+                document.getElementById("attachg").style.display = "none";
+                document.getElementById("attachb").style.display = "none";
+            } 
+            else if (that.value == 1) {
+                document.getElementById("attachg").style.display = "block";
+                document.getElementById("attachb").style.display = "none";
+            }   
+            else if (that.value == 2) {
+                document.getElementById("attachb").style.display = "block";
+                document.getElementById("attachg").style.display = "none";
+            }   
+            else{
+                document.getElementById("attachg").style.display = "none";
+                document.getElementById("attachb").style.display = "none";
             }
         }
     </script>

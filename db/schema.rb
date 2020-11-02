@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_01_160324) do
+ActiveRecord::Schema.define(version: 2020_11_02_184745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -180,7 +180,7 @@ ActiveRecord::Schema.define(version: 2020_11_01_160324) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
     t.integer "attachtype", default: 0
-    t.integer "attachid", default: 0
+    t.integer "goalid", default: 0
     t.integer "budgetid", default: 0
     t.index ["user_id"], name: "index_posts_on_user_id"
   end

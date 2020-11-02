@@ -3,11 +3,11 @@
 # Table name: posts
 #
 #  id         :bigint           not null, primary key
-#  attachid   :integer          default(0)
 #  attachment :string
 #  attachtype :integer          default(0)
 #  budgetid   :integer          default(0)
 #  content    :text
+#  goalid     :integer          default(0)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  user_id    :bigint
@@ -21,7 +21,6 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Post < ApplicationRecord
-    before_create :attach_value
     belongs_to(
         :user,
         class_name: 'User',
@@ -58,11 +57,7 @@ class Post < ApplicationRecord
         @users ||= content.body.attachments.select{ |a| a.attachable.class == User }.map(&:attachable).uniq       
     end
 
-    def attach_value
-        if self.attachtype == 0
-            self.attachid = 0
-        end
-    end
+    
 
 
 
