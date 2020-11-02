@@ -421,13 +421,9 @@
                                             </table>
                                             <% end %>
                                         </div>
-                                    
-                            
-                            </h6>
+                                </h6>
 
-
-
-                        </div>
+                            </div>
                         <div class="card-footer">
                             <!-- Button to like a post -->
                             <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
@@ -468,45 +464,8 @@
 
 
             </div>
-            <div class="col-md-3">
-                <% @goals.each do |goal| %>
-                <div class="card gedf-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Goal: <%= goal.title %></h5>
-                        <h6 class="card-subtitle mb-2 text-muted">
-                            <%= number_to_currency(goal.progress)%><%= "/" %><%=  number_to_currency(goal.goal) %>
-                        </h6>
-                        <% if goal.progress < goal.goal %>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped" role="progressbar"
-                                aria-valuenow=<% goal.ppercent %> aria-valuemin="0" aria-valuemax="100"
-                                style="width: <%=goal.ppercent %>%">
-                                <%= number_to_percentage(goal.ppercent, precision: 0) %> </div>
-                        </div>
-                        <% else %>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped bg-success"
-                                role="progressbar" aria-valuenow=<% goal.ppercent %> aria-valuemin="0"
-                                aria-valuemax="100" style="width: <%=goal.ppercent %>%">
-                                <%= number_to_percentage(goal.ppercent, precision: 0) %> </div>
-                        </div>
-
-
-                        <% end %>
-
-
-                        <p class="card-text"></p>
-                        <%= link_to (image_tag ("info.png") ), goal %>
-                        <% if @user.id == current_user.id %>
-                        <%= link_to (image_tag ("plus.png") ), edit_goal_path(id: goal.id) %>
-                        <% end %>
-                    </div>
-                </div>
-                <br>
-                <% end %>
-
-
-            </div>
+            <div class="col-md-3"> </div>
+                
         </div>
     </div>
     <hr>
