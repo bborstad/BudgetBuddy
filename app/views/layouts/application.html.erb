@@ -4,84 +4,91 @@
 <html>
   <head>
   <!-- Vertical navbar -->
-  <%= render 'shared/head' %> 
-  <% if current_user.present? %>
-  <div class="sidenav vertical-nav bg-white" id="sidebar">
-  <div class="py-4 px-3 mb-4 bg-light">
-    <div class="media d-flex align-items-center">
-    <% if current_user.avatar.attached?%>
-      <img class="rounded-circle" height= "65" width="65" <%=image_tag(current_user.avatar)%>
-    <% else %>
-      <img class="rounded-circle" height= "65" width="65" <%=image_tag("No_user.jpg")%>
-    <% end %>
-      <div class="display: flex; justify-content: flex-end">
-        <h4 class="m-0"><%=current_user.first_name%> <%=current_user.last_name %></h4>
-        <p class="font-weight-light text-muted mb-0"><%=current_user.email%></p>
+  <div id = "Vertnavbar" style="display: block;">
+    
+    <%= render 'shared/head' %> 
+    <% if current_user.present? %>
+    <div class="sidenav vertical-nav bg-white" id="sidebar">
+      <div class="py-4 px-3 mb-4 bg-light">
+        <div class="media d-flex align-items-center">
+         <% if current_user.avatar.attached?%>
+            <img class="rounded-circle" height= "65" width="65" <%=image_tag(current_user.avatar)%>
+        <% else %>
+            <img class="rounded-circle" height= "65" width="65" <%=image_tag("No_user.jpg")%>
+        <% end %>
+        <div class="display: flex; justify-content: flex-end">
+          <h4 class="m-0"><%=current_user.first_name%> <%=current_user.last_name %></h4>
+          <p class="font-weight-light text-muted mb-0"><%=current_user.email%></p>
+        </div>
       </div>
     </div>
+
+    <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Main</p>
+
+    <ul class="nav flex-column bg-white mb-0 ">
+      <li class="nav-item">
+        <a href="<%= root_path %>" class="nav-link text-dark font-italic">
+                  <i class="fa fa-home mr-3 text-primary fa-fw"></i>
+                  Social Home
+              </a>
+      </li>
+      <li class="nav-item">
+        <a href="<%= mentioned_posts_path %>" class="nav-link text-dark font-italic">
+                  <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                  Mentions
+              </a>
+      </li>
+      <li class="nav-item">
+        <a href="<%= rooms_path %>" class="nav-link text-dark font-italic">
+                  <i class="fa fa-inbox mr-3 text-primary fa-fw"></i>
+                  Messages
+              </a>
+      </li>
+      <li class="nav-item ">
+        <a href="<%= user_path(current_user) %>" class="nav-link text-dark font-italic">
+                  <i class="fas fa-user-circle mr-3 text-primary fa-fw"></i>
+                  My Profile 
+              </a>
+      </li>
+      <li class="nav-item ">
+        <a href="<%= users_path %>" class="nav-link text-dark font-italic">
+                  <i class="fa fa-users mr-3 text-primary fa-fw"></i>
+                  Users 
+              </a>
+      </li>
+    </ul>
+    <% if current_page?(rooms_path) || params[:controller] == 'rooms' && params[:action] == 'show' %>
+      <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Direct Messages</p>
+        <ul class="nav flex-column bg-white mb-0 ">
+          <% @rooms.where(user1:current_user.id).or(@rooms.where(user2:current_user.id)).limit(6).order(updated_at: :desc).each do |room| %>
+            <li class="nav-item">
+              <a href="<%= room_path(room.id) %>" class="nav-link text-dark font-italic">
+                <i class=" fas fa-reply mr-3 text-primary fa-fw"></i>
+                  <% if room.user1 == current_user.id %>
+                    <%= User.find_by(id: room.user2).first_name%>
+                  <% elsif room.user2 == current_user.id%>
+                    <%= User.find_by(id: room.user1).first_name%>
+                  <% else %>
+                    No User
+                  <% end%>
+                </a>   
+            </li>
+          <% end %>
+
+            <% end %>
+    
+
+
+      </div>
+
+
+    <% end %>
+
+
   </div>
-
-  <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Main</p>
-
-  <ul class="nav flex-column bg-white mb-0 ">
-    <li class="nav-item">
-      <a href="<%= root_path %>" class="nav-link text-dark font-italic">
-                <i class="fa fa-home mr-3 text-primary fa-fw"></i>
-                Social Home
-            </a>
-    </li>
-    <li class="nav-item">
-      <a href="<%= mentioned_posts_path %>" class="nav-link text-dark font-italic">
-                <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
-                Mentions
-            </a>
-    </li>
-    <li class="nav-item">
-      <a href="<%= rooms_path %>" class="nav-link text-dark font-italic">
-                <i class="fa fa-inbox mr-3 text-primary fa-fw"></i>
-                Messages
-            </a>
-    </li>
-    <li class="nav-item ">
-      <a href="<%= user_path(current_user) %>" class="nav-link text-dark font-italic">
-                <i class="fas fa-user-circle mr-3 text-primary fa-fw"></i>
-                My Profile 
-            </a>
-    </li>
-    <li class="nav-item ">
-      <a href="<%= users_path %>" class="nav-link text-dark font-italic">
-                <i class="fa fa-users mr-3 text-primary fa-fw"></i>
-                Users 
-            </a>
-    </li>
-  </ul>
-  <% if current_page?(rooms_path) || params[:controller] == 'rooms' && params[:action] == 'show' %>
-  <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Direct Messages</p>
-      <ul class="nav flex-column bg-white mb-0 ">
-      <% @rooms.where(user1:current_user.id).or(@rooms.where(user2:current_user.id)).limit(6).order(updated_at: :desc).each do |room| %>
-          <li class="nav-item">
-            <a href="<%= room_path(room.id) %>" class="nav-link text-dark font-italic">
-              <i class=" fas fa-reply mr-3 text-primary fa-fw"></i>
-                <% if room.user1 == current_user.id %>
-                  <%= User.find_by(id: room.user2).first_name%>
-                <% elsif room.user2 == current_user.id%>
-                  <%= User.find_by(id: room.user1).first_name%>
-                <% else %>
-                  No User
-                <% end%>
-            </a>   
-          </li>
-         <% end %>
-
-        <% end %>
   
 
-
-
-
-</div>
-<!-- End vertical navbar -->
-<% end %>
+    <!-- End vertical navbar -->
 
        
   </head>
@@ -90,7 +97,18 @@
   
 
   <body>
+
     <%= render 'shared/navbar' %>
+<
+      <div class="col-sm" id="buttonnavfirst" >
+        <button onclick="myFunction()" id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="fas fa-list-ul"></i><small class="text-uppercase font-weight-bold"> Nav-bar Toggle</small></button>
+
+      </div>
+      
+  
+
+
+    
     <%= render 'shared/notices' %>
 
     <div class="container">
@@ -100,3 +118,21 @@
     <%= render 'shared/footer' %>
   </body>
 </html>
+
+
+<script>
+function myFunction() {
+  var x = document.getElementById("Vertnavbar");
+  var y = document.getElementById("buttonnavfirst") 
+  var z = document.getElementById("buttonnavsecond") 
+
+  if (x.style.display === "none") {
+    x.style.display = "block";
+   
+  } else {
+    x.style.display = "none";
+    
+  }
+}
+
+</script>
