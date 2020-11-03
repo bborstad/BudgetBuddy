@@ -79,4 +79,16 @@ trix-toolbar .button_groups {
 .trix-button-group.trix-button-group--block-tools { display: none !important; }
 .trix-button-group.trix-button-group--history-tools { display: none !important; }
 
-
+#buttonnavfirst{
+  button{ 
+    position:relative; 
+    top:50%; 
+    left:16%;
+  }
+}
+#buttonnavsecond{
+  button{ 
+    position:relative; 
+    top:0%; 
+  }
+}
