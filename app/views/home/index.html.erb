@@ -162,7 +162,7 @@
                                 <div class="ml-2">
                                     <div class="h5 m-0"><%= post.try(:user).try(:first_name) %>
                                         <%= post.try(:user).try(:last_name) %></div>
-                                    <div class="h7 text-muted"><%= post.try(:user).try(:email) %></div>
+                                    
                                 </div>
                                 <% end  %>
 
@@ -242,8 +242,7 @@
                                     <div class="ml-2">
                                         <div class="h5 m-0"><%= post.try(:user).try(:first_name) %>
                                             <%= post.try(:user).try(:last_name) %></div>
-                                        <div class="h7 text-muted"><%= post.try(:user).try(:email) %></div>
-                                    </div>
+                                        </div>
                                     <% end %>
 
                                 </div>
@@ -279,6 +278,7 @@
                             <div class="progress">
                                 <div class="progress-bar progress-bar-striped" role="progressbar"
                                     aria-valuenow=<% Goal.select(:ppercent).find(post.goalid).ppercent %>
+
                                     aria-valuemin="0" aria-valuemax="100"
                                     style="width: <%=Goal.select(:ppercent).find(post.goalid).ppercent %>%">
                                     <%= number_to_percentage(Goal.select(:ppercent).find(post.goalid).ppercent, precision: 0) %>
@@ -286,7 +286,7 @@
                             </div>
                             <% else %>
                             <div class="progress">
-                                <div class="progress-bar progress-bar-striped  bg-success"
+                                <div class="progress-bar progress-bar-animated bg-success"
                                     role="progressbar"
                                     aria-valuenow=<% Goal.select(:ppercent).find(post.goalid).ppercent %>
                                     aria-valuemin="0" aria-valuemax="100"
@@ -364,6 +364,7 @@
                                                     <%= post.try(:user).try(:last_name) %></div>
                                                 <div class="h7 text-muted"><%= post.try(:user).try(:email) %></div>
                                             </div>
+
                                         <% end %>
 
                                     </div>
@@ -466,6 +467,7 @@
             </div>
             <div class="col-md-3"> </div>
                 
+
         </div>
     </div>
     <hr>
