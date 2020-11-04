@@ -5,13 +5,14 @@
 
 <% @comments.each do |comment| %>
 
-    <p><b><%= comment.user.name %></b> -  <%= comment.content %> </p>
 
+        <p><b><%= comment.user.name %></b> -  <%= comment.content %>
 
-    <% if current_user == comment.user %>
-        <%= link_to "Delete", [comment.post,comment], method: :delete %>
-        <%= link_to "Edit", edit_post_comment_path(comment.post, comment)%>
-    <% end %>
-
+        
+            <% if current_user == comment.user %>
+            <%= link_to "", edit_post_comment_path(comment.post, comment), class: "card-link", class: "fas fa-pencil-alt"%>    
+            <%= link_to "",[comment.post,comment], method: :delete,  class: "card-link", class: "far fa-trash-alt" %>   
+            <% end %>
+        </p>
 <% end %>
 <%= render 'comments/form' %>
