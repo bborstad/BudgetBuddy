@@ -198,15 +198,49 @@
 
                                     <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
                                     <div style="display: flex; justify-content: flex-end">
-                                    <class="text-muted h7 mb-2"> <i class="fa fa-clock-o "> </i><%= time_ago_in_words(post.created_at) %>
-                                </div>
+                                        <class="text-muted h7 mb-2"> <i class="fa fa-clock-o "> </i><%= time_ago_in_words(post.created_at) %>
+                                    </div>
                                 
                                 
                                 </div> 
 
-                                    <!-- Comments //// 
-                                        this will only display if there has already been a comment made-->
-                                    <% if has_comment != 0 %>
+                                    <!-- Comments //// -->
+                                    <!-- Will show the last 3 post and link to the show -->
+                                    <% if post.comments.count > 3  %>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <p style = "font-size:3em; margin-top: -55px; margin-bottom: -5px;"><%= link_to "...", post_path(post), class: "card-link"%></p>
+                                            </div> 
+
+                                            <% post.comments.last(3).each do |comment| %>
+                                                <div class= "row">
+                                                            <%=link_to  user_path(comment.user), :action => 'go' do %>
+                                                                <div class="ml-2">
+                                                                    <div class="h9 m-0"><%= comment.try(:user).try(:first_name) %> <%= comment.try(:user).try(:last_name) %></div>
+                                                                </div>
+                                                            <% end  %>  -  <%= comment.content %>
+
+                                                        
+                                                        
+
+
+
+                                                        
+                                                        
+                                                            <% if current_user == comment.user %>
+                                                            <div class="h9 m-1"><%= link_to "", edit_post_comment_path(comment.post, comment), class: "card-link", class: "fas fa-pencil-alt"%>  
+                                                                <%= link_to "",[comment.post,comment], method: :delete,  class: "card-link", class: "far fa-trash-alt" %>   </div>  
+                                                            <% end %>
+
+                                                </div>
+                                            <% end %>
+
+                                            
+                                        </div>
+                                    
+
+                                        <!-- this will only display if there has already been a comment made -->
+                                    <% elsif has_comment != 0 %>
                                             <div class="card-body">
                                                 
                                                 <% post.comments.each do |comment| %>
@@ -214,24 +248,24 @@
                                                 
 
                                                         <div class= "row">
-                                                        <%=link_to  user_path(comment.user), :action => 'go' do %>
-                                                            <div class="ml-0">
-                                                                <div class="h9 m-0"><%= comment.try(:user).try(:first_name) %> <%= comment.try(:user).try(:last_name) %></div>
-                                                            </div>
-                                                        <% end  %>  -  <%= comment.content %>
+                                                            <%=link_to  user_path(comment.user), :action => 'go' do %>
+                                                                <div class="ml-0">
+                                                                    <div class="h9 m-0"><%= comment.try(:user).try(:first_name) %> <%= comment.try(:user).try(:last_name) %></div>
+                                                                </div>
+                                                            <% end  %>  -  <%= comment.content %>
 
-                                                       
-                                                    
-
-
-
-                                                       
-                                                    
-                                                        <% if current_user == comment.user %>
-                                                        <div class="h9 m-1"><%= link_to "", edit_post_comment_path(comment.post, comment), class: "card-link", class: "fas fa-pencil-alt"%>  
-                                                            <%= link_to "",[comment.post,comment], method: :delete,  class: "card-link", class: "far fa-trash-alt" %>   </div>  
-                                                        <% end %>
                                                         
+                                                        
+
+
+
+                                                        
+                                                        
+                                                            <% if current_user == comment.user %>
+                                                            <div class="h9 m-1"><%= link_to "", edit_post_comment_path(comment.post, comment), class: "card-link", class: "fas fa-pencil-alt"%>  
+                                                                <%= link_to "",[comment.post,comment], method: :delete,  class: "card-link", class: "far fa-trash-alt" %>   </div>  
+                                                            <% end %>
+                                                            
                                                         </div>
                                                     
                                             
@@ -330,13 +364,18 @@
 
 
 
-                                <!--  Tempoary link to show page in order to create comments  -->
-                                <%= link_to "Show Page", post_path(post)%>
+                                <!-- Button to comment on a post -->
+                                    <% has_comment = post.comments.count %>           
+                                    <% if has_comment != 0 %>
+                                        <%= link_to post.comments.count, post_path(post), class: "card-link", class: "fa fa-comment"%>
+                                    <% else %>
+                                        <%= link_to 'Comment', post_path(post),  class: "card-link", class: "fa fa-comment"%>        
+                                    <% end %>
 
 
 
 
-                                <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                                
                                 <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
                                 <div style="display: flex; justify-content: flex-end">
                                     <class="text-muted h7 mb-2"> <i class="fa fa-clock-o "> </i><%= time_ago_in_words(post.created_at) %>
@@ -344,24 +383,79 @@
                                 
 
                             </div>
-                        <!-- Comments //// -->
-                            <div class="card-body">
-                                    <p>This post has <%= post.comments.count%> comments</p>
-                                    <% post.comments.each do |comment| %>
+                        
+                            <!-- Comments //// -->
+                            <!-- Will show the last 3 post and link to the show -->
+                            <% if post.comments.count > 3  %>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <p style = "font-size:3em; margin-top: -55px; margin-bottom: -5px;"><%= link_to "...", post_path(post), class: "card-link"%></p>
+                                    </div> 
 
-                                        <p><b><%= comment.user.name %></b> -  <%= comment.content %>                                 
-                                        <div style="display: flex; justify-content: flex-end">
-                                            <class="text-muted h7 mb-2"> <i class="fa fa-clock-o "> </i><%= time_ago_in_words(comment.created_at) %>
+                                    <% post.comments.last(3).each do |comment| %>
+                                        <div class= "row">
+                                                    <%=link_to  user_path(comment.user), :action => 'go' do %>
+                                                        <div class="ml-2">
+                                                            <div class="h9 m-0"><%= comment.try(:user).try(:first_name) %> <%= comment.try(:user).try(:last_name) %></div>
+                                                        </div>
+                                                    <% end  %>  -  <%= comment.content %>
+
+                                                
+                                                
+
+
+
+                                                
+                                                
+                                                    <% if current_user == comment.user %>
+                                                    <div class="h9 m-1"><%= link_to "", edit_post_comment_path(comment.post, comment), class: "card-link", class: "fas fa-pencil-alt"%>  
+                                                        <%= link_to "",[comment.post,comment], method: :delete,  class: "card-link", class: "far fa-trash-alt" %>   </div>  
+                                                    <% end %>
+
                                         </div>
-                                    
-                                        <% if current_user == comment.user %>
-                                            <%= link_to "Delete", [comment.post,comment], method: :delete %>
-                                            <%= link_to "Edit", edit_post_comment_path(comment.post, comment)%>
-                                        <% end %>
-                                    
                                     <% end %>
-                            </div>
-                        <!-- End Comments /// -->   
+
+                                    
+                                </div>
+                            
+
+                                <!-- this will only display if there has already been a comment made -->
+                            <% elsif has_comment != 0 %>
+                                    <div class="card-body">
+                                        
+                                        <% post.comments.each do |comment| %>
+
+                                        
+
+                                                <div class= "row">
+                                                    <%=link_to  user_path(comment.user), :action => 'go' do %>
+                                                        <div class="ml-0">
+                                                            <div class="h9 m-0"><%= comment.try(:user).try(:first_name) %> <%= comment.try(:user).try(:last_name) %></div>
+                                                        </div>
+                                                    <% end  %>  -  <%= comment.content %>
+
+                                                
+                                                
+
+
+
+                                                
+                                                
+                                                    <% if current_user == comment.user %>
+                                                    <div class="h9 m-1"><%= link_to "", edit_post_comment_path(comment.post, comment), class: "card-link", class: "fas fa-pencil-alt"%>  
+                                                        <%= link_to "",[comment.post,comment], method: :delete,  class: "card-link", class: "far fa-trash-alt" %>   </div>  
+                                                    <% end %>
+                                                    
+                                                </div>
+                                            
+                                    
+                                        <% end %>
+                                    </div>
+
+                            <% else %>
+                                <!-- Nothing here because there should be no new part of the container -->
+                            <% end %>
+                            <!-- End Comments /// -->      
                         
                         </div>
                         <!-- Post /////-->
