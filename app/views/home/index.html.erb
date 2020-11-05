@@ -211,14 +211,29 @@
                                                 
                                                 <% post.comments.each do |comment| %>
 
-                                                    <p><b><%= comment.user.name %></b> -  <%= comment.content %>
                                                 
+
+                                                        <div class= "row">
+                                                        <%=link_to  user_path(comment.user), :action => 'go' do %>
+                                                            <div class="ml-0">
+                                                                <div class="h9 m-0"><%= comment.try(:user).try(:first_name) %> <%= comment.try(:user).try(:last_name) %></div>
+                                                            </div>
+                                                        <% end  %>  -  <%= comment.content %>
+
+                                                       
+                                                    
+
+
+
+                                                       
                                                     
                                                         <% if current_user == comment.user %>
-                                                            <%= link_to "", edit_post_comment_path(comment.post, comment), class: "card-link", class: "fas fa-pencil-alt"%>    
-                                                            <%= link_to "",[comment.post,comment], method: :delete,  class: "card-link", class: "far fa-trash-alt" %>   
+                                                        <div class="h9 m-1"><%= link_to "", edit_post_comment_path(comment.post, comment), class: "card-link", class: "fas fa-pencil-alt"%>  
+                                                            <%= link_to "",[comment.post,comment], method: :delete,  class: "card-link", class: "far fa-trash-alt" %>   </div>  
                                                         <% end %>
-                                                    </p>
+                                                        
+                                                        </div>
+                                                    
                                             
                                                 <% end %>
                                             </div>
