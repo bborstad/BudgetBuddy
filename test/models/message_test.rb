@@ -1,28 +1,27 @@
 # == Schema Information
 #
-# Table name: posts
+# Table name: messages
 #
 #  id         :bigint           not null, primary key
-#  attachment :string
-#  attachtype :integer          default(0)
-#  budgetid   :integer          default(0)
 #  content    :text
-#  goalid     :integer          default(0)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  user_id    :bigint
+#  room_id    :bigint           not null
+#  user_id    :bigint           not null
 #
 # Indexes
 #
-#  index_posts_on_user_id  (user_id)
+#  index_messages_on_room_id  (room_id)
+#  index_messages_on_user_id  (user_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (room_id => rooms.id)
 #  fk_rails_...  (user_id => users.id)
 #
 require 'test_helper'
 
-class PostTest < ActiveSupport::TestCase
+class MessageTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -78,6 +78,6 @@ gem 'chartkick'
 
 # Gemfile
 gem 'gravatar_image_tag'
-
+gem 'redis'
 
 #

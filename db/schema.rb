@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_28_194827) do
+ActiveRecord::Schema.define(version: 2020_11_02_184745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,16 @@ ActiveRecord::Schema.define(version: 2020_10_28_194827) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "notifications", force: :cascade do |t|
     t.string "recipient_type", null: false
     t.bigint "recipient_id", null: false
@@ -180,7 +190,8 @@ ActiveRecord::Schema.define(version: 2020_10_28_194827) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
     t.integer "attachtype", default: 0
-    t.integer "attachid", default: 0
+    t.integer "goalid", default: 0
+    t.integer "budgetid", default: 0
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -194,6 +205,19 @@ ActiveRecord::Schema.define(version: 2020_10_28_194827) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
     t.index ["user_id"], name: "index_retirements_on_user_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "author_id"
+    t.integer "receiver_id"
+    t.integer "user1"
+    t.integer "user2"
+    t.index ["author_id", "receiver_id"], name: "index_rooms_on_author_id_and_receiver_id", unique: true
+    t.index ["author_id"], name: "index_rooms_on_author_id"
+    t.index ["receiver_id"], name: "index_rooms_on_receiver_id"
   end
 
   create_table "services", force: :cascade do |t|
@@ -237,6 +261,8 @@ ActiveRecord::Schema.define(version: 2020_10_28_194827) do
   add_foreign_key "groups", "budgets"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "retirements", "users"
   add_foreign_key "services", "users"

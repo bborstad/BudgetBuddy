@@ -13,6 +13,8 @@ require("chart.js")
 require("sidebarCollapse")
 require("trix")
 require("@rails/actiontext")
+require("channels")
+
 
 window.Rails = Rails
 

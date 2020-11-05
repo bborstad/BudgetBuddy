@@ -1,6 +1,8 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :messages
+  resources :rooms
   # Routing for budget section
   resources :budgets do
     resources :groups do
