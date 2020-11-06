@@ -1,18 +1,32 @@
 
 
-<h2>This post has <%= pluralize(@comments.count, "Comment")%> </h2>
+
 
 
 <% @comments.each do |comment| %>
+    
+    <div class= "row" style = "padding-left: 15px";>
+        <p>
+            <%=link_to  users_path(comment.user), :action => 'go' do %>
+                <div class="ml-0">
+                    <div class="h9 m-0"><%= comment.try(:user).try(:first_name) %> <%= comment.try(:user).try(:last_name) %></div>
+                </div>
+                <% end  %> 
+            
+                -  <%= comment.content %>
 
 
-        <p><b><%= comment.user.name %></b> -  <%= comment.content %>
+            
 
-        
-            <% if current_user == comment.user %>
-            <%= link_to "", edit_post_comment_path(comment.post, comment), class: "card-link", class: "fas fa-pencil-alt"%>    
-            <%= link_to "",[comment.post,comment], method: :delete,  class: "card-link", class: "far fa-trash-alt" %>   
-            <% end %>
+            
+                <% if current_user == comment.user %>
+                    <div class="h9 m-1">
+                        <%= link_to "", edit_post_comment_path(comment.post, comment), class: "card-link", class: "fas fa-pencil-alt"%>    
+                        <%= link_to "",[comment.post,comment], method: :delete,  class: "card-link", class: "far fa-trash-alt" %>   
+                    </div>    
+                <% end %>
         </p>
+    </div>
+
 <% end %>
 <%= render 'comments/form' %>
