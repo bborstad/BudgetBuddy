@@ -12,7 +12,8 @@
     </style>
 
     
-    <h2>Users that are Follwoing you</h2>
+    <h2><%=link_to  user_path(@user) do %><%=@user.name%> <% end %> Followers</h2>
+
     <section class="our-webcoderskull padding-lg">
       <div class="container">
         <ul class="row">
