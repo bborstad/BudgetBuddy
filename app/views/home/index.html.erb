@@ -34,27 +34,38 @@
         <div class="col-md-6 gedf-main">
             <!--- \\\\\\ Create Post //////-->
             <%= form_for(@post, remote: true) do |form| %>
-                <div class="card gedf-card">
-                    <div class="card-header">
-                        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
-                                    aria-controls="posts" aria-selected="true">Make
-                                    a Post</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images"
-                                    aria-selected="false" href="#images">Attach</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
-                                <div class="form-group">
-                                    <label class="sr-only" for="message">post</label>
-                                    <%= form.rich_text_area :content,:size=>"50", placeholder: "What are you thinking? ", class: 'form-control post_content',data: {controller: "mentions", target: "mentions.field"} %>
-                                </div>
+            <div class="card gedf-card">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
+                                aria-controls="posts" aria-selected="true">Make
+                                a Post</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images"
+                                aria-selected="false" href="#images">Attach</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                            <div class="form-group">
+                                <label class="sr-only" for="message">post</label>
+                                <%= form.rich_text_area :content,:size=>"50", placeholder: "What are you thinking? ", class: 'form-control post_content',data: {controller: "mentions", target: "mentions.field"} %>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
+                            <div class="form-group">
+                                <%= form.label :"What would you like to attach" %>
+                                <select class="custom-select" name="post[attachtype]" id="post_attachtype" onchange="yesnoCheck(this);">
+                                    <option disabled value="" selected hidden>Please Select</option>
+                                    <option value=0>None</option>
+                                    <option value=1>Goal</option>
+                                    <option value=2>Budget</option>
+                                </select>
                             </div>
                             <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
                                 <div class="form-group">
@@ -77,17 +88,25 @@
                                     </select>
                                 </div>
 
-                                <div class="form-group" id="budget_attachid" style="display: none;">
-                                    <%= form.label :"Select Budget to Attach" %>
-                                    <select name="post[attachid]" id="post_attachid">
-                                        <option disabled value="" selected hidden>Please Select</option>
-                                        <% Budget.where(user_id:current_user).each do |budget| %>
-                                            <option value=<%= budget.id %>> Budget: <%= budget.month %> <%= budget.year %></option>
-                                        <% end %>
-                                    </select>
-                                </div>
+                            <div class="form-group" id="attachg" style="display: none;">
+                                <%= form.label :"Select Goal to Attach" %>
+                                <select class="custom-select" name="post[goalid]" id="goal_goalid">
+                                    <option disabled value="" selected hidden>Please Select</option>
+                                    <% Goal.where(user_id:current_user).each do |goal| %>
+                                    <option value=<%= goal.id %>> Goal: <%= goal.title %></option>
+                                    <% end %>
+                                </select>
+                            </div>
 
-                                <div class="py-4"></div>
+                            <div class="form-group" id="attachb" style="display: none;">
+                                <%= form.label :"Select Budget to Attach" %>
+                                <select class="custom-select" name="post[budgetid]" id="budget_budgetid">
+                                    <option disabled value="" selected hidden>Please Select</option>
+                                    <% Budget.where(user_id:current_user).each do |budget| %>
+                                    <option value=<%= budget.id %>> Budget: <%= budget.month %> <%= budget.year %>
+                                    </option>
+                                    <% end %>
+                                </select>
                             </div>
                         </div>
                         <div class="btn-toolbar justify-content-between">
@@ -118,42 +137,154 @@
                 <div class="card gedf-card">
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-items-center">
+                            <div class="mr-2">
+                                <% if post.user.avatar.attached?%>
+                                <img class="rounded-circle" height="45" width="45" <%=image_tag(post.user.avatar)%>
+                                    <% else %> <img class="rounded-circle" height="45" width="45"
+                                    <%=image_tag("No_user.jpg")%> <% end  %> </div>
+                                <%=link_to  user_path(post.user), :action => 'go' do %>
+                                <div class="ml-2">
+                                    <div class="h5 m-0"><%= post.try(:user).try(:first_name) %>
+                                        <%= post.try(:user).try(:last_name) %></div>
+                                    
+                                </div>
+                                <% end  %>
 
                         </div>
 
                     </div>
                     <div class="card-body">
 
-                        <h3 class="card-text">
-                            This User has no post yet.
-                        </h3>
+                        <p class="card-text">
+                            <dd><%= post.content %></dd>
+                        </p>
                     </div>
-                    <div class="card-footer"></div>
-                </div>
-            <% end %>
+                    <div class="card-footer">
+                        <!-- Button to like a post -->
+                        <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
+                        <% has_like =  post.likes.count %>
 
-            <% @posts.each do |post| %>
-                <!--- \\\\\\\ Post with no attachments ////// -->
-                <% if post.attachtype == 0 || post.attachtype.nil? %>
-                    <div class="card gedf-card">
-                        <div class="card-header">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="mr-2">
-                                        <% if post.user.avatar.attached?%>
-                                            <img class="rounded-circle" height="45" width="45" <%=image_tag(post.user.avatar)%>
-                                        <% else %>
-                                            <img class="rounded-circle" height="45" width="45" <%=image_tag("No_user.jpg")%>
-                                        <% end  %>
-                                    </div>
-                                    <%=link_to  user_path(post.user), :action => 'go' do %>
-                                        <div class="ml-2">
-                                            <div class="h5 m-0">
-                                                <%= post.try(:user).try(:first_name) %>
-                                                <%= post.try(:user).try(:last_name) %>
-                                            </div>
+                        <% if pre_like %>
+                        <%= link_to post.likes.count, post_like_path(post, pre_like), method: :delete, class: "card-link", class: "fa fa-gittip" %>
+                        <% elsif has_like != 0  %>
+                        <%= link_to post.likes.count, post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
+                        <% else %>
+                        <%= link_to 'Like', post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
+                        <% end %>
+
+
+                        <!-- Button to comment on a post -->
+                        <% has_comment = post.comments.count %>           
+                        <% if has_comment != 0 %>
+                            <%= link_to post.comments.count, post_path(post), class: "card-link", class: "fa fa-comment"%>
+                        <% else %>
+                            <%= link_to 'Comment', post_path(post),  class: "card-link", class: "fa fa-comment"%>        
+                        <% end %>
+
+                        
+                        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                        <div style="display: flex; justify-content: flex-end">
+                            <class="text-muted h7 mb-2"> <i class="fa fa-clock-o ">
+                                </i><%= time_ago_in_words(post.created_at) %>
+                        </div>
+
+
+                    </div>
+
+                    <!-- Comments //// -->
+                    <!-- Will show the last 3 post and link to the show -->
+                    <% if post.comments.count > 3  %>
+                        <div class="card-body">
+                            <div class="row">
+                                <p style = "font-size:3em; margin-top: -55px; margin-bottom: -5px;"><%= link_to "...", post_path(post), class: "card-link"%></p>
+                            </div> 
+
+                            <% post.comments.last(3).each do |comment| %>
+                                <div class= "row">
+                                            <%=link_to  user_path(comment.user), :action => 'go' do %>
+                                                <div class="ml-2">
+                                                    <div class="h9 m-0"><%= comment.try(:user).try(:first_name) %> <%= comment.try(:user).try(:last_name) %></div>
+                                                </div>
+                                            <% end  %>  -  <%= comment.content %>
+
+                                        
+                                        
+
+
+
+                                        
+                                        
+                                            <% if current_user == comment.user %>
+                                            <div class="h9 m-1"><%= link_to "", edit_post_comment_path(comment.post, comment), class: "card-link", class: "fas fa-pencil-alt"%>  
+                                                <%= link_to "",[comment.post,comment], method: :delete,  class: "card-link", class: "far fa-trash-alt" %>   </div>  
+                                            <% end %>
+
+                                </div>
+                            <% end %>
+
+                            
+                        </div>
+                    
+
+                        <!-- this will only display if there has already been a comment made -->
+                    <% elsif has_comment != 0 %>
+                            <div class="card-body">
+                                
+                                <% post.comments.each do |comment| %>
+
+                                
+
+                                        <div class= "row">
+                                            <%=link_to  user_path(comment.user), :action => 'go' do %>
+                                                <div class="ml-0">
+                                                    <div class="h9 m-0"><%= comment.try(:user).try(:first_name) %> <%= comment.try(:user).try(:last_name) %></div>
+                                                </div>
+                                            <% end  %>  -  <%= comment.content %>
+
+                                        
+                                        
+
+
+
+                                        
+                                        
+                                            <% if current_user == comment.user %>
+                                            <div class="h9 m-1"><%= link_to "", edit_post_comment_path(comment.post, comment), class: "card-link", class: "fas fa-pencil-alt"%>  
+                                                <%= link_to "",[comment.post,comment], method: :delete,  class: "card-link", class: "far fa-trash-alt" %>   </div>  
+                                            <% end %>
+                                            
                                         </div>
-                                    <% end  %>
+                                    
+                            
+                                <% end %>
+                            </div>
+
+                    <% else %>
+                        <!-- Nothing here because there should be no new part of the container -->
+                    <% end %>
+                    <!-- End Comments /// -->      
+            
+
+                </div>
+                <!-- Post /////-->
+                <br>
+                <% elsif post.attachtype == 1 && (post.goalid.present? && post.goalid != 0) %>
+                <div class="card gedf-card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="mr-2">
+                                    <% if post.user.avatar.attached?%>
+                                    <img class="rounded-circle" height="45" width="45" <%=image_tag(post.user.avatar)%>
+                                        <% else %> <img class="rounded-circle" height="45" width="45"
+                                        <%=image_tag("No_user.jpg")%> <% end  %> </div>
+                                    <%=link_to  user_path(post.user), :action => 'go' do %>
+                                    <div class="ml-2">
+                                        <div class="h5 m-0"><%= post.try(:user).try(:first_name) %>
+                                            <%= post.try(:user).try(:last_name) %></div>
+                                        </div>
+                                    <% end %>
+
                                 </div>
                                 <div>
                                     <div class="dropdown">
@@ -190,46 +321,28 @@
                                 <% end %>
 
 
-                                <!-- 
-                                Removed this becasue I redid the button without the hyperlink anchor
+                            <h5 class="card-title">Goal: <%= Goal.select(:title).find(post.goalid).title %></h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                <%= number_to_currency(Goal.select(:progress).find(post.goalid).progress)%><%= "/" %><%=  number_to_currency(Goal.select(:goal).find(post.goalid).goal) %>
+                            </h6>
+                            <% if  Goal.select(:progress).find(post.goalid).progress < Goal.select(:goal).find(post.goalid).goal %>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped" role="progressbar"
+                                    aria-valuenow=<% Goal.select(:ppercent).find(post.goalid).ppercent %>
 
-                                    <a href="#" class="card-link"><i class="fa fa-gittip"></i>
-                                        <% if post.likes.count == 0 %>
-                                        Like
-                                        <% else %>
-                                            <%= post.likes.count %>
-                                        <% end %>
-                                    </a>
-                                -->
-
-                                <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                                <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-                                <div style="display: flex; justify-content: flex-end">
-                                    <class="text-muted h7 mb-2"> <i class="fa fa-clock-o ">
-                                        </i><%= time_ago_in_words(post.created_at) %>
+                                    aria-valuemin="0" aria-valuemax="100"
+                                    style="width: <%=Goal.select(:ppercent).find(post.goalid).ppercent %>%">
+                                    <%= number_to_percentage(Goal.select(:ppercent).find(post.goalid).ppercent, precision: 0) %>
                                 </div>
-                        </div>
-                    </div>
-                        
-                    <br>
-                <!--- \\\\\\\ Post with Goal attached ////// -->
-                <% elsif post.attachtype == 1 && post.attachid.present? %>
-                    <div class="card gedf-card">
-                        <div class="card-header">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="mr-2">
-                                        <% if post.user.avatar.attached?%>
-                                            <img class="rounded-circle" height= "45" width="45" <%=image_tag(post.user.avatar)%>
-                                        <% else %>
-                                            <img class="rounded-circle" height= "45" width="45" <%=image_tag("No_user.jpg")%>
-                                        <% end  %>
-                                    </div>
-                                    <%=link_to  user_path(post.user), :action => 'go' do %>
-                                        <div class="ml-2">
-                                            <div class="h5 m-0"><%= post.try(:user).try(:first_name) %> <%= post.try(:user).try(:last_name) %></div>
-                                        </div>
-                                    <% end %>
+                            </div>
+                            <% else %>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-animated bg-success"
+                                    role="progressbar"
+                                    aria-valuenow=<% Goal.select(:ppercent).find(post.goalid).ppercent %>
+                                    aria-valuemin="0" aria-valuemax="100"
+                                    style="width: <%=Goal.select(:ppercent).find(post.goalid).ppercent %>%">
+                                    <%= number_to_percentage(Goal.select(:ppercent).find(post.goalid).ppercent, precision: 0) %>
                                 </div>
                                 <div>
                                 
@@ -248,7 +361,12 @@
                                 </div>
 
                             </div>
-                            <div class="card-body">
+                            <% end %>
+                            <br>
+                            <%= link_to (image_tag ("info.png"), size:40 ), goal_path(id: post.goalid) %>
+                            <% if @post.user_id == current_user.id %>
+                            <%= link_to (image_tag ("plus.png"), size:40 ), edit_goal_path(id: post.goalid) %>
+                            <% end %>
 
                                 <p class="card-text">
                                     <dd><%= post.content %></dd>
@@ -293,38 +411,126 @@
                             <% end %>
 
 
-                        <!-- 
-                        Removed this becasue I redid the button without the hyperlink anchor
-                            <a href="#" class="card-link"><i class="fa fa-gittip"></i>
-                                <% if post.likes.count == 0 %>
-                                Like
-                                <% else %>
-                                    <%= post.likes.count %>
-                                <% end %>
-                            </a>
-                        -->
+                            
+                            <!-- Button to comment on a post -->
+                            <% has_comment = post.comments.count %>           
+                            <% if has_comment != 0 %>
+                                <%= link_to post.comments.count, post_path(post), class: "card-link", class: "fa fa-comment"%>
+                            <% else %>
+                                <%= link_to 'Comment', post_path(post),  class: "card-link", class: "fa fa-comment"%>        
+                            <% end %>
 
-                                <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                                <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-                                <div style="display: flex; justify-content: flex-end">
-                                    <class="text-muted h7 mb-2"> <i class="fa fa-clock-o "> </i><%= time_ago_in_words(post.created_at) %>
-                                </div>
+                           
+                            <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                            <div style="display: flex; justify-content: flex-end">
+                                <class="text-muted h7 mb-2"> <i class="fa fa-clock-o ">
+                                    </i><%= time_ago_in_words(post.created_at) %>
                             </div>
                         </div>
+
+                        <!-- Comments //// -->
+                        <!-- Will show the last 3 post and link to the show -->
+                        <% if post.comments.count > 3  %>
+                            <div class="card-body">
+                                <div class="row">
+                                    <p style = "font-size:3em; margin-top: -55px; margin-bottom: -5px;"><%= link_to "...", post_path(post), class: "card-link"%></p>
+                                </div> 
+
+                                <% post.comments.last(3).each do |comment| %>
+                                    <div class= "row">
+                                                <%=link_to  user_path(comment.user), :action => 'go' do %>
+                                                    <div class="ml-2">
+                                                        <div class="h9 m-0"><%= comment.try(:user).try(:first_name) %> <%= comment.try(:user).try(:last_name) %></div>
+                                                    </div>
+                                                <% end  %>  -  <%= comment.content %>
+
+                                            
+                                            
+
+
+
+                                            
+                                            
+                                                <% if current_user == comment.user %>
+                                                <div class="h9 m-1"><%= link_to "", edit_post_comment_path(comment.post, comment), class: "card-link", class: "fas fa-pencil-alt"%>  
+                                                    <%= link_to "",[comment.post,comment], method: :delete,  class: "card-link", class: "far fa-trash-alt" %>   </div>  
+                                                <% end %>
+
+                                    </div>
+                                <% end %>
+
+                                
+                            </div>
                         
-                        <br>
-                <!--- \\\\\\\ Post with Budget attached //////-->
-                <% elsif post.attachtype == 2 && post.attachid.present? %>
+
+                            <!-- this will only display if there has already been a comment made -->
+                        <% elsif has_comment != 0 %>
+                                <div class="card-body">
+                                    
+                                    <% post.comments.each do |comment| %>
+
+                                    
+
+                                            <div class= "row">
+                                                <%=link_to  user_path(comment.user), :action => 'go' do %>
+                                                    <div class="ml-0">
+                                                        <div class="h9 m-0"><%= comment.try(:user).try(:first_name) %> <%= comment.try(:user).try(:last_name) %></div>
+                                                    </div>
+                                                <% end  %>  -  <%= comment.content %>
+
+                                            
+                                            
+
+
+
+                                            
+                                            
+                                                <% if current_user == comment.user %>
+                                                <div class="h9 m-1"><%= link_to "", edit_post_comment_path(comment.post, comment), class: "card-link", class: "fas fa-pencil-alt"%>  
+                                                    <%= link_to "",[comment.post,comment], method: :delete,  class: "card-link", class: "far fa-trash-alt" %>   </div>  
+                                                <% end %>
+                                                
+                                            </div>
+                                        
+                                
+                                    <% end %>
+                                </div>
+
+                        <% else %>
+                            <!-- Nothing here because there should be no new part of the container -->
+                        <% end %>
+                        <!-- End Comments /// -->      
+                
+
+
+                    </div>
+                    <!-- Post /////-->
+                    <br>
+
+                    <!-- Post /////-->
+                    <br>
+                    <% elsif post.attachtype == 2 && (post.budgetid.present? && post.budgetid != 0) %>
                     <div class="card gedf-card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="mr-2">
                                         <% if post.user.avatar.attached?%>
-                                            <img class="rounded-circle" height="45" width="45" <%=image_tag(post.user.avatar)%>
-                                        <% else %>
-                                            <img class="rounded-circle" height="45" width="45" <%=image_tag("No_user.jpg")%>
-                                        <% end  %>
+                                            <img class="rounded-circle" height="45" width="45"
+                                                <%=image_tag(post.user.avatar)%> 
+                                            <% else %> <img class="rounded-circle"
+                                                height="45" width="45" <%=image_tag("No_user.jpg")%> 
+                                            <% end  %> 
+                                            </div>
+                                            <%=link_to  user_path(post.user), :action => 'go' do %>
+                                            <div class="ml-2">
+                                                <div class="h5 m-0"><%= post.try(:user).try(:first_name) %>
+                                                    <%= post.try(:user).try(:last_name) %></div>
+                                                <div class="h7 text-muted"><%= post.try(:user).try(:email) %></div>
+                                            </div>
+
+                                        <% end %>
+
                                     </div>
                                     <%=link_to  user_path(post.user), :action => 'go' do %>
                                         <div class="ml-2">
@@ -358,10 +564,10 @@
                                 </p>
                                 <hr>
 
-                                <h5 class="card-title">Budget: <%= Budget.select(:month).find(post.attachid).month %> <%= Budget.select(:year).find(post.attachid).year %></h5>
+                                <h5 class="card-title">Budget: <%= Budget.select(:month).find(post.budgetid).month %> <%= Budget.select(:year).find(post.budgetid).year %></h5>
                                 <h6 class="card-subtitle mb-2 text-muted">
                                         <div class="table-responsive">
-                                            <% Budget.find(post.attachid).groups.each do |group| %>
+                                            <% Budget.find(post.budgetid).groups.each do |group| %>
                                             <table class="table table-hover; width: 100%">
                                                 <colgroup>
                                                     <col span="1" style="width: 50%;">
@@ -388,39 +594,32 @@
                                             </table>
                                             <% end %>
                                         </div>
-
                                 </h6>
 
-
-
-                        </div>
+                            </div>
                         <div class="card-footer">
                             <!-- Button to like a post -->
                             <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
                             <% has_like =  post.likes.count %>
 
                             <% if pre_like %>
-                            <%= link_to post.likes.count, post_like_path(post, pre_like), method: :delete, class: "card-link", class: "fa fa-gittip" %>
+                                <%= link_to post.likes.count, post_like_path(post, pre_like), method: :delete, class: "card-link", class: "fa fa-gittip" %>
                             <% elsif has_like != 0  %>
-                            <%= link_to post.likes.count, post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
+                                <%= link_to post.likes.count, post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
                             <% else %>
-                            <%= link_to 'Like', post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
+                                <%= link_to 'Like', post_likes_path(post), method: :post, class: "card-link", class: "fa fa-gittip"%>
+                            <% end %>
+                            
+
+
+                            <!-- Button to comment on a post -->
+                            <% has_comment = post.comments.count %>           
+                            <% if has_comment != 0 %>
+                                <%= link_to post.comments.count, post_path(post), class: "card-link", class: "fa fa-comment"%>
+                            <% else %>
+                                <%= link_to 'Comment', post_path(post),  class: "card-link", class: "fa fa-comment"%>        
                             <% end %>
 
-
-                            <!-- 
-        Removed this becasue I redid the button without the hyperlink anchor
-
-            <a href="#" class="card-link"><i class="fa fa-gittip"></i>
-                <% if post.likes.count == 0 %>
-                Like
-                <% else %>
-                    <%= post.likes.count %>
-                <% end %>
-            </a>
-        -->
-
-                            <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
                             <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
                             <div style="display: flex; justify-content: flex-end">
                                 <class="text-muted h7 mb-2"> <i class="fa fa-clock-o ">
@@ -429,48 +628,103 @@
 
 
                         </div>
-                    </div>
 
-                    <br>
-                <% end %>
-            <% end %>
-        </div>
+                        <!-- Comments //// -->
+                        <!-- Will show the last 3 post and link to the show -->
+                        <% if post.comments.count > 3  %>
+                            <div class="card-body">
+                                <div class="row">
+                                    <p style = "font-size:3em; margin-top: -55px; margin-bottom: -5px;"><%= link_to "...", post_path(post), class: "card-link"%></p>
+                                </div> 
 
-        <div class="col-md-3">
-            <% @goals.each do |goal| %>
-                <div class="card gedf-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Goal: <%= goal.title %></h5>
-                        <h6 class="card-subtitle mb-2 text-muted">
-                            <%= number_to_currency(goal.progress)%><%= "/" %><%=  number_to_currency(goal.goal) %>
-                        </h6>
-                        <% if goal.progress < goal.goal %>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-animated" role="progressbar"
-                                    aria-valuenow=<% goal.ppercent %> aria-valuemin="0" aria-valuemax="100"
-                                    style="width: <%=goal.ppercent %>%">
-                                    <%= number_to_percentage(goal.ppercent, precision: 0) %>
-                                </div>
+                                <% post.comments.last(3).each do |comment| %>
+                                    <div class= "row">
+                                                <%=link_to  user_path(comment.user), :action => 'go' do %>
+                                                    <div class="ml-2">
+                                                        <div class="h9 m-0"><%= comment.try(:user).try(:first_name) %> <%= comment.try(:user).try(:last_name) %></div>
+                                                    </div>
+                                                <% end  %>  -  <%= comment.content %>
+
+                                            
+                                            
+
+
+
+                                            
+                                            
+                                                <% if current_user == comment.user %>
+                                                <div class="h9 m-1"><%= link_to "", edit_post_comment_path(comment.post, comment), class: "card-link", class: "fas fa-pencil-alt"%>  
+                                                    <%= link_to "",[comment.post,comment], method: :delete,  class: "card-link", class: "far fa-trash-alt" %>   </div>  
+                                                <% end %>
+
+                                    </div>
+                                <% end %>
+
+                                
                             </div>
+                        
+
+                            <!-- this will only display if there has already been a comment made -->
+                        <% elsif has_comment != 0 %>
+                                <div class="card-body">
+                                    
+                                    <% post.comments.each do |comment| %>
+
+                                    
+
+                                            <div class= "row">
+                                                <%=link_to  user_path(comment.user), :action => 'go' do %>
+                                                    <div class="ml-0">
+                                                        <div class="h9 m-0"><%= comment.try(:user).try(:first_name) %> <%= comment.try(:user).try(:last_name) %></div>
+                                                    </div>
+                                                <% end  %>  -  <%= comment.content %>
+
+                                            
+                                            
+
+
+
+                                            
+                                            
+                                                <% if current_user == comment.user %>
+                                                <div class="h9 m-1"><%= link_to "", edit_post_comment_path(comment.post, comment), class: "card-link", class: "fas fa-pencil-alt"%>  
+                                                    <%= link_to "",[comment.post,comment], method: :delete,  class: "card-link", class: "far fa-trash-alt" %>   </div>  
+                                                <% end %>
+                                                
+                                            </div>
+                                        
+                                
+                                    <% end %>
+                                </div>
+
                         <% else %>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-animated bg-success"
-                                    role="progressbar" aria-valuenow=<% goal.ppercent %> aria-valuemin="0"
-                                    aria-valuemax="100" style="width: <%=goal.ppercent %>%">
-                                    <%= number_to_percentage(goal.ppercent, precision: 0) %>
-                                </div>
-                            </div>
+                            <!-- Nothing here because there should be no new part of the container -->
                         <% end %>
+                        <!-- End Comments /// -->      
+                
 
-                        <p class="card-text"></p>
-                        <%= link_to (image_tag ("info.png") ), goal %>
-                        <% if @user.id == current_user.id %>
-                            <%= link_to (image_tag ("plus.png") ), edit_goal_path(id: goal.id) %>
-                        <% end %>
                     </div>
+                    <!-- Post /////-->
+                    <br>
+                    
+
+
+                    <% end %>
+                    <% end %>
+
+
+
+
+
                 </div>
-                <br>
-            <% end %>
+
+
+
+
+            </div>
+            <div class="col-md-3"> </div>
+                
+
         </div>
     </div>
 </div>
@@ -501,21 +755,21 @@
 
     <script type="text/javascript">
         function yesnoCheck(that) {
-            if (that.value == 1) {
-                document.getElementById("goal_attachid").style.display = "block";
-                document.getElementById("budget_attachid").style.display = "none";
-                
-
-            } else if (that.value == 0) {
-                document.getElementById("post_attachid").style.display = "none";
-
-            } else if (that.value == 2) {
-                document.getElementById("budget_attachid").style.display = "block";
-                document.getElementById("goal_attachid").style.display = "none";
-
-
-            } else {
-                document.getElementById("post_attachid").style.display = "none";
+             if (that.value == 0) {
+                document.getElementById("attachg").style.display = "none";
+                document.getElementById("attachb").style.display = "none";
+            } 
+            else if (that.value == 1) {
+                document.getElementById("attachg").style.display = "block";
+                document.getElementById("attachb").style.display = "none";
+            }   
+            else if (that.value == 2) {
+                document.getElementById("attachb").style.display = "block";
+                document.getElementById("attachg").style.display = "none";
+            }   
+            else{
+                document.getElementById("attachg").style.display = "none";
+                document.getElementById("attachb").style.display = "none";
             }
         }
     </script>
