@@ -40,9 +40,9 @@
                             <% if @user.id != current_user.id %>
                                 <% if Follow.where(:requestor => current_user.id, :following =>@user.id).present? %>    
                                     <% found = Follow.where(:requestor => current_user.id, :following =>@user.id).pluck(:id) %>
-                                    <%= button_to 'Unfollow', follow_url(found), method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+                                    <span><%= link_to  'Following', follow_url(found), method: :delete, class: "btn unfollow-button", id: 'unfollow-button', data: { confirm: 'Are you sure?' } %></span>
                                 <% else %>
-                                    <%= button_to "Follow", {:controller => 'follows', :action => 'create', :requestor => current_user.id, :following => @user.id}, {:method => :post} %>
+                                    <%= button_to "Follow", {:controller => 'follows', :action => 'create', :requestor => current_user.id, :following => @user.id},  {:method => :post, class: 'btn follow-button', id: 'follow-button'}  %>
                                 <% end %>
                             <% end %>
                         </div>

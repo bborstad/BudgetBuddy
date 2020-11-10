@@ -92,3 +92,43 @@ trix-toolbar .button_groups {
     top:0%; 
   }
 }
+
+.follow-button {
+  text-transform: uppercase;
+  
+  border-color: #4090db;
+  background-color: #4090db;
+
+  color:white;
+  margin-left: 20px;
+  &:visited, &:focus, &:hover {
+    background-color: green;
+
+    color: white;
+  }
+}
+
+.unfollow-button {
+  width: 100px; /* set a width so it doesnt change upon hover */
+  border-color: #bd2b2b;
+  background-color: #140d6d;
+  color: white;
+  margin-left: 20px;
+  &:visited, &:focus, &:hover {
+    content: 'Following';
+    border-color: #FF0000;
+    background-color: #FF0000;
+    color: white;
+  }
+
+  
+}
+.unfollow-button:hover span {
+  display:none
+}
+.unfollow-button:hover:before {
+  content:" Unfollow ";
+}
+
+
+
