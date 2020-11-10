@@ -20,6 +20,8 @@
           <option disabled value="" selected hidden>Please Select</option>
           <option value=2>Monthly Payments</option>
           <option value=1 >Principle</option>
+          <option value=3 >Years</option>
+
       </select>  
    </div>
     
@@ -54,9 +56,11 @@
       <%= form.number_field :compounds_per_year, :value =>@calculate_debt.compounds_per_year, class: 'form-control', min:0,required:true %>
     </div>
   
-    <div class="form-group">
-      <%= form.label :"In how many years would you like to pay this loan off?" %>
-      <%= form.number_field :number_of_year, :value =>@calculate_debt.number_of_year, class: 'form-control', min:0,required:true %>
+    <div id="ifYear" style="display: none;">
+      <div class="form-group">
+        <%= form.label :"In how many years would you like to pay this loan off?" %>
+        <%= form.number_field :number_of_year, :value =>@calculate_debt.number_of_year, class: 'form-control', min:0,required:true %>
+      </div>
     </div>
   
     <div class="form-group">
@@ -82,17 +86,23 @@
       if (that.value == 1) {
           document.getElementById("ifPrinciple").style.display = "block";
           document.getElementById("ifMonthly").style.display = "none";
+          document.getElementById("ifYear").style.display = "block";
+
 
       } else if (that.value == 2) {
           document.getElementById("ifPrinciple").style.display = "none";
           document.getElementById("ifMonthly").style.display = "block";
+          document.getElementById("ifYear").style.display = "block";
+
+      } else if (that.value == 3) {
+          document.getElementById("ifPrinciple").style.display = "block";
+          document.getElementById("ifMonthly").style.display = "block";
+          document.getElementById("ifYear").style.display = "none";
 
       } else{
         document.getElementById("ifPrinciple").style.display = "none";
         document.getElementById("ifMonthly").style.display = "none";
-
-
-
+        document.getElementById("ifYear").style.display = "none";
       }
   }
 </script>
