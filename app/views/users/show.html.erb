@@ -49,12 +49,17 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <div class="h6 text-muted">Followers</div>
-                            <div class="h5"><%= Follow.where(:following => @user.id).count %></div>
+                            <%= link_to followers_path(@user, :id => @user.id)  do %>
+                                <div class="h6 text-muted">Followers</div>
+                                <div class="h5"><%= Follow.where(:following => @user.id).count %></div>
+                            <% end %>
+
                         </li>
                         <li class="list-group-item">
-                            <div class="h6 text-muted">Following</div>
-                            <div class="h5"><%= Follow.where(:requestor => @user.id).count %></div>
+                            <%= link_to followings_path(@user, :id => @user.id)  do %>
+                                <div class="h6 text-muted">Following</div>
+                                <div class="h5"><%= Follow.where(:requestor => @user.id).count %></div>
+                            <% end %>
                     </ul>
                 </div>
                 <br>

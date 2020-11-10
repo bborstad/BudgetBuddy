@@ -19,6 +19,10 @@ Rails.application.routes.draw do
   resources :mentions, only: [:index]
   resources :mentioned_posts, only: [:index]
   resources :follows
+  resources :followers, only: [:index]
+  resources :followings, only: [:index]
+
+
   resources :accounts
   resources :goals
   resources :retirements
