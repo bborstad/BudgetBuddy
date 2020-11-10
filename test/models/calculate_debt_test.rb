@@ -6,7 +6,7 @@
 #  compounds_per_year :integer
 #  email              :string
 #  monthly_payements  :decimal(, )
-#  number_of_year     :integer
+#  number_of_year     :decimal(, )
 #  principle          :decimal(, )
 #  rate               :decimal(, )
 #  select             :integer

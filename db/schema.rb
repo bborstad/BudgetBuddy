@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_02_184745) do
+ActiveRecord::Schema.define(version: 2020_11_10_011607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 2020_11_02_184745) do
     t.decimal "rate"
     t.decimal "monthly_payements"
     t.integer "compounds_per_year"
-    t.integer "number_of_year"
+    t.decimal "number_of_year"
     t.string "email"
     t.integer "select"
     t.datetime "created_at", precision: 6, null: false
