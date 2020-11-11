@@ -151,7 +151,7 @@ trix-toolbar .button_groups {
 .unfollow-button {
   width: 100px; /* set a width so it doesnt change upon hover */
   border-color: #bd2b2b;
-  background-color: #140d6d;
+  background-color: #4090db;
   color: white;
   margin-left: 20px;
   &:visited, &:focus, &:hover {
@@ -171,4 +171,16 @@ trix-toolbar .button_groups {
 }
 
 
+.btn.unfollow-button span:hover:before {
+  content: attr(data-unfollow);
+}
 
+[data-unfollow]:before {
+  content: attr(data-unfollow);
+}
+
+[data-follow]:before {
+  content: attr(data-follow);
+  color: white;
+
+}
