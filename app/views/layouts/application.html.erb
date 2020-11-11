@@ -99,12 +99,15 @@
   <body>
 
     <%= render 'shared/navbar' %>
+    
     <%= render 'shared/notices' %>
-
-<
-      <div class="col-sm" id="buttonnavfirst" >
-        <button onclick="myFunction()" class="button btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4" style="vertical-align:middle"><span><small class="text-uppercase font-weight-bold"> Nav-bar Toggle</small></span></button>
-      </div>
+    <div>
+    
+   
+      <% unless current_page?(controller: 'rooms') || current_page?(room_path(6))%>
+          <button onclick="myFunction()" class="button btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4" style="vertical-align:middle"><span><small class="text-uppercase font-weight-bold"> Nav-bar Toggle</small></span></button>
+      <% end %>
+    </div>
 
 
 
