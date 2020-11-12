@@ -1,0 +1,34 @@
+<%= form_with(model: user_option, local: true) do |form| %>
+  <% if user_option.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user_option.errors.count, "error") %> prohibited this user_option from being saved:</h2>
+
+      <ul>
+      <% user_option.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :budget_id %>
+    <%= form.number_field :budget_id, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <% if user_option.persisted? %>
+      <div class="float-right">
+        <%= link_to 'Destroy', user_option, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+      </div>
+    <% end %>
+
+    <%= form.submit class: 'btn btn-primary' %>
+
+    <% if user_option.persisted? %>
+      <%= link_to "Cancel", user_option, class: "btn btn-link" %>
+    <% else %>
+      <%= link_to "Cancel", user_options_path, class: "btn btn-link" %>
+    <% end %>
+  </div>
+<% end %>
