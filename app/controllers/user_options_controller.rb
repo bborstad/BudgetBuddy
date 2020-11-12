@@ -24,7 +24,7 @@ class UserOptionsController < ApplicationController
   # POST /user_options
   # POST /user_options.json
   def create
-    @user_option = current_user.user_options.build(user_option_params)
+    @user_option = current_user.build_user_option(user_option_params)
     respond_to do |format|
       if @user_option.save
         format.html { redirect_back fallback_location: root_path, notice: 'User option was successfully created.' }

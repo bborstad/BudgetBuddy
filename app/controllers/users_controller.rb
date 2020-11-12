@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     @goalss = Goal.where(user_id:@user.id).order(ppercent: :asc)
     @comments = Comment.where(post_id: @post).order("created_at DESC")
 
-    @user_option = UserOption.new
+    @user_option = UserOption.find_or_create_by(user_id: current_user.id)
 
     @display = UserOption.where(user_id:@user.id).last
 

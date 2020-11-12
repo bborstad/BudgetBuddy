@@ -83,7 +83,7 @@ class User < ApplicationRecord
 
   has_many :comments, dependent: :destroy
 
-  has_many :user_options
+  has_one :user_option
     
 
 

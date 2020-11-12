@@ -21,6 +21,6 @@ class UserOption < ApplicationRecord
         :user,
         class_name: 'User',
         foreign_key: 'user_id',
-        inverse_of: :user_options
+        inverse_of: :user_option
     )
 end
