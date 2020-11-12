@@ -1,0 +1,43 @@
+
+
+
+<div class="row">
+  <div class="col-sm-6">
+    <h1>User_options</h1>
+  </div>
+
+  <div class="col-sm-6 text-right">
+  <%= link_to new_user_option_path, class: 'btn btn-primary' do %>
+    Add New User option
+  <% end %>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+    
+
+            <th>Budget</th>
+            
+          <th></th>
+        
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @user_options.each do |user_option| %>
+        <%= content_tag :tr, id: dom_id(user_option), class: dom_class(user_option) do %>
+          
+
+                      <td><%= user_option.budget_id %></td>
+          
+          
+            <td><%= link_to 'Show', user_option %></td>
+          
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :user_options
   get 'search', to: 'users#search'
   
   resources :messages
