@@ -24,11 +24,10 @@ class UserOptionsController < ApplicationController
   # POST /user_options
   # POST /user_options.json
   def create
-    @user_option = UserOption.new(user_option_params)
-
+    @user_option = current_user.user_options.build(user_option_params)
     respond_to do |format|
       if @user_option.save
-        format.html { redirect_to @user_option, notice: 'User option was successfully created.' }
+        format.html { redirect_back fallback_location: root_path, notice: 'User option was successfully created.' }
         format.json { render :show, status: :created, location: @user_option }
       else
         format.html { render :new }
@@ -42,7 +41,7 @@ class UserOptionsController < ApplicationController
   def update
     respond_to do |format|
       if @user_option.update(user_option_params)
-        format.html { redirect_to @user_option, notice: 'User option was successfully updated.' }
+        format.html { redirect_back fallback_location: root_path, notice: 'User option was successfully updated.' }
         format.json { render :show, status: :ok, location: @user_option }
       else
         format.html { render :edit }

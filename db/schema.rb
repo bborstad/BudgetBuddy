@@ -195,14 +195,6 @@ ActiveRecord::Schema.define(version: 2020_11_12_171421) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
-  create_table "profile_options", force: :cascade do |t|
-    t.integer "budget_id", default: 0
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_profile_options_on_user_id"
-  end
-
   create_table "retirements", force: :cascade do |t|
     t.decimal "annual_savings"
     t.integer "year_of_retirement"
@@ -280,7 +272,6 @@ ActiveRecord::Schema.define(version: 2020_11_12_171421) do
   add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "users"
   add_foreign_key "posts", "users"
-  add_foreign_key "profile_options", "users"
   add_foreign_key "retirements", "users"
   add_foreign_key "services", "users"
   add_foreign_key "user_options", "users"
