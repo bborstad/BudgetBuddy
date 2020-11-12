@@ -1,6 +1,8 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  get 'search', to: 'users#search'
+  
   resources :messages
   resources :rooms
   # Routing for budget section
