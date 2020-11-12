@@ -5,7 +5,9 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-
+  def search
+    @users = User.where("first_name || ' ' || last_name ILIKE ?", "%"+params[:q]+"%")
+  end
 
 
   def show 
