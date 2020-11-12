@@ -16,14 +16,17 @@
     <div class="collapse navbar-collapse" id="navbarMain">
       <ul class="navbar-nav mr-auto mt-2 mt-md-0">
       </ul>
-
-      <ul class="navbar-nav">
+      <div style="padding-right: 150px">
         <% if user_signed_in? %>
-
           <form class="form-inline my-2 my-lg-0" action="/search">
             <input class="form-control mr-sm-2" name="q" type="text" placeholder="Search for a user" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
+        <% end %>
+      </div>
+      <ul class="navbar-nav">
+        <% if user_signed_in? %>
+
           <li class="blank"><p></p></li>
           <li class="nav-item"><%= link_to "Budget", budgets_path, class: "nav-link" %></li>
           <li class="nav-item"><%= link_to "Goals", goals_path, class: "nav-link" %></li>
