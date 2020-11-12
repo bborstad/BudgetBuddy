@@ -36,12 +36,21 @@
                         <div class="h7">
                         <br>
                         <% if @user.id == current_user.id %>
+
+                        <% if @display.present? && @display.budget_id > 0%>
+                            <% thisdisplaymonth = Budget.select(:month).find(@display.budget_id).month %>
+                            <% thisdisplayyear = Budget.select(:year).find(@display.budget_id).year %>
+                            
+                        <%else%>
+                            <%thisdisplaymonth = 'Please '%>
+                            <%thisdisplayyear = 'Select'%>
+                        <%end%>
                             <%= form_for(@user_option, remote: true) do |form| %>
  
                                 <div class="form-group" id="user_option_budgetid" >                                                 
                                     <div class="h7 text">Select Budget to Display</div>
                                         <select class="custom-select" name="user_option[budget_id]" id="user_option_budgetid" >
-                                            <option disabled value="" selected hidden>Please Select</option>
+                                            <option disabled value="" selected hidden><%= thisdisplaymonth%> <%=thisdisplayyear %></option>
                                             <option value=0> None</option>
                                             <% Budget.where(user_id:current_user).each do |budget| %>
                                                 <option value=<%= budget.id %>> Budget: <%= budget.month %> <%= budget.year %>
