@@ -90,40 +90,47 @@
                     </ul>
                 </div>
                 <br>
-                <div class="card gedf-card">
-                        <div class="card-body">
-                            <h5 class="card-title"><%= Budget.select(:month).find(@display.budget_id).month %> <%= Budget.select(:year).find(@display.budget_id).year %></h5>
-                            <h6 class="card-subtitle mb-2 text-muted">
-                                        <div class="table-responsive">
-                                            <% Budget.find(@display.budget_id).groups.each do |group| %>
-                                            <table class="table table-hover; width: 10%">
-                                                <colgroup>
-                                                    <col span="1" style="width: 50%;">
-                                                    <col span="1" style="width: 15%;">
-                                                    <col span="1" style="width: 15%;">
-                                                </colgroup>
-                                                <thead>
-                                                    <tr
-                                                        style="border-bottom: 3px solid #17A2B8; border-top: 0px; font-weight:bold; color: rgb(71, 73, 73);">
-                                                        <td><%= group.name %></td>
-                                                        <td>Projected</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <% group.categories.each do |category| %>
-                                                    <tr style="border-bottom: 3px solid darkgrey;">
-                                                        <td><%= category.name %></td>
-                                                        <td><%= number_to_currency(category.projected) %></td>
-                                                    </tr>
-                                                    <% end %>
-                                                </tbody>
-                                            </table>
-                                            <% end %>
-                                        </div>
+                    <div class="card gedf-card">
+                        <% if @display.present? && @display.budget_id > 0 %>
+                            <div class="card-body">
+                            
+                                <h5 class="card-title"><%= Budget.select(:month).find(@display.budget_id).month %> <%= Budget.select(:year).find(@display.budget_id).year %></h5>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                            <div class="table-responsive">
+                                                <% Budget.find(@display.budget_id).groups.each do |group| %>
+                                                <table class="table table-hover; width: 10%">
+                                                    <colgroup>
+                                                        <col span="1" style="width: 50%;">
+                                                        <col span="1" style="width: 15%;">
+                                                        <col span="1" style="width: 15%;">
+                                                    </colgroup>
+                                                    <thead>
+                                                        <tr
+                                                            style="border-bottom: 3px solid #17A2B8; border-top: 0px; font-weight:bold; color: rgb(71, 73, 73);">
+                                                            <td><%= group.name %></td>
+                                                            <td>Projected</td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <% group.categories.each do |category| %>
+                                                        <tr style="border-bottom: 3px solid darkgrey;">
+                                                            <td><%= category.name %></td>
+                                                            <td><%= number_to_currency(category.projected) %></td>
+                                                        </tr>
+                                                        <% end %>
+                                                    </tbody>
+                                                </table>
+                                                <% end %>
+                                            </div>
                                 </h6>
+                            </div>
+                        <% else %>
+
+                        <% end %>
                         </div>
+
                     </div>
-            </div>
+
             <div class="col-md-6 gedf-main">
 
             
