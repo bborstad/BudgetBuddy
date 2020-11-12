@@ -99,12 +99,13 @@
   <body>
 
     <%= render 'shared/navbar' %>
-<
-      <div class="col-sm" id="buttonnavfirst" >
-        <button onclick="myFunction()" id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="fas fa-list-ul"></i><small class="text-uppercase font-weight-bold"> Nav-bar Toggle</small></button>
+    
+    <%= render 'shared/notices' %>
+      <div class="hideme">
+        <button onclick="myFunction()" class="button btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4" style="vertical-align:middle"><span><small class="text-uppercase font-weight-bold"> Nav-bar Toggle</small></span></button>
       </div>
 
-    <%= render 'shared/notices' %>
+
 
     <div class="container">
       <%= yield %>
