@@ -12,8 +12,27 @@
   <dt>Progress:</dt>
   <dd><%= number_to_currency(@goal.progress)%><%= "/" %><%=  number_to_currency(@goal.goal) %> </dd>
 
-  <dd><%= bar_chart Goal.where(user_id:current_user).where(title: @goal.title).group(:title).sum(:progress), min: 0, max: @goal.goal, prefix: "$", round: 2, zeros: true, height: "75px" %></dd>
+  <% if @goal.progress != @goal.goal %>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar"
+        aria-valuenow=<% Goal.select(:ppercent).find(@goal.id).ppercent %>
 
+        aria-valuemin="0" aria-valuemax="100"
+        style="width: <%=Goal.select(:ppercent).find(@goal.id).ppercent %>%">
+        <%= number_to_percentage(Goal.select(:ppercent).find(@goal.id).ppercent, precision: 0) %>
+      </div>
+    </div>
+  <% elsif @goal.progress == @goal.goal %>
+    <div class="progress">
+      <div class="progress-bar bg-success" role="progressbar"
+        aria-valuenow=<% Goal.select(:ppercent).find(@goal.id).ppercent %>
+
+        aria-valuemin="0" aria-valuemax="100"
+        style="width: <%=Goal.select(:ppercent).find(@goal.id).ppercent %>%">
+        <%= number_to_percentage(Goal.select(:ppercent).find(@goal.id).ppercent, precision: 0) %>
+      </div>
+    </div>
+  <% end %>
 
 </dl>
 

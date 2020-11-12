@@ -31,12 +31,12 @@ class Budget < ApplicationRecord
     validates :month, presence: true
     validates :year, presence: true
     
-    def previous
-      Budget.where('budgets.id < ?', self.id).order('id').last
+    def previous(current_user)
+      Budget.where(user_id:current_user).where('budgets.id < ?', self.id).order('id').last
     end
     
-    def next
-      Budget.where('budgets.id > ?', self.id).order('id').first
+    def next(current_user)
+      Budget.where(user_id:current_user).where('budgets.id > ?', self.id).order('id').first
     end
     
 end
