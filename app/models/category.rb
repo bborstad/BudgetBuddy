@@ -20,6 +20,7 @@
 #
 class Category < ApplicationRecord
     belongs_to :group
+    has_many :transactions
 
     validates :actual, numericality: { less_than_or_equal_to: :projected }
 end
