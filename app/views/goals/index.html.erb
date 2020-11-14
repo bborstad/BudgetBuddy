@@ -10,14 +10,21 @@
   </div>
 </div>
 
-<div class="table-responsive; card gedf-card">
+<div class="table-responsive card">
   <table class="table table-striped table-hover">
+    <colgroup>
+      <col span="1" style="width: 90%;">
+      <col span="1" style="width: 10%;">
+
+    </colgroup>
     <tbody>
       <% @goals.each do |goal| %>
         <%= content_tag :tr, id: dom_id(goal), class: dom_class(goal) do %>
           <% if goal.progress != goal.goal %>
             <td>
-              <%= number_to_currency(Goal.select(:progress).find(goal.id).progress)%><%= "/" %><%=  number_to_currency(Goal.select(:goal).find(goal.id).goal) %>
+              <div class="text-right">
+                <%= number_to_currency(Goal.select(:progress).find(goal.id).progress)%><%= "/" %><%=  number_to_currency(Goal.select(:goal).find(goal.id).goal) %>
+              </div>
               <div class="progress">
                 <div class="progress-bar" role="progressbar"
                   aria-valuenow=<% Goal.select(:ppercent).find(goal.id).ppercent %>
@@ -28,8 +35,7 @@
                 </div>
               </div>
             </td>
-            <td><%= link_to (image_tag ("info.png") ), goal %></td>
-            <td><%= link_to (image_tag ("plus.png") ), edit_goal_path(id: goal.id) %></td>
+            <td class="text-center" style="padding-top: 25px"><%= link_to edit_goal_path(id: goal.id) do %>Edit Goal<% end %></td>
           <% end %>
         <% end %>
       <% end %>
@@ -43,8 +49,12 @@
   </div>
 </div>
 
-<div class="table-responsive">
+<div class="table-responsive card">
   <table class="table table-striped table-hover">
+    <colgroup>
+      <col span="1" style="width: 90%;">
+      <col span="1" style="width: 10%;">
+    </colgroup>
     <tbody>
       <% @goals.each do |goal| %>
       <%= content_tag :tr, id: dom_id(goal), class: dom_class(goal) do %>
@@ -52,18 +62,20 @@
       <% if goal.progress == goal.goal || goal.progress >= goal.goal %>
 
       <td>
-      <%= number_to_currency(Goal.select(:progress).find(goal.id).progress)%><%= "/" %><%=  number_to_currency(Goal.select(:goal).find(goal.id).goal) %>
-      <div class="success">
-        <div class="progress-bar bg-success" role="progressbar"
-          aria-valuenow=<% Goal.select(:ppercent).find(goal.id).ppercent %>
-
-          aria-valuemin="0" aria-valuemax="100"
-          style="width: <%=Goal.select(:ppercent).find(goal.id).ppercent %>%">
-          <%= number_to_percentage(Goal.select(:ppercent).find(goal.id).ppercent, precision: 0) %>
+        <div class="text-right">
+          <%= number_to_currency(Goal.select(:progress).find(goal.id).progress)%><%= "/" %><%=  number_to_currency(Goal.select(:goal).find(goal.id).goal) %>
         </div>
-      </div>
+        <div class="success">
+          <div class="progress-bar bg-success" role="progressbar"
+            aria-valuenow=<% Goal.select(:ppercent).find(goal.id).ppercent %>
+
+            aria-valuemin="0" aria-valuemax="100"
+            style="width: <%=Goal.select(:ppercent).find(goal.id).ppercent %>%">
+            <%= number_to_percentage(Goal.select(:ppercent).find(goal.id).ppercent, precision: 0) %>
+          </div>
+        </div>
       </td>
-      <td><%= link_to (image_tag ("info.png") ), goal %></td>
+      <td class="text-center" style="padding-top: 25px"><%= link_to edit_goal_path(id: goal.id) do %>Edit Goal<% end %></td>
 
       <% end %>
       <% end %>
