@@ -1,10 +1,12 @@
 class TransactionsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :require_permission, only: [:show, :edit, :update, :destroy]
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
 
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = Transaction.all
+    @transactions = Transaction.where(user_id:current_user)
   end
 
   # GET /transactions/1
@@ -24,7 +26,7 @@ class TransactionsController < ApplicationController
   # POST /transactions
   # POST /transactions.json
   def create
-    @transaction = Transaction.new(transaction_params)
+    @transaction = current_user.transactions.build(transaction_params)
 
     respond_to do |format|
       if @transaction.save
@@ -70,5 +72,11 @@ class TransactionsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def transaction_params
       params.require(:transaction).permit(:amount, :date, :source)
+    end
+
+    def require_permission
+      if Transaction.find(params[:id]).user != current_user
+        redirect_to goals_url, flash: { error: "You do not have permission to do that."}
+      end
     end
 end

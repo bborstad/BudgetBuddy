@@ -84,6 +84,8 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   has_one :user_option
+
+  has_many :transactions, dependent: :destroy
     
 
 
