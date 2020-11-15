@@ -15,7 +15,7 @@
 3. Start redis-server (<code>sudo service redis-server start</code> to start and <code>sudo service redis-server status</code> to verify it is running). If you don't have redis-server installed, run <code>sudo apt install redis-server</code>
 4. Start cron (<code>sudo service cron start</code> to start and <code>sudo service cron status</code> to verify it is running)
 5. Run <code>bundle exec whenever --update-crontab</code>
-6. Run <code>crontab -l</code> and check if groups:update is in the crontab. If it is, ensure it's <code>RAILS_ENV=development</code>. If the environment is production, run <code>whenever --update-crontab --set environment='development'</code>
+6. Run <code>crontab -l</code> and check if <code>groups:update</code> is in the crontab. If it is, check to see if <code>RAILS_ENV=development</code>. If the environment is production, run <code>whenever --update-crontab --set environment='development'</code>
 7. Run <code>bundle install && yarn install</code>
 8. Run <code>rails db:migrate:reset</code>
 9. Then, run <code>rails db:seed</code>
