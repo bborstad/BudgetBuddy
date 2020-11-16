@@ -1,6 +1,6 @@
 <%= form_for([@post, @post.comments.build]) do |f| %>
 
-    <%= f.text_area :content,:size=>"50", placeholder: "Leave a comment ", class: 'form-control post_content',data: {controller: "mentions", target: "mentions.field"} %>
+    <%= f.text_area :content,:size=>"50", placeholder: "Leave a comment ", class: 'form-control post_content' %>
     <br>
     <%= f.submit class: 'btn btn-primary' %>
     
