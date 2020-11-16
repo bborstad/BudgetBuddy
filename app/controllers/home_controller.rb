@@ -4,7 +4,11 @@ class HomeController < ApplicationController
     @post = Post.new
     @user = current_user
     @goals = Goal.where(user_id:@user.id).order(ppercent: :asc)
-    @posts = Post.all.order(created_at: :desc)
+
+    @userlist = Follow.where(:requestor => @current_user.id).pluck(:following)
+    @userlist.push( @current_user.id)
+    @posts = Post.where(user_id:@userlist).order(created_at: :desc)
+    
     @goalss = Goal.where(user_id:@user.id).order(ppercent: :asc)
     @comments = Comment.where(post_id: @post).order("created_at DESC")
 

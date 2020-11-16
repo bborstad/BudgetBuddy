@@ -20,6 +20,7 @@
     <option disabled value="" selected hidden>Please Select</option>
     <option value=2>Monthly Payments</option>
     <option value=1 >Principle</option>
+    <option value=3 >Years</option>
   </select>
 </div>
 
@@ -39,6 +40,9 @@
 </div>
 
 
+
+
+
   <div class="form-group">
     <%= form.label :"What is the interest rate of the loan?" %>
     <%= form.text_field :rate, placeholder: "0.00%", class: 'form-control', required:true %>
@@ -54,10 +58,14 @@
     <%= form.number_field :compounds_per_year, placeholder: "12", min:1, class: 'form-control', required:true %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :"In how many years would you like to pay this loan off?" %>
-    <%= form.number_field :number_of_year, min:0, class: 'form-control',required:true %>
+  <div id="ifYear" style="display: none;">
+    <div class="form-group">
+      <%= form.label :"In how many years would you like to pay this loan off?" %>
+      <%= form.number_field :number_of_year, min:0, class: 'form-control' %>
+    </div>
   </div>
+
+  
 
   <div class="form-group">
     <% if calculate_debt.persisted? %>
@@ -83,14 +91,23 @@
       if (that.value == 1) {
           document.getElementById("ifPrinciple").style.display = "block";
           document.getElementById("ifMonthly").style.display = "none";
+          document.getElementById("ifYear").style.display = "block";
+
 
       } else if (that.value == 2) {
           document.getElementById("ifPrinciple").style.display = "none";
           document.getElementById("ifMonthly").style.display = "block";
+          document.getElementById("ifYear").style.display = "block";
+
+      } else if (that.value == 3) {
+          document.getElementById("ifPrinciple").style.display = "block";
+          document.getElementById("ifMonthly").style.display = "block";
+          document.getElementById("ifYear").style.display = "none";
 
       } else{
         document.getElementById("ifPrinciple").style.display = "none";
         document.getElementById("ifMonthly").style.display = "none";
+        document.getElementById("ifYear").style.display = "none";
 
 
 

@@ -6,7 +6,7 @@
 #  compounds_per_year :integer
 #  email              :string
 #  monthly_payements  :decimal(, )
-#  number_of_year     :integer
+#  number_of_year     :decimal(, )
 #  principle          :decimal(, )
 #  rate               :decimal(, )
 #  select             :integer
@@ -59,6 +59,27 @@ class CalculateDebt < ApplicationRecord
 
                 sum = sum /r_and_k
                 self.principle = sum.round(2)
+
+        
+
+        elsif self.select == 3 #find Year
+            dk = self.monthly_payements * self.compounds_per_year #d*k
+
+            dkr = dk / trate # d*k/r
+            xminusdkr = self.principle - dkr #x - dkr
+
+            x = ((-(trate * xminusdkr)/dk))
+
+            x = Math.log(x)
+
+            another = (trate/self.compounds_per_year) + 1
+            a = self.compounds_per_year * Math.log(another)
+            x = (-(x/a))
+
+            
+            self.number_of_year = x.round
+
+
 
         end
     end

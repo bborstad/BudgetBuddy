@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_02_184745) do
+ActiveRecord::Schema.define(version: 2020_11_12_171421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 2020_11_02_184745) do
     t.decimal "rate"
     t.decimal "monthly_payements"
     t.integer "compounds_per_year"
-    t.integer "number_of_year"
+    t.decimal "number_of_year"
     t.string "email"
     t.integer "select"
     t.datetime "created_at", precision: 6, null: false
@@ -234,6 +234,14 @@ ActiveRecord::Schema.define(version: 2020_11_02_184745) do
     t.index ["user_id"], name: "index_services_on_user_id"
   end
 
+  create_table "user_options", force: :cascade do |t|
+    t.integer "budget_id", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_user_options_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -266,4 +274,5 @@ ActiveRecord::Schema.define(version: 2020_11_02_184745) do
   add_foreign_key "posts", "users"
   add_foreign_key "retirements", "users"
   add_foreign_key "services", "users"
+  add_foreign_key "user_options", "users"
 end

@@ -1,6 +1,9 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :user_options
+  get 'search', to: 'users#search'
+
   resources :messages
   resources :rooms
   # Routing for budget section
@@ -19,8 +22,13 @@ Rails.application.routes.draw do
   resources :mentions, only: [:index]
   resources :mentioned_posts, only: [:index]
   resources :follows
+  resources :followers, only: [:index]
+  resources :followings, only: [:index]
+
+
   resources :accounts
   resources :goals
+  
   resources :retirements
   get '/users', to: 'users#index'
   get '/user/:id', to: 'users#show', as: 'user'

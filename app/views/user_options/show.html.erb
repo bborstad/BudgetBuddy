@@ -1,0 +1,15 @@
+<div class="page-header">
+  <%= link_to user_options_path, class: 'btn btn-default' do %>
+    All User_options
+  <% end %>
+  <%= link_to edit_user_option_path(@user_option), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show user_option</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Budget:</dt>
+  <dd><%= @user_option.budget_id %></dd>
+
+</dl>
