@@ -1,3 +1,4 @@
+# Update the average for all groups.
 namespace :groups do
     desc "Rake task to update group averages"
     task :update => :environment do

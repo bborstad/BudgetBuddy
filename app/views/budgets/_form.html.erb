@@ -11,6 +11,7 @@
     </div>
   <% end %>
 
+  <!--- Labels and inputs -->
   <div class="form-group">
     <%= form.label :month, 'Month' %>
     <%= form.text_field :month, class: 'form-control' %>
@@ -20,6 +21,7 @@
 
   </div>
 
+  <!--- Logic for handling creation/destruction -->
   <div class="form-group">
     <% if budget.persisted? %>
       <div class="float-right">

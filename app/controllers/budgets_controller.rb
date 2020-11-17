@@ -74,6 +74,7 @@ class BudgetsController < ApplicationController
       params.require(:budget).permit(:month, :year)
     end
 
+    # Require that the owner of the resource is the current user.
     def require_permission
       if Budget.find(params[:id]).user != current_user
         redirect_to goals_url, flash: { error: "You do not have permission to do that."}

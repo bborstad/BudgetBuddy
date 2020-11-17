@@ -1,7 +1,7 @@
 <%= stylesheet_link_tag "hideme"%>
+
+<!--- Button to hide left navbar -->
 <button onclick="myFunction()" class=" btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4" style="vertical-align:middle"><span><i class="fas fa-list-ul"></i><small class="text-uppercase font-weight-bold"> Nav-bar Toggle</small></span></button>
-
-
 
 
 <div class="row">
@@ -9,6 +9,7 @@
     <h1>Budgets</h1>
   </div>
   
+  <!--- Button to create a new budget -->
   <div class="col-sm-6 text-right">
   <%= link_to new_budget_path, class: 'btn btn-primary' do %>
     Add New Budget
@@ -16,6 +17,7 @@
   </div>
 </div>
 
+<!--- Table showing all budges owned by current user -->
 <div class="table-responsive">
   <table class="table table-striped table-bordered table-hover">
     <thead>

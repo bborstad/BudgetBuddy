@@ -1,5 +1,5 @@
 <%= stylesheet_link_tag "hideme"%>
-
+<!--- Form for Goals pages -->
 <%= form_with(model: goal, local: true) do |form| %>
   <% if goal.errors.any? %>
     <div id="error_explanation">
@@ -12,7 +12,8 @@
       </ul>
     </div>
   <% end %>
-
+  
+  <!--- All lables and inputs for this page. -->
   <div class="form-group">
     <%= form.label :title, 'Goal Name' %>
     <%= form.text_field :title, placeholder: "ex: Savings", class: 'form-control' %>
@@ -37,6 +38,7 @@
 
     <%= form.submit class: 'btn btn-primary' %>
 
+    <!--- Logic to make sure Goal changes save. -->
     <% if goal.persisted? %>
       <%= link_to "Cancel", goal, class: "btn btn-link" %>
     <% else %>

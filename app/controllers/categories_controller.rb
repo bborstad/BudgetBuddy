@@ -76,11 +76,13 @@ class CategoriesController < ApplicationController
       params.require(:category).permit(:name, :projected, :actual)
     end
 
+    # Find the budget and group that a category belongs to.
     def get_group_and_budget
       @budget = Budget.find(params[:budget_id])
       @group = Group.find(params[:group_id])
     end
 
+    # Require that the owner of the resource is the current user.
     def require_permission
       if Budget.find(params[:budget_id]).user != current_user
         redirect_to goals_url, flash: { error: "You do not have permission to do that."}

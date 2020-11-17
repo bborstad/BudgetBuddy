@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-
+  <!--- Labels and input fields -->
   <div class="form-group">
     <%= form.label :"Please select a name for this group:" %>
     <%= form.select(:name, options_for_select([ ['Auto & Transportation'], ['Bills'], ['Business Services'], ['Children'], ['Clothing'], ['Debt'], ['Education'], ['Entertainment'], ['Expenses'], ['Fees & Charges'], ['Food & Dining'], ['Gifts & Donations'], ['Household Items/Supplies'], ['Housing'], ['Income'], ['Insurance'], ['Medical & Healthcare'], ['Miscellaneous'], ['Personal'], ['Personal Care'], ['Personal Development'], ['Pets'], ['Recreation & Fun'], ['Retirement'], ['Savings'], ['Shopping'], ['Taxes'], ['Travel'], ['Utilities'], ['Work'] ]),{ :prompt => "Select one"}, :required => true)%>
@@ -24,7 +24,7 @@
       </div>
     <% end %>
 
-    
+    <!--- Logic to handle saving Group -->
     <%= form.submit class: 'btn btn-primary' %>
 
     <% if group.persisted? %>
