@@ -21,6 +21,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Post < ApplicationRecord
+    #links to user
     belongs_to(
         :user,
         class_name: 'User',
@@ -29,8 +30,9 @@ class Post < ApplicationRecord
     )
 
 
-
+    #links to comments
     has_many :comments, dependent: :destroy    
+    #links to likes
     has_many :likes, dependent: :destroy
     
     has_many :mentioned_posts, dependent: :destroy

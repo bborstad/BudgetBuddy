@@ -1,3 +1,4 @@
+<!-- form to create a new retirement estimate -->
 <%= form_with(model: retirement, local: true) do |form| %>
   <% if retirement.errors.any? %>
     <div id="error_explanation">
@@ -11,36 +12,29 @@
     </div>
   <% end %>
 
+ <!-- annual_savings -->
   <div class="form-group">
     <%= form.label :"How much will you deposit for your retirement account annually?" %>
     <%= form.text_field :annual_savings, placeholder: "0.00", class: 'form-control',min:0,required:true %>
   </div>
 
+  <!-- year_of_retirement -->
   <div class="form-group">
     <%= form.label :"What year do you want to retire by?" %>
     <%= form.number_field :year_of_retirement, min:Date.today.year, placeholder: "YYYY", class: 'form-control', required:true %>
   </div>
 
+  <!-- inital_savings -->
   <div class="form-group">
     <%= form.label :"How much did you start with in your account?"%>
     <%= form.text_field :inital_savings, placeholder: "0.00", class: 'form-control',required:true %>
   </div>
 
+  <!-- intrest_rate -->
   <div class="form-group">
     <%= form.label :"Interest_Rate (%)" %>
     <%= form.text_field :intrest_rate, placeholder: "0.00", class: 'form-control',required:true %>
   </div>
-
-<!--
-        Remove retirement_estimate as an input on the forum 
-
-
-  <div class="form-group">
-    <%= form.label :retirement_estimate %>
-    <%= form.text_field :retirement_estimate, class: 'form-control' %>
-  </div>
-
--->
 
 
   <div class="form-group">

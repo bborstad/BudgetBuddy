@@ -23,14 +23,15 @@
 class Retirement < ApplicationRecord
 
 
-
+# links to user
     belongs_to(
         :user,
         class_name: 'User',
         foreign_key: 'user_id',
         inverse_of: :retirements
     )
-
+    # checks for any less than 0 data 
+    # which wouldn't make sense 
     before_save :calculate_retirement
     validates :intrest_rate, numericality: {greater_than_or_equal_to: 0}
     validates :inital_savings, numericality: {greater_than_or_equal_to: 0}
