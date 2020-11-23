@@ -19,6 +19,9 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Like < ApplicationRecord
+
+  # links to post
   belongs_to :post
+  #links to user
   belongs_to :user
 end

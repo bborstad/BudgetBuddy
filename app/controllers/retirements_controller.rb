@@ -7,9 +7,6 @@ class RetirementsController < ApplicationController
   # GET /retirements.json
   def index
     @retirements = Retirement.where(user_id:current_user)
-   
-         # @retirements = Retirements.where(email:current_user.email)
-        # need to create a migration that adds user email to retirements then add the above code 
   
 end
 
@@ -74,6 +71,7 @@ end
       @retirement = Retirement.find(params[:id])
     end
 
+    #makes sure only the user who created the estimate is the only one who can edit it 
     def require_permission
       if Retirement.find(params[:id]).user != current_user
         redirect_to retirements_url, flash: { error: "You do not have permission to do that."}
@@ -83,12 +81,6 @@ end
     # Only allow a list of trusted parameters through.
     def retirement_params
       params.require(:retirement).permit(:annual_savings, :year_of_retirement, :inital_savings, :intrest_rate, :retirement_estimate)
-    end
-
-    def require_permission
-      if Retirement.find(params[:id]).user != current_user
-        redirect_to retirements_url, flash: { error: "You do not have permission to do that."}
-      end
     end
 
 end

@@ -18,7 +18,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Account < ApplicationRecord
-
+    # links to users
     belongs_to(
         :user,
         class_name: 'User',

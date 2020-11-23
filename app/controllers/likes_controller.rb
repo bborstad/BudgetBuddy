@@ -21,25 +21,22 @@ class LikesController < ApplicationController
         else
           @like.destroy
         end
-
-
-        ### saving this code incase i need it later
-            ####redirect_to post_path(@post)
-        # redirects to current page
         redirect_to request.referrer
       end
 
     private
-    
+    #get post id
     def find_post
         @post = Post.find(params[:post_id])
     end
-
+    # used to see if current user has already liked post 
+    # so you can only like a post once
     def already_liked?
         Like.where(user_id: current_user.id, post_id:
         params[:post_id]).exists?
     end
-
+    # finds a like 
+    # used to delete a like
     def find_like
         @like = @post.likes.find(params[:id])
     end

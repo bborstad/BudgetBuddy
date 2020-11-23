@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       resources :categories
     end
   end
-
+  #routing for post with likes and comments 
   resources :posts do 
     resources :likes
     resources :comments

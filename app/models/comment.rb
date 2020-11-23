@@ -20,6 +20,8 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Comment < ApplicationRecord
+    #links to post
     belongs_to :post
+    #links to users
     belongs_to :user
 end

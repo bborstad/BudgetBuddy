@@ -10,7 +10,7 @@ class HomeController < ApplicationController
     @posts = Post.where(user_id:@userlist).order(created_at: :desc) #filters posts with users you follow
     
     @goalss = Goal.where(user_id:@user.id).order(ppercent: :asc)
-    @comments = Comment.where(post_id: @post).order("created_at DESC")
+    @comments = Comment.where(post_id: @post).order("created_at DESC") # get comments for post in descending order
 
     
   end
