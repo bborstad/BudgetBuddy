@@ -11,6 +11,7 @@
     </div>
   <% end %>
 
+<!--- All labels for category -->
   <div class="form-group">
     <%= form.label :name %>
     <%= form.text_field :name, class: 'form-control' %>
@@ -33,6 +34,7 @@
       </div>
     <% end %>
 
+    <!--- Logic to handle saving category -->
     <%= form.submit class: 'btn btn-primary' %>
 
     <% if category.persisted? %>

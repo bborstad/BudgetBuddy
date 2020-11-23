@@ -14,17 +14,21 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
 <%= stylesheet_link_tag "hideme"%>
+<!--- Button to hide left navbar -->
 <button onclick="myFunction()" class=" btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4" style="vertical-align:middle"><span><i class="fas fa-list-ul"></i><small class="text-uppercase font-weight-bold"> Nav-bar Toggle</small></span></button>
 
 
 <div class="container-fluid gedf-wrapper">
   <div class="row">
+  <!--- Table with groups and categories for current budget -->
     <div class="card gedf-card; col-md-9">
       <div class="navigation; wrap">
+      <!--- Button to go to previous budget -->
         <div class="left"><%= link_to @budget.previous(current_user), class: 'btn btn-info btn-block' do %>Previous<% end %></div>
         <div class="center">
           <h3 style="text-align:center;float:center"><%= @budget.month %> <%= @budget.year %> </h3>
         </div>
+        <!--- Button to go to next budget -->
         <div class="right"><%= link_to @budget.next(current_user), class: 'btn btn-info btn-block' do %>Next<% end %></div>
 
       </div>
@@ -33,6 +37,7 @@
 
       <div class="card-body">
         <div class="table-responsive">
+        <!--- Renderes each group, its categories, and numbers  -->
           <% @budget.groups.each do |group| %>
 
           <table class="table table-hover; width: 100%">
@@ -45,6 +50,7 @@
             <thead>
               <tr style="border-bottom: 3px solid #17A2B8; border-top: 0px; font-weight:bold; color: rgb(71, 73, 73);">
                 <td>
+                <!--- Info about group, options to edit or delete -->
                   <%= group.name %>
                   |
                   <%= link_to edit_budget_group_path(@budget, group) do %>edit<% end %>
@@ -53,6 +59,7 @@
                 </td>
                 <td>Projected</td>
                 <td>Actual</td>
+                <!--- Dispalys current user's group compared to all other users -->
                 <td style="color:#026877">
                   <% if ((group.categories_sum * 100 )/(group.average) - 100) > 1 %>
                   
@@ -67,9 +74,11 @@
                 </td>
               </tr>
             </thead>
+            <!--- Dispalys the categories contained within a group -->
             <tbody>
               <% group.categories.each do |category| %>
               <tr style="border-bottom: 3px solid darkgrey;">
+              <!--- Information about a category with options to edit and delete -->
                 <td>
                   <%= category.name %>
                   |
@@ -81,12 +90,14 @@
                 <td><%= number_to_currency(category.actual) %></td>
               </tr>
               <% end %>
+              <!--- Allows the user to add a new category to the budget  -->
               <td colspan="3"><%= link_to new_budget_group_category_path(@budget, group, @category) do%>+ Add Category<% end %></td>
             </tbody>
           </table>
           <% end %>
 
         </div>
+        <!--- Allows the user to add a new group to the budget -->
         <div>
           <%= link_to new_budget_group_path(@budget, @group) do %>
           + ADD GROUP
@@ -95,6 +106,7 @@
       </div>
     </div>
 
+    <!--- Dispalys a pie chart with a breakdown of the user's budget -->
     <div class="card gedf-card; col-md-3">
       <div class="card-header">
         <h4 style="text-align:center">Spending</h4>

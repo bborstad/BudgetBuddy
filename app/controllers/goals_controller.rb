@@ -76,9 +76,10 @@ class GoalsController < ApplicationController
       params.require(:goal).permit(:title, :progress, :goal)
     end
 
-  def require_permission
-    if Goal.find(params[:id]).user != current_user
-      redirect_to goals_url, flash: { error: "You do not have permission to do that."}
+    # Require that the owner of the resource is the current user.
+    def require_permission
+      if Goal.find(params[:id]).user != current_user
+        redirect_to goals_url, flash: { error: "You do not have permission to do that."}
+      end
     end
-  end
 end

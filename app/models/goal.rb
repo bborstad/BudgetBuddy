@@ -30,6 +30,7 @@ class Goal < ApplicationRecord
     validates :progress, numericality: {greater_than_or_equal_to: 0}
     before_save :set_ppercent
 
+    # This function sets the ppercent variable by dividing progress/goal.
     def set_ppercent
         x = self.progress / self.goal
         self.ppercent = x * 100

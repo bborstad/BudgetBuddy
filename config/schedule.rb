@@ -21,6 +21,7 @@
 set :environment, "development"
 set :output, 'log/whenever.log'
 
+# Runs a job to keep each groups' average up to date. Can be found under lib/tasks/groups.rake
 every 1.minute  do
     rake "groups:update"
 end

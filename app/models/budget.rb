@@ -31,10 +31,12 @@ class Budget < ApplicationRecord
     validates :month, presence: true
     validates :year, presence: true
     
+    # This function is called from the Budget show page and allows a user to move to the previous budget.
     def previous(current_user)
       Budget.where(user_id:current_user).where('budgets.id < ?', self.id).order('id').last
     end
     
+    # This function is called from the Budget show page and allows a user to move to the next budget.
     def next(current_user)
       Budget.where(user_id:current_user).where('budgets.id > ?', self.id).order('id').first
     end

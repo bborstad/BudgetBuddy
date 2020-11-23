@@ -25,7 +25,7 @@ class Group < ApplicationRecord
 
     validates :name, presence: true
 
-
+    # This function runs two SQL queries to update the average for each Group.
     def self.update_average
         puts("STARTING TASK")
 
