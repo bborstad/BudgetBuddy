@@ -29,7 +29,7 @@ class MessagesController < ApplicationController
     @message.user = current_user
     @message.save
 
-    SendMessageJob.perform_later(@message)
+    SendMessageJob.perform_later(@message) #links back to message job
   end
 
   # PATCH/PUT /messages/1
